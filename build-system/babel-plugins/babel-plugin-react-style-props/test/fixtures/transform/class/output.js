@@ -1,7 +1,7 @@
 /*#__PURE__*/
-React.createElement("div", {
-  id: "foo",
-  className: "foo",
+React.createElement('div', {
+  id: 'foo',
+  className: 'foo',
   hidden: true,
-  onClick: () => {}
+  onClick: () => {},
 });

@@ -44,7 +44,7 @@ The example below displays a double angle formula for cosines:
 
 ### Inline formula
 
-This is an example of a formula of `` <amp-mathml layout="container" inline data-formula="`x`"></amp-mathml> ``, `<amp-mathml layout="container" inline data-formula="\(x = {-b \pm \sqrt{b^2-4ac} \over 2a}\)"></amp-mathml>` placed inline in the middle of a block of text. `<amp-mathml layout="container" inline data-formula="\( \cos(θ+φ) \)"></amp-mathml>` This shows how the formula will fit inside a block of text and can be styled with CSS.
+This is an example of a formula of ``<amp-mathml layout="container" inline data-formula="`x`"></amp-mathml>``, `<amp-mathml layout="container" inline data-formula="\(x = {-b \pm \sqrt{b^2-4ac} \over 2a}\)"></amp-mathml>` placed inline in the middle of a block of text. `<amp-mathml layout="container" inline data-formula="\( \cos(θ+φ) \)"></amp-mathml>` This shows how the formula will fit inside a block of text and can be styled with CSS.
 
 ## Attributes
 

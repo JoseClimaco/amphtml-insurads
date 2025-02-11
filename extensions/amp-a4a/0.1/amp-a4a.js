@@ -2360,10 +2360,6 @@ export class AmpA4A extends AMP.BaseElement {
    * @private
    */
   maybeTriggerAnalyticsEvent_(lifecycleStage) {
-    if (!this.a4aAnalyticsConfig_) {
-      // No config exists that will listen to this event.
-      return;
-    }
     const analyticsEvent = devAssert(
       LIFECYCLE_STAGE_TO_ANALYTICS_TRIGGER[lifecycleStage]
     );

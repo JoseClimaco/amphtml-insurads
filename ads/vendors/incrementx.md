@@ -4,9 +4,9 @@
 
 ```html
  <amp-ad
-  width="320" 
-  height="50" 
-  type="incrementx" 
+  width="320"
+  height="50"
+  type="incrementx"
   data-vzid="PNXW125273VB49B96">
   </amp-ad>
 ```

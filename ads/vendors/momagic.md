@@ -9,7 +9,7 @@
   width="300"
   height="600"
   type="momagic"
-  data-container="slotId" 
+  data-container="slotId"
   data-publisher="publisherId"
   >
 </amp-ad>
@@ -21,11 +21,11 @@ For details on the configuration semantics, please contact the ad network or ref
 
 ### Required parameters
 
--   `data-publisher` 
+-   `data-publisher`
 -   `data-container`
 
-
 ### Optional parameters
+
 -   `data-format`
 -   `data-url`
 -   `data-extras`

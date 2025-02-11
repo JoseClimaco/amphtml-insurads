@@ -6,8 +6,8 @@ let str = 'foo';
 /** @type {string} */
 ('hello');
 let result =
-/** @type {string} */
-('world');
+  /** @type {string} */
+  ('world');
 let result2 =
-/** @type {string} */
-('');
+  /** @type {string} */
+  ('');

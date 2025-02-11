@@ -8,7 +8,9 @@
 
 goog.module('amp.htmlparser.HtmlParserTest');
 
-const {DocLocator, HtmlSaxHandler, HtmlSaxHandlerWithLocation} = goog.require('amp.htmlparser.interface');
+const {DocLocator, HtmlSaxHandler, HtmlSaxHandlerWithLocation} = goog.require(
+  'amp.htmlparser.interface'
+);
 const {HtmlParser} = goog.require('amp.htmlparser');
 
 /**
@@ -54,8 +56,12 @@ class LoggingHandler extends HtmlSaxHandler {
   startTag(tag) {
     tag.dedupeAttrs();
     this.log.push(
-        'startTag(' + tag.upperName() + ',' + this.attrsToString(tag.attrs()) +
-        ')');
+      'startTag(' +
+        tag.upperName() +
+        ',' +
+        this.attrsToString(tag.attrs()) +
+        ')'
+    );
   }
 
   /** @override */
@@ -235,7 +241,7 @@ describe('HtmlParser', () => {
   it('parses cdata', () => {
     const handler = new LoggingHandler();
     const parser = new HtmlParser();
-    parser.parse(handler, '<script><![CDATA[alert("hey");]]><\/script>');
+    parser.parse(handler, '<script><![CDATA[alert("hey");]]></script>');
 
     expect(handler.log).toEqual([
       'startDoc()',
@@ -320,9 +326,9 @@ describe('HtmlParser', () => {
     const handler = new LoggingHandler();
     const parser = new HtmlParser();
     parser.parse(
-        handler,
-        '<a-tag><more-tags>' +
-            '<custom foo="Hello">world.</more-tags></a-tag>');
+      handler,
+      '<a-tag><more-tags>' + '<custom foo="Hello">world.</more-tags></a-tag>'
+    );
 
     expect(handler.log).toEqual([
       'startDoc()',
@@ -468,52 +474,87 @@ class LoggingHandlerWithLocation extends HtmlSaxHandlerWithLocation {
   /** @override */
   startDoc() {
     this.log.push(
-        ':' + this.locator.getLine() + ':' + this.locator.getCol() +
-        ': startDoc()');
+      ':' +
+        this.locator.getLine() +
+        ':' +
+        this.locator.getCol() +
+        ': startDoc()'
+    );
   }
 
   /** @override */
   cdata(text) {
     this.log.push(
-        ':' + this.locator.getLine() + ':' + this.locator.getCol() +
-        ': cdata("' + text + '")');
+      ':' +
+        this.locator.getLine() +
+        ':' +
+        this.locator.getCol() +
+        ': cdata("' +
+        text +
+        '")'
+    );
   }
 
   /** @override */
   pcdata(text) {
     this.log.push(
-        ':' + this.locator.getLine() + ':' + this.locator.getCol() +
-        ': pcdata("' + text + '")');
+      ':' +
+        this.locator.getLine() +
+        ':' +
+        this.locator.getCol() +
+        ': pcdata("' +
+        text +
+        '")'
+    );
   }
 
   /** @override */
   rcdata(text) {
     this.log.push(
-        ':' + this.locator.getLine() + ':' + this.locator.getCol() +
-        ': rcdata("' + text + '")');
+      ':' +
+        this.locator.getLine() +
+        ':' +
+        this.locator.getCol() +
+        ': rcdata("' +
+        text +
+        '")'
+    );
   }
 
   /** @override */
   endDoc() {
     this.log.push(
-        ':' + this.locator.getLine() + ':' + this.locator.getCol() +
-        ': endDoc()');
+      ':' + this.locator.getLine() + ':' + this.locator.getCol() + ': endDoc()'
+    );
   }
 
   /** @override */
   startTag(tag) {
     tag.dedupeAttrs();
     this.log.push(
-        ':' + this.locator.getLine() + ':' + this.locator.getCol() +
-        ': startTag(' + tag.upperName() + ',' +
-        this.attrsToString(tag.attrs()) + ')');
+      ':' +
+        this.locator.getLine() +
+        ':' +
+        this.locator.getCol() +
+        ': startTag(' +
+        tag.upperName() +
+        ',' +
+        this.attrsToString(tag.attrs()) +
+        ')'
+    );
   }
 
   /** @override */
   endTag(tag) {
     this.log.push(
-        ':' + this.locator.getLine() + ':' + this.locator.getCol() +
-        ': endTag(' + tag.upperName() + ')');
+      ':' +
+        this.locator.getLine() +
+        ':' +
+        this.locator.getCol() +
+        ': endTag(' +
+        tag.upperName() +
+        ')'
+    );
   }
 
   /**
@@ -542,12 +583,13 @@ describe('HtmlParser with location', () => {
     const handler = new LoggingHandlerWithLocation();
     const parser = new HtmlParser();
     parser.parse(
-        handler,
-        '<html>\n' +
-            '  <body>\n' +
-            '    <div style=foo>Oh hi!</div>\n' +
-            '  </body>\n' +
-            '</html>');
+      handler,
+      '<html>\n' +
+        '  <body>\n' +
+        '    <div style=foo>Oh hi!</div>\n' +
+        '  </body>\n' +
+        '</html>'
+    );
 
     expect(handler.log).toEqual([
       ':1:0: startDoc()',
@@ -579,16 +621,17 @@ describe('HtmlParser with location', () => {
     const handler = new LoggingHandlerWithLocation();
     const parser = new HtmlParser();
     parser.parse(
-        handler,
-        '<html>\n' +
-            '  <body>\n' +
-            '    <p>\n' +
-            '      <a-custom>\n' +
-            '        <div style=foo>Oh hi!</div>\n' +
-            '      </a-custom>\n' +
-            '    </p>\n' +
-            '  </body>\n' +
-            '</html>');
+      handler,
+      '<html>\n' +
+        '  <body>\n' +
+        '    <p>\n' +
+        '      <a-custom>\n' +
+        '        <div style=foo>Oh hi!</div>\n' +
+        '      </a-custom>\n' +
+        '    </p>\n' +
+        '  </body>\n' +
+        '</html>'
+    );
 
     expect(handler.log).toEqual([
       ':1:0: startDoc()',
@@ -621,24 +664,25 @@ describe('HtmlParser with location', () => {
     const handler = new LoggingHandlerWithLocation();
     const parser = new HtmlParser();
     parser.parse(
-        handler,
-        '<html>\n' +
-            '<body>\n' +
-            '<script type="application/json">\n' +
-            '{\n' +
-            '"vars": {\n' +
-            '"account": "UA-XXXX-Y"\n' +
-            '},\n' +
-            '"triggers": {\n' +
-            '"default pageview": {\n' +
-            '"on": "visible"\n' +
-            '}\n' +
-            '}\n' +
-            '}\n' +
-            '</script>\n' +
-            '<amp-analytics></amp-analytics>\n' +
-            '</body>\n' +
-            '</html>');
+      handler,
+      '<html>\n' +
+        '<body>\n' +
+        '<script type="application/json">\n' +
+        '{\n' +
+        '"vars": {\n' +
+        '"account": "UA-XXXX-Y"\n' +
+        '},\n' +
+        '"triggers": {\n' +
+        '"default pageview": {\n' +
+        '"on": "visible"\n' +
+        '}\n' +
+        '}\n' +
+        '}\n' +
+        '</script>\n' +
+        '<amp-analytics></amp-analytics>\n' +
+        '</body>\n' +
+        '</html>'
+    );
 
     expect(handler.log).toEqual([
       ':1:0: startDoc()',
@@ -648,17 +692,17 @@ describe('HtmlParser with location', () => {
       ':2:6: pcdata("\n")',
       ':3:0: startTag(SCRIPT,[type,application/json])',
       ':3:0: cdata("\n' +
-          '{\n' +
-          '"vars": {\n' +
-          '"account": "UA-XXXX-Y"\n' +
-          '},\n' +
-          '"triggers": {\n' +
-          '"default pageview": {\n' +
-          '"on": "visible"\n' +
-          '}\n' +
-          '}\n' +
-          '}\n' +
-          '")',
+        '{\n' +
+        '"vars": {\n' +
+        '"account": "UA-XXXX-Y"\n' +
+        '},\n' +
+        '"triggers": {\n' +
+        '"default pageview": {\n' +
+        '"on": "visible"\n' +
+        '}\n' +
+        '}\n' +
+        '}\n' +
+        '")',
       ':14:0: endTag(SCRIPT)',
       ':14:9: pcdata("\n")',
       ':15:0: startTag(AMP-ANALYTICS,[])',
@@ -679,16 +723,17 @@ describe('HtmlParser with location', () => {
     const handler = new LoggingHandlerWithLocation();
     const parser = new HtmlParser();
     parser.parse(
-        handler,
-        '<!doctype html>\n' +
-            '<html amp lang="tr">\n' +
-            '<head>\n' +
-            '<meta charset="utf-8">\n' +
-            '<title></title>\n' +
-            '<script async src="https://cdn.ampproject.org/v0.js"></script>\n' +
-            '</head>\n' +
-            '<body>İ</body>\n' +
-            '</html>');
+      handler,
+      '<!doctype html>\n' +
+        '<html amp lang="tr">\n' +
+        '<head>\n' +
+        '<meta charset="utf-8">\n' +
+        '<title></title>\n' +
+        '<script async src="https://cdn.ampproject.org/v0.js"></script>\n' +
+        '</head>\n' +
+        '<body>İ</body>\n' +
+        '</html>'
+    );
 
     expect(handler.log).toEqual([
       ':1:0: startDoc()',

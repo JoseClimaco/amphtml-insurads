@@ -22,8 +22,7 @@ const obj = {
 
   get 'getter_'() {},
 
-  set 'setter_'(v) {}
-
+  set 'setter_'(v) {},
 };
 
 class Instance {
@@ -50,7 +49,6 @@ class Instance {
   get 'getter_'() {}
 
   set 'setter_'(v) {}
-
 }
 
 class Static {
@@ -77,7 +75,6 @@ class Static {
   static get 'getter_'() {}
 
   static set 'setter_'(v) {}
-
 }
 
 var bar_;

@@ -1,5 +1,3 @@
-
-
 /*
  * Pre-upgrade:
  * - display:block element
@@ -52,7 +50,9 @@ bento-accordion > section > * {
 }
 
 /* Collapse content by default. */
-bento-accordion > section:not([expanded]) > :last-child:not(.i-amphtml-animating),
+bento-accordion
+  > section:not([expanded])
+  > :last-child:not(.i-amphtml-animating),
 bento-accordion
   > section:not([expanded])
   > :last-child:not(.i-amphtml-animating)

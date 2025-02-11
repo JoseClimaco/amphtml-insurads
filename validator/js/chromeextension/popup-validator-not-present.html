@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
   <head>
-    <link href="polymer.html" rel="import">
-    <link href="polymer-extension-toolbar.html" rel="import">
+    <link href="polymer.html" rel="import" />
+    <link href="polymer-extension-toolbar.html" rel="import" />
     <style is="custom-style">
       body {
         background-color: #fff;
@@ -18,7 +18,9 @@
   <body unresolved>
     <dom-module id="popup-validator-not-present">
       <style scope="popup-validator-not-present">
-        #message { margin: 10px 20px 20px; }
+        #message {
+          margin: 10px 20px 20px;
+        }
       </style>
       <template>
         <extension-toolbar id="toolbar"></extension-toolbar>
@@ -30,10 +32,10 @@
           properties: {
             validatorNotPresentText: {
               type: String,
-              value: chrome.i18n.getMessage("validatorNotPresentText"),
+              value: chrome.i18n.getMessage('validatorNotPresentText'),
             },
           },
-          ready: function() {
+          ready: function () {
             this.$.toolbar.changeSpinnerState(false);
           },
         });

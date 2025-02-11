@@ -29,10 +29,10 @@ export function decryptAesGcm(key, text) {
     const contentBuffer = base64Decode(text).buffer;
     const iv = contentBuffer.slice(0, 12);
     const bytesToDecrypt = contentBuffer.slice(12);
-    return decryptAesGcmImpl(formattedkey, iv, bytesToDecrypt)
+    return decryptAesGcmImpl(formattedkey, iv, bytesToDecrypt);
   });
-  }
-    
+}
+
 /**
  * Subtle-based AES-GCM decryption supported on all browser types.
  * Decrypts the input text using AES-GCM with the input key and IV.
@@ -44,24 +44,24 @@ export function decryptAesGcm(key, text) {
 export function decryptAesGcmImpl(key, iv, text) {
   const isIE = !!self.msCrypto;
   const subtle = isIE ? self.msCrypto.subtle : self.crypto.subtle;
-  return wrapCryptoOp(subtle
-    .decrypt(
+  return wrapCryptoOp(
+    subtle.decrypt(
       {
         name: 'AES-GCM',
         iv: iv,
         // IE requires "tag" of length 16.
         tag: isIE ? text.slice(text.byteLength - 16) : undefined,
         // Edge requires "tagLength".
-        tagLength: 128 // block size (16): 1-128
+        tagLength: 128, // block size (16): 1-128
       },
       key,
       // IE requires "tag" to be removed from the bytes.
       isIE ? text.slice(0, text.byteLength - 16) : text
-    ))
-    .then((buffer) => {
-      // 5. Decryption gives us raw bytes and we need to turn them into text.
-      return utf8Decode(new Uint8Array(buffer));
-    });
+    )
+  ).then((buffer) => {
+    // 5. Decryption gives us raw bytes and we need to turn them into text.
+    return utf8Decode(new Uint8Array(buffer));
+  });
 }
 
 /**
@@ -73,12 +73,12 @@ export function decryptAesGcmImpl(key, iv, text) {
 export function safeAesGcmImportKey(key) {
   const isIE = !!self.msCrypto;
   const subtle = isIE ? self.msCrypto.subtle : self.crypto.subtle;
-  return wrapCryptoOp(subtle.importKey('raw', key,
-    'AES-GCM',
-    true, ['decrypt']));
+  return wrapCryptoOp(
+    subtle.importKey('raw', key, 'AES-GCM', true, ['decrypt'])
+  );
 }
 
-/** 
+/**
  * Converts IE11 CryptoOperation type to a Promise.
  * @param {Object} op
  * @return {!Promise}

@@ -1,2 +1,1 @@
-import json from './options.json' assert { more: 'other' };
-
+import json from './options.json' assert {more: 'other'};

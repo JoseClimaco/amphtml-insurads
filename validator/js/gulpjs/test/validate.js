@@ -9,38 +9,36 @@ const gulpAmpHtmlValidator = require('../');
 const VALID_FILE = '../testdata/feature_tests/minimum_valid_amp.html';
 const INVALID_FILE = '../testdata/feature_tests/empty.html';
 
-describe('gulp-amphtml-validator', function() {
-
-  describe('validate', function() {
-
+describe('gulp-amphtml-validator', function () {
+  describe('validate', function () {
     let validate;
 
-    beforeEach(function() {
+    beforeEach(function () {
       validate = gulpAmpHtmlValidator.validate();
     });
 
-    it('passes valid AMPs', function(done) {
+    it('passes valid AMPs', function (done) {
       const validFile = createFile(VALID_FILE);
       validate.write(validFile);
-      validate.once('data', function(file) {
+      validate.once('data', function (file) {
         assert.equal(file.ampValidationResult.status, 'PASS');
         done();
       });
     });
 
-    it('fails invalid AMPs', function(done) {
+    it('fails invalid AMPs', function (done) {
       const invalidFile = createFile(INVALID_FILE);
       validate.write(invalidFile);
-      validate.once('data', function(file) {
+      validate.once('data', function (file) {
         assert.equal(file.ampValidationResult.status, 'FAIL');
         done();
       });
     });
 
-    it('fails if validator cannot be downloaded', function(done) {
+    it('fails if validator cannot be downloaded', function (done) {
       const faillingValidator = {
-        getInstance: function() {
-          return new Promise(function(resolve, reject) {
+        getInstance: function () {
+          return new Promise(function (resolve, reject) {
             reject(new Error('expected'));
           });
         },
@@ -48,25 +46,23 @@ describe('gulp-amphtml-validator', function() {
       validate = gulpAmpHtmlValidator.validate(faillingValidator);
       const validFile = createFile(VALID_FILE);
       validate.write(validFile);
-      validate.once('data', function(file) {
+      validate.once('data', function (file) {
         assert.equal(file.ampValidationResult.status, 'UNKNOWN');
         done();
       });
     });
-
   });
 
-  describe('format', function() {
-
+  describe('format', function () {
     let logger;
     let format;
 
-    beforeEach(function() {
+    beforeEach(function () {
       logger = new MockLogger();
       format = gulpAmpHtmlValidator.format(logger);
     });
 
-    it('prints passed validation results', function(done) {
+    it('prints passed validation results', function (done) {
       const pass = createFileStub(VALID_FILE);
       pass.ampValidationResult = {
         status: 'PASS',
@@ -74,14 +70,19 @@ describe('gulp-amphtml-validator', function() {
       };
       format.write(pass);
       format.end();
-      format.once('finish', function() {
-        assert.ok(logger.logged.includes('AMP Validation results:\n\n' + VALID_FILE +
-          ': \u001b[32mPASS\u001b[39m'));
+      format.once('finish', function () {
+        assert.ok(
+          logger.logged.includes(
+            'AMP Validation results:\n\n' +
+              VALID_FILE +
+              ': \u001b[32mPASS\u001b[39m'
+          )
+        );
         done();
       });
     });
 
-    it('prints failed vaidation results', function(done) {
+    it('prints failed vaidation results', function (done) {
       const fail = createFileStub(INVALID_FILE);
       fail.ampValidationResult = {
         status: 'FAIL',
@@ -91,34 +92,39 @@ describe('gulp-amphtml-validator', function() {
             line: 24,
             col: 4,
             message: 'errorMessage',
-            specUrl: 'specUrl' ,
+            specUrl: 'specUrl',
             category: 'category',
             code: 'errorCode',
-            params: ['img','noscript','amp-img'],
+            params: ['img', 'noscript', 'amp-img'],
           },
         ],
       };
       format.write(fail);
       format.end();
-      format.once('finish', function() {
-        assert.ok(logger.logged.includes('AMP Validation results:\n\n' +
-          INVALID_FILE + ': \u001b[31mFAIL\u001b[39m\n' + INVALID_FILE +
-          ':24:4 ' + '\u001b[31merrorMessage\u001b[39m (see specUrl)'));
+      format.once('finish', function () {
+        assert.ok(
+          logger.logged.includes(
+            'AMP Validation results:\n\n' +
+              INVALID_FILE +
+              ': \u001b[31mFAIL\u001b[39m\n' +
+              INVALID_FILE +
+              ':24:4 ' +
+              '\u001b[31merrorMessage\u001b[39m (see specUrl)'
+          )
+        );
         done();
       });
     });
-
   });
 
-  describe('failAfterError', function() {
-
+  describe('failAfterError', function () {
     let failAfterError;
 
-    beforeEach(function() {
+    beforeEach(function () {
       failAfterError = gulpAmpHtmlValidator.failAfterError();
     });
 
-    it('fails after invalid AMP', function(done) {
+    it('fails after invalid AMP', function (done) {
       const invalidFile = createFailedFile('fail.html');
       failAfterError.write(invalidFile);
       try {
@@ -128,7 +134,7 @@ describe('gulp-amphtml-validator', function() {
       }
     });
 
-    it('fails if validator fails to load', function(done) {
+    it('fails if validator fails to load', function (done) {
       const invalidFile = createFileWithValidatorFailure('fail.html');
       failAfterError.write(invalidFile);
       try {
@@ -138,13 +144,12 @@ describe('gulp-amphtml-validator', function() {
       }
     });
 
-    it('passes valid AMP', function(done) {
+    it('passes valid AMP', function (done) {
       const invalidFile = createPassedFile('pass.html');
       failAfterError.write(invalidFile);
       failAfterError.end();
       done();
     });
-
   });
 
   function createFailedFile(name) {
@@ -186,7 +191,6 @@ describe('gulp-amphtml-validator', function() {
   }
 
   class MockLogger {
-
     constructor() {
       this.logged = '';
     }
@@ -196,4 +200,3 @@ describe('gulp-amphtml-validator', function() {
     }
   }
 });
-

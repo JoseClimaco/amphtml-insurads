@@ -1,6 +1,5 @@
 /*! https://mths.be/cssescape v1.5.1 by @mathias | MIT license */
 
-
 /**
  * This regex consists of 4 matching capture groups and one (non-matching) fallback:
  *
@@ -18,7 +17,8 @@
  *
  * Together, this matches everything necessary for CSS.escape.
  */
-var regex = /(\0)|^(-)$|([\x01-\x1f\x7f]|^-?[0-9])|([\x80-\uffff0-9a-zA-Z_-]+)|[^]/g;
+var regex =
+  /(\0)|^(-)$|([\x01-\x1f\x7f]|^-?[0-9])|([\x80-\uffff0-9a-zA-Z_-]+)|[^]/g;
 
 function escaper(match, nil, dash, hexEscape, chars) {
   // Chars is the legal-chars (group 4) capture
@@ -33,7 +33,12 @@ function escaper(match, nil, dash, hexEscape, chars) {
   // (group 3) must be backslash escaped with a trailing space.  Funnily, the
   // leading dash must not be escaped, but the number. :shrug:
   if (hexEscape) {
-    return match.slice(0, -1) + '\\' + match.slice(-1).charCodeAt(0).toString(16) + ' '
+    return (
+      match.slice(0, -1) +
+      '\\' +
+      match.slice(-1).charCodeAt(0).toString(16) +
+      ' '
+    );
   }
   // Finally, the solitary dash and the catch-all chars require backslash
   // escaping.

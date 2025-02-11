@@ -1,4 +1,4 @@
-// useStyles() references that don't belong to a MemberExpression should be 
+// useStyles() references that don't belong to a MemberExpression should be
 // preserve the classname object.
 
 // TODO(alanorozco): It would be nice if these cases were linted to prevent
@@ -11,5 +11,5 @@ console.log(useStyles());
 console.log(useStyles().thisOneIsOptimized);
 
 const a = useAnotherStyles();
-console.log(a)
-console.log(a.thisOneIsOptimized)
+console.log(a);
+console.log(a.thisOneIsOptimized);

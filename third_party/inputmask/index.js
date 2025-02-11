@@ -1,4 +1,3 @@
-
 import {factory as inputmaskDependencyFactory} from './inputmask.dependencyLib';
 import {factory as inputmaskCoreFactory} from './inputmask';
 import {factory as inputmaskDateExtensionsFactory} from './inputmask.date.extensions';
@@ -12,7 +11,12 @@ function factory(element) {
   const win = doc.defaultView;
 
   const InputmaskDependencyLib = inputmaskDependencyFactory(win, doc);
-  const Inputmask = inputmaskCoreFactory(InputmaskDependencyLib, win, doc, undefined);
+  const Inputmask = inputmaskCoreFactory(
+    InputmaskDependencyLib,
+    win,
+    doc,
+    undefined
+  );
   inputmaskDateExtensionsFactory(Inputmask);
 
   return Inputmask;

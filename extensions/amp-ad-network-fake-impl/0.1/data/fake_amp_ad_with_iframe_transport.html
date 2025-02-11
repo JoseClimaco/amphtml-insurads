@@ -2,16 +2,29 @@
 <html amp4ads>
   <head>
     <title>Ad with 3p Analytics and amp-ad-exit</title>
-    <meta charset=utf-8>
-    <script async src='https://cdn.ampproject.org/v0.js'></script>
-    <script async custom-element='amp-analytics' src='https://cdn.ampproject.org/v0/amp-analytics-0.1.js'></script>
-    <script async custom-element='amp-ad-exit' src='https://cdn.ampproject.org/v0/amp-ad-exit-0.1.js'></script>
-    <style amp4ads-boilerplate>body{visibility:hidden}</style>
-    <meta name=viewport content=width=device-width,minimum-scale=1>
+    <meta charset="utf-8" />
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script
+      async
+      custom-element="amp-analytics"
+      src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+    ></script>
+    <script
+      async
+      custom-element="amp-ad-exit"
+      src="https://cdn.ampproject.org/v0/amp-ad-exit-0.1.js"
+    ></script>
+    <style amp4ads-boilerplate>
+      body {
+        visibility: hidden;
+      }
+    </style>
+    <meta name="viewport" content="width" ="device-width,minimum-scale" ="1" />
   </head>
   <body>
     Before using this example ad, please add the following to
-    ANALYTICS_IFRAME_TRANSPORT_CONFIG in extensions/amp-analytics/0.1/iframe-transport-vendors.js:
+    ANALYTICS_IFRAME_TRANSPORT_CONFIG in
+    extensions/amp-analytics/0.1/iframe-transport-vendors.js:
     <pre>
       'example-3p-vendor': {
         'transport': {
@@ -19,8 +32,8 @@
         },
       },
     </pre>
-    <amp-analytics type='example-3p-vendor'>
-      <script type='application/json'>
+    <amp-analytics type="example-3p-vendor">
+      <script type="application/json">
         {
           "requests": {
             "sample_visibility_request": "visible=true&url=${canonicalUrl}&title=${title}&acct=${account}",
@@ -43,8 +56,8 @@
         }
       </script>
     </amp-analytics>
-    <amp-ad-exit id='exit-api'>
-      <script type='application/json'>
+    <amp-ad-exit id="exit-api">
+      <script type="application/json">
         {
           "targets": {
             "target1": {
@@ -73,11 +86,21 @@
         }
       </script>
     </amp-ad-exit>
-    <div id='ad'>
-      <div class='product' on='tap:exit-api.exit(target="target1", _elem="Product 1")'>
-        <amp-img id='img' src='https://upload.wikimedia.org/wikipedia/commons/6/6e/Golde33443.jpg' width=256 height=300></amp-img>
-        <p class='frob'>
-          By Golden Trvs Gol twister (Own work) [CC BY-SA 4.0 (http://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons
+    <div id="ad">
+      <div
+        class="product"
+        on='tap:exit-api.exit(target="target1", _elem="Product 1")'
+      >
+        <amp-img
+          id="img"
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Golde33443.jpg"
+          width="256"
+          height="300"
+        ></amp-img>
+        <p class="frob">
+          By Golden Trvs Gol twister (Own work) [CC BY-SA 4.0
+          (http://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia
+          Commons
         </p>
       </div>
     </div>

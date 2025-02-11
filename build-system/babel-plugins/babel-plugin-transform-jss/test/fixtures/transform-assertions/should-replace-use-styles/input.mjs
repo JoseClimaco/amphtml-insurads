@@ -12,10 +12,6 @@ function x() {
 
 useStyles().x;
 
-const {
-  one,
-  two: twoRenamed,
-  ...rest
-} = useStyles();
+const {one, two: twoRenamed, ...rest} = useStyles();
 
 let {single} = useStyles();

@@ -1,10 +1,10 @@
 <!-- A custom element for the error list below the editor window. The errors
      are kept as an array of validation errors, and selection changes will
      fire an event ('error-selected') with the appropriate error. -->
-<link rel="import" href="../paper-listbox/paper-listbox.html">
-<link rel="import" href="../paper-item/paper-item.html">
-<link rel="import" href="../iron-icon/iron-icon.html">
-<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html" />
+<link rel="import" href="../paper-item/paper-item.html" />
+<link rel="import" href="../iron-icon/iron-icon.html" />
+<link rel="import" href="../iron-icons/iron-icons.html" />
 <dom-module id="webui-errorlist">
   <style scope="webui-errorlist">
     .category {
@@ -48,8 +48,8 @@
     }
     #listbox paper-item {
       --paper-item: {
-         cursor: pointer;
-       };
+        cursor: pointer;
+      };
     }
     #listbox paper-item:first-of-type {
       border-top: 1px solid #c1c2c3;
@@ -60,25 +60,41 @@
       <paper-item class="filterMessage">
         <paper-item-body>
           Results filtered to {{filter}}.
-          <paper-button id="clearFilterButton" on-click="clearFilter" raised>Clear filter</paper-button>
+          <paper-button id="clearFilterButton" on-click="clearFilter" raised
+            >Clear filter</paper-button
+          >
         </paper-item-body>
       </paper-item>
     </template>
-    <paper-listbox id="listbox" on-iron-select="handleSelect" selected="{{selectedError}}">
-      <template id="listboxErrors" is="dom-repeat" items='{{errors}}' as="e" filter="filterErrors">
+    <paper-listbox
+      id="listbox"
+      on-iron-select="handleSelect"
+      selected="{{selectedError}}"
+    >
+      <template
+        id="listboxErrors"
+        is="dom-repeat"
+        items="{{errors}}"
+        as="e"
+        filter="filterErrors"
+      >
         <paper-item>
           <template is="dom-if" if="{{e.isError}}">
-            <iron-icon class="ampproject-error" icon='{{e.icon}}'></iron-icon>&nbsp;&nbsp;
+            <iron-icon class="ampproject-error" icon="{{e.icon}}"></iron-icon
+            >&nbsp;&nbsp;
           </template>
           <template is="dom-if" if="{{e.isWarning}}">
-            <iron-icon class="ampproject-warning" icon='{{e.icon}}'></iron-icon>&nbsp;&nbsp;
+            <iron-icon class="ampproject-warning" icon="{{e.icon}}"></iron-icon
+            >&nbsp;&nbsp;
           </template>
           <paper-item-body two-line>
             <div>
               <div class="message">{{e.message}}</div>
               <div class="category">{{e.category}}</div>
             </div>
-            <div secondary><small>line {{e.line}}, column {{e.col}}</small></div>
+            <div secondary>
+              <small>line {{e.line}}, column {{e.col}}</small>
+            </div>
           </paper-item-body>
         </paper-item>
       </template>
@@ -88,20 +104,22 @@
   <script>
     Polymer({
       is: 'webui-errorlist',
-      addError: function(error) {
+      addError: function (error) {
         this.push('errors', error);
       },
-      clearErrors: function() {
+      clearErrors: function () {
         this.splice('errors', 0);
       },
-      clearFilter: function() {
+      clearFilter: function () {
         this.filter = undefined;
         this.$.listboxErrors.render();
         removeParamFromLocationHashParams('filter');
         this.fire('webui-errorlist-filter-changes', {'validationDelayMs': 0});
       },
-      getFilter: function() { return this.filter; },
-      filterErrors: function(error) {
+      getFilter: function () {
+        return this.filter;
+      },
+      filterErrors: function (error) {
         // If no filter set, return all errors.
         if (this.filter === undefined) {
           return error;
@@ -111,7 +129,7 @@
           return error;
         }
       },
-      handleSelect: function(e) {
+      handleSelect: function (e) {
         // This.selectedError refers to the index into the filtered array,
         // but this.errors is not filtered.
         var filteredErrors;
@@ -134,25 +152,27 @@
       properties: {
         errors: {
           type: Array,
-          value: function() { return []; },
-          notify: true
+          value: function () {
+            return [];
+          },
+          notify: true,
         },
         filter: {
           type: String,
         },
         selectedError: {
           type: Number,
-          value: -1  // don't select anything by default.
-        }
+          value: -1, // don't select anything by default.
+        },
       },
-      selectAndFocusError: function(index) {
+      selectAndFocusError: function (index) {
         this.$.listbox.selected = index;
         this.$.listboxErrors.render();
         if (this.$.listbox.selectedItem) {
           this.$.listbox.selectedItem.scrollIntoView();
         }
       },
-      setFilter: function(filter) {
+      setFilter: function (filter) {
         this.filter = filter;
       },
     });

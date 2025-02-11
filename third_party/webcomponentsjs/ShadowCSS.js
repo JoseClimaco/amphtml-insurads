@@ -1,10 +1,10 @@
 /**
-* @license
-* Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
-* Use of this source code is governed by a BSD-style
-* license that can be found in the LICENSE file or at
-* https://developers.google.com/open-source/licenses/bsd
-*/
+ * @license
+ * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style
+ * license that can be found in the LICENSE file or at
+ * https://developers.google.com/open-source/licenses/bsd
+ */
 
 /*
   This is a limited shim for ShadowDOM css styling.
@@ -121,7 +121,6 @@
   in comments in lieu of the next selector when running under polyfill.
 */
 
-
 const strictStyling = false;
 const allowArraySelectors = false;
 const isIeSupported = false;
@@ -130,10 +129,11 @@ const isIeSupported = false;
 export function scopeRules(cssRules, scopeSelector, opt_transformer) {
   var cssText = '';
   if (cssRules) {
-    Array.prototype.forEach.call(cssRules, function(rule) {
-      if (rule.selectorText && (rule.style && rule.style.cssText !== undefined)) {
-        cssText += doScopeSelector(
-          rule.selectorText, scopeSelector, opt_transformer) + ' {\n\t';
+    Array.prototype.forEach.call(cssRules, function (rule) {
+      if (rule.selectorText && rule.style && rule.style.cssText !== undefined) {
+        cssText +=
+          doScopeSelector(rule.selectorText, scopeSelector, opt_transformer) +
+          ' {\n\t';
         cssText += propertiesFromRule(rule) + '\n}\n\n';
       } else if (rule.type === CSSRule.MEDIA_RULE) {
         cssText += '@media ' + rule.media.mediaText + ' {\n';
@@ -149,7 +149,7 @@ export function scopeRules(cssRules, scopeSelector, opt_transformer) {
           if (rule.cssText) {
             cssText += rule.cssText + '\n\n';
           }
-        } catch(x) {
+        } catch (x) {
           if (
             isIeSupported &&
             rule.type === CSSRule.KEYFRAMES_RULE &&
@@ -166,7 +166,7 @@ export function scopeRules(cssRules, scopeSelector, opt_transformer) {
 
 export function ieSafeCssTextFromKeyFrameRule(rule) {
   var cssText = '@keyframes ' + rule.name + ' {';
-  Array.prototype.forEach.call(rule.cssRules, function(rule) {
+  Array.prototype.forEach.call(rule.cssRules, function (rule) {
     cssText += ' ' + rule.keyText + ' {' + rule.style.cssText + '}';
   });
   cssText += ' }';
@@ -174,16 +174,18 @@ export function ieSafeCssTextFromKeyFrameRule(rule) {
 }
 
 export function doScopeSelector(selector, scopeSelector, opt_transformer) {
-  var r = [], parts = selector.split(',');
-  parts.forEach(function(p) {
+  var r = [],
+    parts = selector.split(',');
+  parts.forEach(function (p) {
     p = p.trim();
     if (opt_transformer) {
       p = opt_transformer(p);
     }
     if (selectorNeedsScoping(p, scopeSelector)) {
-      p = (strictStyling && !p.match(polyfillHostNoCombinator)) ?
-          applyStrictSelectorScope(p, scopeSelector) :
-          applySelectorScope(p, scopeSelector);
+      p =
+        strictStyling && !p.match(polyfillHostNoCombinator)
+          ? applyStrictSelectorScope(p, scopeSelector)
+          : applySelectorScope(p, scopeSelector);
     }
     r.push(p);
   });
@@ -204,15 +206,15 @@ export function makeScopeMatcher(scopeSelector) {
 }
 
 export function applySelectorScope(selector, selectorScope) {
-  return allowArraySelectors && Array.isArray(selectorScope) ?
-      applySelectorScopeList(selector, selectorScope) :
-      applySimpleSelectorScope(selector, selectorScope);
+  return allowArraySelectors && Array.isArray(selectorScope)
+    ? applySelectorScopeList(selector, selectorScope)
+    : applySimpleSelectorScope(selector, selectorScope);
 }
 
 // apply an array of selectors
 export function applySelectorScopeList(selector, scopeSelectorList) {
   var r = [];
-  for (var i=0, s; (s=scopeSelectorList[i]); i++) {
+  for (var i = 0, s; (s = scopeSelectorList[i]); i++) {
     r.push(applySimpleSelectorScope(selector, s));
   }
   return r.join(', ');
@@ -235,16 +237,18 @@ export function applyStrictSelectorScope(selector, scopeSelector) {
   var splits = [' ', '>', '+', '~'],
     scoped = selector,
     attrName = '[' + scopeSelector + ']';
-  splits.forEach(function(sep) {
+  splits.forEach(function (sep) {
     var parts = scoped.split(sep);
-    scoped = parts.map(function(p) {
-      // remove :host since it should be unnecessary
-      var t = p.trim().replace(polyfillHostRe, '');
-      if (t && (splits.indexOf(t) < 0) && (t.indexOf(attrName) < 0)) {
-        p = t.replace(/([^:]*)(:*)(.*)/, '$1' + attrName + '$2$3');
-      }
-      return p;
-    }).join(sep);
+    scoped = parts
+      .map(function (p) {
+        // remove :host since it should be unnecessary
+        var t = p.trim().replace(polyfillHostRe, '');
+        if (t && splits.indexOf(t) < 0 && t.indexOf(attrName) < 0) {
+          p = t.replace(/([^:]*)(:*)(.*)/, '$1' + attrName + '$2$3');
+        }
+        return p;
+      })
+      .join(sep);
   });
   return scoped;
 }
@@ -255,8 +259,10 @@ export function propertiesFromRule(rule) {
   // property. (https://bugs.webkit.org/show_bug.cgi?id=118045)
   // don't replace attr rules
   if (rule.style.content && !rule.style.content.match(/['"]+|attr/)) {
-    cssText = cssText.replace(/content:[^;]*;/g, 'content: \'' +
-        rule.style.content + '\';');
+    cssText = cssText.replace(
+      /content:[^;]*;/g,
+      "content: '" + rule.style.content + "';"
+    );
   }
   // TODO(sorvell): we can workaround this issue here, but we need a list
   // of troublesome properties to fix https://github.com/Polymer/platform/issues/53
@@ -274,42 +280,48 @@ export function propertiesFromRule(rule) {
 }
 
 var selectorRe = /([^{]*)({[\s\S]*?})/gim,
-    cssCommentRe = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim,
-    // TODO(sorvell): remove either content or comment
-    cssCommentNextSelectorRe = /\/\*\s*@polyfill ([^*]*\*+([^/*][^*]*\*+)*\/)([^{]*?){/gim,
-    cssContentNextSelectorRe = /polyfill-next-selector[^}]*content\:[\s]*?['"](.*?)['"][;\s]*}([^{]*?){/gim,
-    // TODO(sorvell): remove either content or comment
-    cssCommentRuleRe = /\/\*\s@polyfill-rule([^*]*\*+([^/*][^*]*\*+)*)\//gim,
-    cssContentRuleRe = /(polyfill-rule)[^}]*(content\:[\s]*['"](.*?)['"])[;\s]*[^}]*}/gim,
-    // TODO(sorvell): remove either content or comment
-    cssCommentUnscopedRuleRe = /\/\*\s@polyfill-unscoped-rule([^*]*\*+([^/*][^*]*\*+)*)\//gim,
-    cssContentUnscopedRuleRe = /(polyfill-unscoped-rule)[^}]*(content\:[\s]*['"](.*?)['"])[;\s]*[^}]*}/gim,
-    cssPseudoRe = /::(x-[^\s{,(]*)/gim,
-    cssPartRe = /::part\(([^)]*)\)/gim,
-    // note: :host pre-processed to -shadowcsshost.
-    polyfillHost = '-shadowcsshost',
-    // note: :host-context pre-processed to -shadowcsshostcontext.
-    polyfillHostContext = '-shadowcsscontext',
-    parenSuffix = ')(?:\\((' +
-        '(?:\\([^)(]*\\)|[^)(]*)+?' +
-        ')\\))?([^,{]*)';
-    var cssColonHostRe = new RegExp('(' + polyfillHost + parenSuffix, 'gim'),
-    cssColonHostContextRe = new RegExp('(' + polyfillHostContext + parenSuffix, 'gim'),
-    selectorReSuffix = '([>\\s~+\[.,{:][\\s\\S]*)?$',
-    colonHostRe = /\:host/gim,
-    colonHostContextRe = /\:host-context/gim,
-    /* host name without combinator */
-    polyfillHostNoCombinator = polyfillHost + '-no-combinator',
-    polyfillHostRe = new RegExp(polyfillHost, 'gim'),
-    polyfillHostContextRe = new RegExp(polyfillHostContext, 'gim'),
-    shadowDOMSelectorsRe = [
-      />>>/g,
-      /::shadow/g,
-      /::content/g,
-      // Deprecated selectors
-      /\/deep\//g, // former >>>
-      /\/shadow\//g, // former ::shadow
-      /\/shadow-deep\//g, // former /deep/
-      /\^\^/g,     // former /shadow/
-      /\^(?!=)/g   // former /shadow-deep/
-    ];
+  cssCommentRe = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim,
+  // TODO(sorvell): remove either content or comment
+  cssCommentNextSelectorRe =
+    /\/\*\s*@polyfill ([^*]*\*+([^/*][^*]*\*+)*\/)([^{]*?){/gim,
+  cssContentNextSelectorRe =
+    /polyfill-next-selector[^}]*content\:[\s]*?['"](.*?)['"][;\s]*}([^{]*?){/gim,
+  // TODO(sorvell): remove either content or comment
+  cssCommentRuleRe = /\/\*\s@polyfill-rule([^*]*\*+([^/*][^*]*\*+)*)\//gim,
+  cssContentRuleRe =
+    /(polyfill-rule)[^}]*(content\:[\s]*['"](.*?)['"])[;\s]*[^}]*}/gim,
+  // TODO(sorvell): remove either content or comment
+  cssCommentUnscopedRuleRe =
+    /\/\*\s@polyfill-unscoped-rule([^*]*\*+([^/*][^*]*\*+)*)\//gim,
+  cssContentUnscopedRuleRe =
+    /(polyfill-unscoped-rule)[^}]*(content\:[\s]*['"](.*?)['"])[;\s]*[^}]*}/gim,
+  cssPseudoRe = /::(x-[^\s{,(]*)/gim,
+  cssPartRe = /::part\(([^)]*)\)/gim,
+  // note: :host pre-processed to -shadowcsshost.
+  polyfillHost = '-shadowcsshost',
+  // note: :host-context pre-processed to -shadowcsshostcontext.
+  polyfillHostContext = '-shadowcsscontext',
+  parenSuffix = ')(?:\\((' + '(?:\\([^)(]*\\)|[^)(]*)+?' + ')\\))?([^,{]*)';
+var cssColonHostRe = new RegExp('(' + polyfillHost + parenSuffix, 'gim'),
+  cssColonHostContextRe = new RegExp(
+    '(' + polyfillHostContext + parenSuffix,
+    'gim'
+  ),
+  selectorReSuffix = '([>\\s~+[.,{:][\\s\\S]*)?$',
+  colonHostRe = /\:host/gim,
+  colonHostContextRe = /\:host-context/gim,
+  /* host name without combinator */
+  polyfillHostNoCombinator = polyfillHost + '-no-combinator',
+  polyfillHostRe = new RegExp(polyfillHost, 'gim'),
+  polyfillHostContextRe = new RegExp(polyfillHostContext, 'gim'),
+  shadowDOMSelectorsRe = [
+    />>>/g,
+    /::shadow/g,
+    /::content/g,
+    // Deprecated selectors
+    /\/deep\//g, // former >>>
+    /\/shadow\//g, // former ::shadow
+    /\/shadow-deep\//g, // former /deep/
+    /\^\^/g, // former /shadow/
+    /\^(?!=)/g, // former /shadow-deep/
+  ];

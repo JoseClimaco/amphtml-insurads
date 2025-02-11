@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <style>
@@ -54,9 +54,8 @@
         if (shouldStopInt) {
           stopIntFunc();
         } else {
-          stopIntFunc = window.context.observeIntersection(
-            intersectionCallback
-          );
+          stopIntFunc =
+            window.context.observeIntersection(intersectionCallback);
         }
         shouldStopInt = !shouldStopInt;
       }

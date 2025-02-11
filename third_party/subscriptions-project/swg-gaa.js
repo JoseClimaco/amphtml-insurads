@@ -1526,8 +1526,7 @@ const SIGN_IN_WITH_GOOGLE_BUTTON_ID = 'swg-sign-in-with-google-button';
 const PUBLISHER_SIGN_IN_BUTTON_ID = 'swg-publisher-sign-in-button';
 
 /** ID for the Regwall container element. */
-const REGISTRATION_BUTTON_CONTAINER_ID =
-  'swg-registration-button-container';
+const REGISTRATION_BUTTON_CONTAINER_ID = 'swg-registration-button-container';
 
 /** ID for the Regwall container element. */
 const REGWALL_CONTAINER_ID = 'swg-regwall-container';
@@ -2789,4 +2788,10 @@ class GaaUtils {
   }
 }
 
-export { GaaGoogle3pSignInButton, GaaGoogleSignInButton, GaaMeteringRegwall, GaaUserDef, GoogleUserDef };
+export {
+  GaaGoogle3pSignInButton,
+  GaaGoogleSignInButton,
+  GaaMeteringRegwall,
+  GaaUserDef,
+  GoogleUserDef,
+};

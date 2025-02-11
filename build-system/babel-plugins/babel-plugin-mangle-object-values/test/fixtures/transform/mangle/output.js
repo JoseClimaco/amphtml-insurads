@@ -2,26 +2,26 @@
 const x = {
   foo: 'bar',
   bar: 'qux',
-  [x]: 'y'
+  [x]: 'y',
 }; // not mangled:
 
 const y = notMangled({
   foo: 'bar',
   bar: 'qux',
-  [x]: 'y'
+  [x]: 'y',
 }); // mangled:
 
 const z = {
   foo: 1,
   bar: 2,
-  [x]: 3
+  [x]: 3,
 }; // dupes:
 
 const a = {
   foo: 1,
   baz: 2,
   // should be same as foo:
-  bar: 1
+  bar: 1,
 }; // 100 elements:
 
 const b = {
@@ -124,5 +124,5 @@ const b = {
   k96: 97,
   k97: 98,
   k98: 99,
-  k99: 100
+  k99: 100,
 };

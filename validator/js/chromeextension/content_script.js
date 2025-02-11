@@ -2,10 +2,12 @@ const globals = {};
 globals.amphtmlRegex = new RegExp('(^\\s*)amphtml(\\s*$)');
 globals.ampCaches = [
   {
-    'getAmpHref': function() {
-      if (window.location.pathname.startsWith('/a/s') ||
-          window.location.pathname.startsWith('/c/s') ||
-          window.location.pathname.startsWith('/v/s')) {
+    'getAmpHref': function () {
+      if (
+        window.location.pathname.startsWith('/a/s') ||
+        window.location.pathname.startsWith('/c/s') ||
+        window.location.pathname.startsWith('/v/s')
+      ) {
         return 'https://' + window.location.pathname.slice(5);
       } else if (window.location.pathname.startsWith('/c')) {
         return 'http://' + window.location.pathname.slice(3);
@@ -13,7 +15,7 @@ globals.ampCaches = [
         return '';
       }
     },
-    'isAmpCache': function() {
+    'isAmpCache': function () {
       return window.location.hostname.endsWith('cdn.ampproject.org'); // lgtm [js/incomplete-url-substring-sanitization]
     },
   },
@@ -51,11 +53,13 @@ function getAmpHtmlLinkHref() {
   if (headLinks.length > 0) {
     for (const index in headLinks) {
       const link = headLinks[index];
-      if (link instanceof HTMLLinkElement &&
-          link.hasAttribute('rel') &&
-          globals.amphtmlRegex.test(link.getAttribute('rel')) &&
-          link.hasAttribute('href') &&
-          validUrlPrefixRe.test(link.getAttribute('href'))) {
+      if (
+        link instanceof HTMLLinkElement &&
+        link.hasAttribute('rel') &&
+        globals.amphtmlRegex.test(link.getAttribute('rel')) &&
+        link.hasAttribute('href') &&
+        validUrlPrefixRe.test(link.getAttribute('href'))
+      ) {
         ampHtmlLinkHref = link.getAttribute('href');
         break;
       }
@@ -87,8 +91,10 @@ function isAmpCache() {
  * @private
  */
 function isAmpDocument() {
-  return (document.documentElement.hasAttribute('amp') ||
-      document.documentElement.hasAttribute('⚡'));
+  return (
+    document.documentElement.hasAttribute('amp') ||
+    document.documentElement.hasAttribute('⚡')
+  );
 }
 
 /**
@@ -104,15 +110,21 @@ function isAmpDocument() {
  *
  * Requests for loadAmp and has ampHref, then redirects the browser to ampHref.
  */
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.getAmpDetails) {
     const isAmp = isAmpDocument();
     const fromAmpCache = isAmpCache();
     let ampHref = '';
-    if (!isAmp) {ampHref = getAmpHtmlLinkHref();}
-    if (fromAmpCache) {ampHref = getAmpCacheHref();}
+    if (!isAmp) {
+      ampHref = getAmpHtmlLinkHref();
+    }
+    if (fromAmpCache) {
+      ampHref = getAmpCacheHref();
+    }
     sendResponse({
-      'isAmp': isAmp, 'fromAmpCache': fromAmpCache, 'ampHref': ampHref,
+      'isAmp': isAmp,
+      'fromAmpCache': fromAmpCache,
+      'ampHref': ampHref,
       'userAgent': navigator.userAgent,
     });
   }

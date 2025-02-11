@@ -30,7 +30,9 @@ bento-mega-menu > section > :last-child {
   background: white;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 200ms, visibility 0ms 200ms;
+  transition:
+    opacity 200ms,
+    visibility 0ms 200ms;
   transition-timing-function: ease-in;
 }
 bento-mega-menu > section[expanded] > :last-child {

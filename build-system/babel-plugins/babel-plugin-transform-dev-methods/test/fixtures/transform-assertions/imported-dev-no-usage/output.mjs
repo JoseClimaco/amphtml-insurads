@@ -1,1 +1,1 @@
-import { dev } from '#utils/log';
+import {dev} from '#utils/log';

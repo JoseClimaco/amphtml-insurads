@@ -9,7 +9,7 @@ jsonConfiguration({
   c: true,
   d: {
     e: false,
-  }
+  },
 });
 
 jsonConfiguration({

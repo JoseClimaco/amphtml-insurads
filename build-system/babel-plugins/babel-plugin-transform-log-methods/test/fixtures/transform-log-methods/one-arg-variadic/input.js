@@ -8,4 +8,8 @@ const result3 = user().assert(user(), 'welcome,', name);
 devAssert(a + b, 'hello!!', name);
 userAssert(true, 'hello!!', name);
 user().assertElement(element, 'Should be element', element);
-dev().assertEnumValue(foo, bar, 'Unhandled because this argument is usually small');
+dev().assertEnumValue(
+  foo,
+  bar,
+  'Unhandled because this argument is usually small'
+);

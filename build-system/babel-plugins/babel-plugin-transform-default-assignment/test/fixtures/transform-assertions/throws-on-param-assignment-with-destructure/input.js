@@ -1,2 +1,1 @@
-function test({x} = {}) {
-}
+function test({x} = {}) {}

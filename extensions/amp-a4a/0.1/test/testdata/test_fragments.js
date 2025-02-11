@@ -1,5 +1,3 @@
-
-
 export const data = {
   minimalDocOneStyleSrcDoc: `<html><head>
 <style amp-custom>p { background: green }</style>

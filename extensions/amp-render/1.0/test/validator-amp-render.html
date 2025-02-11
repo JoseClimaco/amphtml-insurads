@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html ⚡ lang="en">
   <!-- prettier-ignore -->
   <head>
@@ -18,12 +18,7 @@
   </head>
   <body>
     <!-- Valid: amp-render with only src attribute -->
-    <amp-render
-      width="10"
-      height="10"
-      src="amp-state:source"
-    >
-    </amp-render>
+    <amp-render width="10" height="10" src="amp-state:source"> </amp-render>
 
     <!-- Valid: amp-render with only [src] attribute -->
     <amp-render width="10" height="10" [src]="srcUrl"> </amp-render>
@@ -132,17 +127,22 @@
     </amp-render>
 
     <!-- Valid: amp-render with template attribute -->
-    <amp-render width=10 height=10
+    <amp-render
+      width="10"
+      height="10"
       src="https://data.com/articles.json?ref=CANONICAL_URL"
-      template="found">
+      template="found"
+    >
     </amp-render>
     <template id="found" type="amp-mustache"></template>
 
     <!-- Invalid: missing template with specified id -->
-    <amp-render width=10 height=10
+    <amp-render
+      width="10"
+      height="10"
       src="https://data.com/articles.json?ref=CANONICAL_URL"
-      template="missing">
+      template="missing"
+    >
     </amp-render>
-
   </body>
 </html>

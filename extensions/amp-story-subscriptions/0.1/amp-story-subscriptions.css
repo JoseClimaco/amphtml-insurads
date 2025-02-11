@@ -49,25 +49,29 @@ amp-subscriptions-dialog.i-amphtml-story-subscriptions-dialog-wrapper {
   overflow: hidden !important;
 }
 
-amp-story:not([supports-landscape]) + amp-subscriptions-dialog.i-amphtml-story-subscriptions-dialog-wrapper,
+amp-story:not([supports-landscape])
+  + amp-subscriptions-dialog.i-amphtml-story-subscriptions-dialog-wrapper,
 iframe.swg-dialog {
   width: 100% !important;
   left: 0 !important;
   margin-left: 0 !important;
 }
 
-@media(min-aspect-ratio: 31/40) {
-  amp-story:not([supports-landscape]) + amp-subscriptions-dialog.i-amphtml-story-subscriptions-dialog-wrapper,
-  iframe.swg-dialog  {
+@media (min-aspect-ratio: 31/40) {
+  amp-story:not([supports-landscape])
+    + amp-subscriptions-dialog.i-amphtml-story-subscriptions-dialog-wrapper,
+  iframe.swg-dialog {
     width: var(--i-amphtml-story-desktop-one-panel-width) !important;
     left: 50% !important;
-    margin-left: calc(-0.5 * var(--i-amphtml-story-desktop-one-panel-width)) !important;
+    margin-left: calc(
+      -0.5 * var(--i-amphtml-story-desktop-one-panel-width)
+    ) !important;
   }
 }
 
 .i-amphtml-story-subscriptions-dialog-banner {
   height: 2.54em !important;
-  background: #EDEDED !important;
+  background: #ededed !important;
   display: flex !important;
   justify-content: flex-end !important;
   align-items: center !important;
@@ -82,7 +86,9 @@ iframe.swg-dialog {
   font-size: 0.75em !important;
   opacity: 0 !important;
   transform: translateX(-0.2em) !important;
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out !important;
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out !important;
 
   /* Override default button styles. */
   padding: 0 !important;
@@ -91,7 +97,7 @@ iframe.swg-dialog {
   font-weight: 400 !important;
 }
 
-[dir="rtl"] .i-amphtml-story-subscriptions-dialog-banner-button {
+[dir='rtl'] .i-amphtml-story-subscriptions-dialog-banner-button {
   transform: translateX(0.2em) !important;
 }
 
@@ -116,12 +122,13 @@ iframe.swg-dialog {
   transform: translateX(0) !important;
 }
 
-[dir="rtl"] .i-amphtml-story-subscriptions-dialog-banner-button:after {
-  transform: translateX(0.1em) scaleX(-1)  !important;
+[dir='rtl'] .i-amphtml-story-subscriptions-dialog-banner-button:after {
+  transform: translateX(0.1em) scaleX(-1) !important;
 }
 
-[dir="rtl"] .i-amphtml-story-subscriptions-dialog-banner-button.i-amphtml-story-subscriptions-dialog-banner-button-visible:after {
-  transform: translateX(0) scaleX(-1)  !important;
+[dir='rtl']
+  .i-amphtml-story-subscriptions-dialog-banner-button.i-amphtml-story-subscriptions-dialog-banner-button-visible:after {
+  transform: translateX(0) scaleX(-1) !important;
 }
 
 .i-amphtml-story-subscriptions-dialog-content {
@@ -152,7 +159,8 @@ iframe.swg-dialog {
   margin: 0.4em 0 0.15em !important;
 }
 
-.i-amphtml-story-subscriptions-description, .i-amphtml-story-subscriptions-additional-description {
+.i-amphtml-story-subscriptions-description,
+.i-amphtml-story-subscriptions-additional-description {
   display: block !important;
   font-size: 0.9em !important;
   letter-spacing: -0.015em !important;
@@ -160,7 +168,8 @@ iframe.swg-dialog {
   overflow: hidden !important;
 }
 
-.i-amphtml-story-subscriptions-publisher-button, .i-amphtml-story-subscriptions-google-button {
+.i-amphtml-story-subscriptions-publisher-button,
+.i-amphtml-story-subscriptions-google-button {
   margin: 0 auto 0.8em !important;
   padding: 0 !important;
   border: none !important;
@@ -181,10 +190,11 @@ iframe.swg-dialog {
 }
 
 .i-amphtml-story-subscriptions-google-button {
-  background: #F2F2F2 !important;
+  background: #f2f2f2 !important;
 }
 
-.i-amphtml-story-subscriptions-publisher-logo, .i-amphtml-story-subscriptions-google-logo {
+.i-amphtml-story-subscriptions-publisher-logo,
+.i-amphtml-story-subscriptions-google-logo {
   width: 1.85em !important;
   height: 1.85em !important;
   border-radius: 50% !important;
@@ -196,7 +206,8 @@ iframe.swg-dialog {
   background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" fill="none"><path fill="#fff" d="M16 32a16 16 0 1 0 0-32 16 16 0 0 0 0 32Z"/><path fill="#4285F4" d="M28.56 13.78H16v5h7.19a6.19 6.19 0 0 1-2.67 3.99v3.33h4.3c3.34-3.1 4.46-7.93 3.74-12.32Z"/><path fill="#34A853" d="M16 29.33c3.6 0 6.61-1.2 8.81-3.23l-4.29-3.33A8.04 8.04 0 0 1 16 24.06a7.96 7.96 0 0 1-7.48-5.52H4.1v3.44A13.31 13.31 0 0 0 16 29.33Z"/><path fill="#FBBC05" d="M8.52 18.54a7.93 7.93 0 0 1 0-5.08v-3.44H4.1a13.18 13.18 0 0 0 0 11.96l4.42-3.44Z"/><path fill="#EA4335" d="M16 7.94c1.97 0 3.72.68 5.11 2l3.8-3.8A12.75 12.75 0 0 0 16 2.67c-5.21 0-9.71 3-11.9 7.35l4.42 3.44A7.96 7.96 0 0 1 16 7.94Z"/></svg>') !important;
 }
 
-.i-amphtml-story-subscriptions-publisher-button-text, .i-amphtml-story-subscriptions-google-button-text {
+.i-amphtml-story-subscriptions-publisher-button-text,
+.i-amphtml-story-subscriptions-google-button-text {
   display: block !important;
   letter-spacing: 0.01em !important;
   max-width: 12.6em !important;
@@ -205,7 +216,9 @@ iframe.swg-dialog {
   margin-inline-end: 1.3em !important;
   font-size: 0.75em !important;
   font-weight: 400 !important;
-  font-family: Google Sans, sans-serif !important;
+  font-family:
+    Google Sans,
+    sans-serif !important;
 
   /* Line clamping and ellipses. */
   display: -webkit-box !important;
@@ -219,7 +232,7 @@ iframe.swg-dialog {
 }
 
 .i-amphtml-story-subscriptions-google-button-text {
-  color: #5E5E5E !important;
+  color: #5e5e5e !important;
 }
 
 .i-amphtml-story-subscriptions-signin {

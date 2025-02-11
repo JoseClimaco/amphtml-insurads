@@ -26,8 +26,8 @@ export const data = {
 }
 </script></body></html>`,
 
-  minifiedCreative: '<!doctype html><html ⚡4ads><head><meta charset=utf-8><meta content=width=device-width,minimum-scale=1 name=viewport><link href=https://fonts.googleapis.com/css?family=Questrial rel=stylesheet type=text/css><style amp-custom>\n    amp-user-notification.amp-active {\n      opacity: 0;\n    }\n  </style><style amp4ads-boilerplate>body{visibility:hidden}</style></head><body>Hello, world.\n\n</body></html>',
-
+  minifiedCreative:
+    '<!doctype html><html ⚡4ads><head><meta charset=utf-8><meta content=width=device-width,minimum-scale=1 name=viewport><link href=https://fonts.googleapis.com/css?family=Questrial rel=stylesheet type=text/css><style amp-custom>\n    amp-user-notification.amp-active {\n      opacity: 0;\n    }\n  </style><style amp4ads-boilerplate>body{visibility:hidden}</style></head><body>Hello, world.\n\n</body></html>',
 
   reserializedInvalidOffset: `<!doctype html><html ⚡4ads><head><meta charset=utf-8><meta content=width=device-width,minimum-scale=1 name=viewport><script async src=https://cdn.ampproject.org/amp4ads-v0.js></script><script async custom-element=amp-font src=https://cdn.ampproject.org/v0/amp-font-0.1.js></script><link href=https://fonts.googleapis.com/css?family=Questrial rel=stylesheet type=text/css><style amp-custom>
     amp-user-notification.amp-active {
@@ -76,7 +76,6 @@ export const data = {
 }
 </script></body></html>`,
 
-
   reserializedMissingScriptTag: `<!doctype html><html ⚡4ads><head><meta charset=utf-8><meta content=width=device-width,minimum-scale=1 name=viewport><script async src=https://cdn.ampproject.org/amp4ads-v0.js></script><script async custom-element=amp-font src=https://cdn.ampproject.org/v0/amp-font-0.1.js></script><link href=https://fonts.googleapis.com/css?family=Questrial rel=stylesheet type=text/css><style amp-custom>
     amp-user-notification.amp-active {
       opacity: 0;
@@ -119,7 +118,8 @@ export const data = {
   </body>
 </html>`,
 
-  minifiedTemplateCreative: '<!doctype html><html ⚡><head><meta charset="utf-8"><link rel="canonical" href="self.html" /><meta name="viewport" content="width=device-width,minimum-scale=1"><style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>\n  </head>\n  <body>\n    <template type="amp-mustache">\n      <p>ipsum lorem</p>\n      <a href="{{url}}">Click for ad!</a>\n    </template>\n    \n  </body>\n</html>',
+  minifiedTemplateCreative:
+    '<!doctype html><html ⚡><head><meta charset="utf-8"><link rel="canonical" href="self.html" /><meta name="viewport" content="width=device-width,minimum-scale=1"><style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>\n  </head>\n  <body>\n    <template type="amp-mustache">\n      <p>ipsum lorem</p>\n      <a href="{{url}}">Click for ad!</a>\n    </template>\n    \n  </body>\n</html>',
 
   original: `<!--
   Copyright 2016 The AMP HTML Authors. All Rights Reserved.
@@ -157,7 +157,9 @@ export const data = {
 <body>Hello, world.</body>
 </html>`,
 
-  signatureHeader: 'google:1:vpiimZfnOmH+PjI8oTF9ujhrNyHYNrTW4nY8sP3CWtPIdlP/pxSJ/UeMFQznTCM12Cq56Qgz1mA0VQuPrgNBIp3olSkClQks5CpAuq43P/wXvs3yML8YhQRgUZMCdIpUSW75wW22fcXRtwfR30KRRj8kMjX/QvmWF3H3phah06HiCREl0ONGyxtgyjJkFkPHtfPGGK2vMYMHqHybnsIDsP+zsvyQBPsiMCku8H+i5KtHrjWvVXj/GdcnHL25wvJiyC4qHwkMEoW8ridsDYNQ3dWQD4bVNS1D7gIRvzAM9ZlCBpZcxVhoO5B+mMuIOqq0YTnfgXaT2QgVnHqavpbu9w==',
+  signatureHeader:
+    'google:1:vpiimZfnOmH+PjI8oTF9ujhrNyHYNrTW4nY8sP3CWtPIdlP/pxSJ/UeMFQznTCM12Cq56Qgz1mA0VQuPrgNBIp3olSkClQks5CpAuq43P/wXvs3yML8YhQRgUZMCdIpUSW75wW22fcXRtwfR30KRRj8kMjX/QvmWF3H3phah06HiCREl0ONGyxtgyjJkFkPHtfPGGK2vMYMHqHybnsIDsP+zsvyQBPsiMCku8H+i5KtHrjWvVXj/GdcnHL25wvJiyC4qHwkMEoW8ridsDYNQ3dWQD4bVNS1D7gIRvzAM9ZlCBpZcxVhoO5B+mMuIOqq0YTnfgXaT2QgVnHqavpbu9w==',
 
-  publicKeyset: '{"keys":[{"alg":"RS256","e":"AQAB","ext":true,"kid":"1","kty":"RSA","n":"z43rjaJ9PLk1FHMEL31_ILXGtUTN03rxJ9amD9y3BRDpbTA-GkUKiQM07xAd8OXPUZRqcjvXQfc7b1RCEtwrcfx9oBRdF78QMA4tLLCqSHP0tSuqYF0fA7-GyTFWDcYzey90jRFNNWxjzKrvSazacE0TvJ8S_AVP4EV67VdbByCC1tpBzLhhy7RFHp2cXGTpWYUqZUAVUdJoeBuCho_zQz2au7c6sDaLiF-uYL9Td9MrZ6tSLo3MeMIZia4WgWqjTDICR0h-zlbHUd0K9CoXbGTt5nvkebXHmbKd99ma6zRYVlYNJTuSqsRCBNYtCTFVHIZeBlkjHKsQ46HTZPexZw"}]}',
+  publicKeyset:
+    '{"keys":[{"alg":"RS256","e":"AQAB","ext":true,"kid":"1","kty":"RSA","n":"z43rjaJ9PLk1FHMEL31_ILXGtUTN03rxJ9amD9y3BRDpbTA-GkUKiQM07xAd8OXPUZRqcjvXQfc7b1RCEtwrcfx9oBRdF78QMA4tLLCqSHP0tSuqYF0fA7-GyTFWDcYzey90jRFNNWxjzKrvSazacE0TvJ8S_AVP4EV67VdbByCC1tpBzLhhy7RFHp2cXGTpWYUqZUAVUdJoeBuCho_zQz2au7c6sDaLiF-uYL9Td9MrZ6tSLo3MeMIZia4WgWqjTDICR0h-zlbHUd0K9CoXbGTt5nvkebXHmbKd99ma6zRYVlYNJTuSqsRCBNYtCTFVHIZeBlkjHKsQ46HTZPexZw"}]}',
 };

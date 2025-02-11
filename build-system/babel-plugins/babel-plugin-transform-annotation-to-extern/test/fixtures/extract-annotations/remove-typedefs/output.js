@@ -22,6 +22,5 @@ class PositionObserver {
     let myOtherVariable = 3;
     /**/
   }
-
 }
 /**/

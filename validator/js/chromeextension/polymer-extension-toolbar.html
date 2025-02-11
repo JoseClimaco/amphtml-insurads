@@ -1,4 +1,4 @@
-<link href="polymer.html" rel="import">
+<link href="polymer.html" rel="import" />
 <dom-module id="extension-toolbar">
   <style scope="extension-toolbar">
     paper-toolbar {
@@ -38,13 +38,13 @@
   <script>
     Polymer({
       is: 'extension-toolbar',
-      changeSpinnerState: function(state) {
+      changeSpinnerState: function (state) {
         this.$.spinner.active = state;
       },
       properties: {
         extensionName: {
           type: String,
-          value: chrome.i18n.getMessage("extensionName"),
+          value: chrome.i18n.getMessage('extensionName'),
         },
       },
     });

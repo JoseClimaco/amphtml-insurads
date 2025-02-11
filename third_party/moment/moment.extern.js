@@ -18,92 +18,92 @@ function moment(input) {}
  *
  * @param {string} locale
  */
-moment.locale = function(locale) {};
+moment.locale = function (locale) {};
 
 /**
  * @return {boolean}
  */
-moment.prototype.isValid = function() {};
+moment.prototype.isValid = function () {};
 
 /**
  * @return {!moment}
  */
-moment.prototype.clone = function() {};
+moment.prototype.clone = function () {};
 
 /**
  * @param {!moment} other
  * @return {boolean}
  */
-moment.prototype.isAfter = function(other) {};
+moment.prototype.isAfter = function (other) {};
 
 /**
  * @param {!moment} first
  * @param {!moment} second
  * @return {boolean}
  */
-moment.prototype.isBetween = function(first, second) {};
+moment.prototype.isBetween = function (first, second) {};
 
 /**
  * @param {!moment} other
  * @return {boolean}
  */
-moment.prototype.isSameOrAfter = function(other) {};
+moment.prototype.isSameOrAfter = function (other) {};
 
 /**
  * @param {!moment} other
  * @param {string} type
  * @return {number}
  */
-moment.prototype.diff = function(other, type) {};
+moment.prototype.diff = function (other, type) {};
 
 /**
  * @param {string} format
  * @return {string}
  */
-moment.prototype.format = function(format) {};
+moment.prototype.format = function (format) {};
 
 /**
  * @param {string} locale
  */
-moment.prototype.locale = function(locale) {};
+moment.prototype.locale = function (locale) {};
 
 /**
  * @return {Date}
  */
-moment.prototype.toDate = function() {};
+moment.prototype.toDate = function () {};
 
 /**
  * @param {string} unit
  * @return {!moment}
  */
-moment.prototype.startOf = function(unit) {};
+moment.prototype.startOf = function (unit) {};
 
 /**
  * @param {number} amount
  * @param {string} unit
  * @return {!moment}
  */
-moment.prototype.add = function(amount, unit) {};
+moment.prototype.add = function (amount, unit) {};
 
 /**
  * @return {number}
  */
-moment.prototype.year = function() {};
+moment.prototype.year = function () {};
 
 /**
  * @struct
  * @constructor
  */
-moment.Locale = function() {};
+moment.Locale = function () {};
 
 /**
  * @param {string} format
  * @return {string}
  */
-moment.Locale.longDateFormat = function(format) {};
+moment.Locale.longDateFormat = function (format) {};
 
 /** @return {moment.Locale} */
-moment.prototype.localeData = function() {};
+moment.prototype.localeData = function () {};
 
 /** @return {!moment} */
-moment.prototype.duration = function() {};
+moment.prototype.duration = function () {};

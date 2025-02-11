@@ -7,5 +7,5 @@ amp-app-banner {
   box-sizing: border-box;
   background: #fff;
   z-index: 13;
-  box-shadow: 0 0 5px 0 rgba(0,0,0, 0.2) !important;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2) !important;
 }

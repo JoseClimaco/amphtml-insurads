@@ -6,5 +6,5 @@ const falsey = false;
 /** @type {boolean} */
 (true);
 let result =
-/** @type {boolean} */
-(false);
+  /** @type {boolean} */
+  (false);

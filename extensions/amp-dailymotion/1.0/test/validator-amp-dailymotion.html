@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html ⚡>
   <!-- prettier-ignore -->
   <head>
@@ -17,10 +17,7 @@
   </head>
   <body>
     <!-- Valid. -->
-    <amp-dailymotion
-      data-videoid="x3rdtfy"
-      width="500"
-      height="281">
+    <amp-dailymotion data-videoid="x3rdtfy" width="500" height="281">
     </amp-dailymotion>
 
     <!-- Valid: with custom url attributes. -->
@@ -33,7 +30,8 @@
       data-info="false"
       id="myVideo"
       width="640"
-      height="360">
+      height="360"
+    >
     </amp-dailymotion>
 
     <!-- Valid: with autoplay. -->
@@ -42,14 +40,12 @@
       data-videoid="x3rdtfy"
       width="500"
       height="281"
-      layout="responsive">
+      layout="responsive"
+    >
     </amp-dailymotion>
 
     <!-- Invalid: missing data-videoid. -->
-    <amp-dailymotion
-      width="500"
-      height="281">
-    </amp-dailymotion>
+    <amp-dailymotion width="500" height="281"> </amp-dailymotion>
 
     <!-- Invalid: missing dimensions. -->
     <amp-dailymotion data-videoid="x3rdtfy"></amp-dailymotion>
@@ -58,7 +54,8 @@
     <amp-dailymotion
       data-videoid="https://www.dailymotion.com/embed/video/x3rdtfy?api=1&html=1&app=amp"
       width="500"
-      height="281">
+      height="281"
+    >
     </amp-dailymotion>
   </body>
 </html>

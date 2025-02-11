@@ -1,13 +1,13 @@
-'use strict'
+'use strict';
 
-setDOM.KEY = 'data-key'
-setDOM.IGNORE = 'data-ignore'
-setDOM.CHECKSUM = 'data-checksum'
-var KEY_PREFIX = '_set-dom-'
-var NODE_MOUNTED = KEY_PREFIX + 'mounted'
-var ELEMENT_TYPE_ENUM = 1
-var DOCUMENT_TYPE = 9
-var DOCUMENT_FRAGMENT_TYPE = 11
+setDOM.KEY = 'data-key';
+setDOM.IGNORE = 'data-ignore';
+setDOM.CHECKSUM = 'data-checksum';
+var KEY_PREFIX = '_set-dom-';
+var NODE_MOUNTED = KEY_PREFIX + 'mounted';
+var ELEMENT_TYPE_ENUM = 1;
+var DOCUMENT_TYPE = 9;
+var DOCUMENT_FRAGMENT_TYPE = 11;
 
 // Flattened array of node pairs that were ignored (via setDOM.IGNORE) in last diff.
 var ignoredNodes = null;
@@ -20,28 +20,31 @@ var ignoredNodes = null;
  * @param {string|!Node} newNode - The updated html(entity).
  * @return {!Array<!Node>}
  */
-export function setDOM (oldNode, newNode) {
+export function setDOM(oldNode, newNode) {
   ignoredNodes = [];
 
   // Ensure a realish dom node is provided.
-  assert(oldNode && oldNode.nodeType, 'You must provide a valid node to update.')
+  assert(
+    oldNode && oldNode.nodeType,
+    'You must provide a valid node to update.'
+  );
 
   // Alias document element with document.
-  if (oldNode.nodeType === DOCUMENT_TYPE) oldNode = oldNode.documentElement
+  if (oldNode.nodeType === DOCUMENT_TYPE) oldNode = oldNode.documentElement;
 
   // Document Fragments don't have attributes, so no need to look at checksums, ignored, attributes, or node replacement.
   if (newNode.nodeType === DOCUMENT_FRAGMENT_TYPE) {
     // Simply update all children (and subchildren).
-    setChildNodes(oldNode, newNode)
+    setChildNodes(oldNode, newNode);
   } else {
     // Otherwise we diff the entire old node.
-    setNode(oldNode, newNode)
+    setNode(oldNode, newNode);
   }
 
   // Trigger mount events on initial set.
   if (!oldNode[NODE_MOUNTED]) {
-    oldNode[NODE_MOUNTED] = true
-    mount(oldNode)
+    oldNode[NODE_MOUNTED] = true;
+    mount(oldNode);
   }
 
   var returnValue = ignoredNodes;
@@ -57,39 +60,39 @@ export function setDOM (oldNode, newNode) {
  * @param {Node} oldNode - The previous HTMLNode.
  * @param {Node} newNode - The updated HTMLNode.
  */
-function setNode (oldNode, newNode) {
+function setNode(oldNode, newNode) {
   if (oldNode.nodeType === newNode.nodeType) {
     // Handle regular element node updates.
     if (oldNode.nodeType === ELEMENT_TYPE_ENUM) {
       // Checks if nodes are equal before diffing.
-      if (isEqualNode(oldNode, newNode)) return
+      if (isEqualNode(oldNode, newNode)) return;
 
       // Update all children (and subchildren).
-      setChildNodes(oldNode, newNode)
+      setChildNodes(oldNode, newNode);
 
       // Update the elements attributes / tagName.
       if (oldNode.nodeName === newNode.nodeName) {
         // If we have the same nodename then we can directly update the attributes.
-        setAttributes(oldNode.attributes, newNode.attributes)
+        setAttributes(oldNode.attributes, newNode.attributes);
       } else {
         // Otherwise clone the new node to use as the existing node.
-        var newPrev = newNode.cloneNode()
+        var newPrev = newNode.cloneNode();
         // Copy over all existing children from the original node.
-        while (oldNode.firstChild) newPrev.appendChild(oldNode.firstChild)
+        while (oldNode.firstChild) newPrev.appendChild(oldNode.firstChild);
         // Replace the original node with the new one with the right tag.
-        oldNode.parentNode.replaceChild(newPrev, oldNode)
+        oldNode.parentNode.replaceChild(newPrev, oldNode);
       }
     } else {
       // Handle other types of node updates (text/comments/etc).
       // If both are the same type of node we can update directly.
       if (oldNode.nodeValue !== newNode.nodeValue) {
-        oldNode.nodeValue = newNode.nodeValue
+        oldNode.nodeValue = newNode.nodeValue;
       }
     }
   } else {
     // we have to replace the node.
-    oldNode.parentNode.replaceChild(newNode, dismount(oldNode))
-    mount(newNode)
+    oldNode.parentNode.replaceChild(newNode, dismount(oldNode));
+    mount(newNode);
   }
 }
 
@@ -101,31 +104,31 @@ function setNode (oldNode, newNode) {
  * @param {NamedNodeMap} oldAttributes - The previous attributes.
  * @param {NamedNodeMap} newAttributes - The updated attributes.
  */
-function setAttributes (oldAttributes, newAttributes) {
-  var i, a, b, ns, name
+function setAttributes(oldAttributes, newAttributes) {
+  var i, a, b, ns, name;
 
   // Remove old attributes.
-  for (i = oldAttributes.length; i--;) {
-    a = oldAttributes[i]
-    ns = a.namespaceURI
-    name = a.localName
-    b = newAttributes.getNamedItemNS(ns, name)
-    if (!b) oldAttributes.removeNamedItemNS(ns, name)
+  for (i = oldAttributes.length; i--; ) {
+    a = oldAttributes[i];
+    ns = a.namespaceURI;
+    name = a.localName;
+    b = newAttributes.getNamedItemNS(ns, name);
+    if (!b) oldAttributes.removeNamedItemNS(ns, name);
   }
 
   // Set new attributes.
-  for (i = newAttributes.length; i--;) {
-    a = newAttributes[i]
-    ns = a.namespaceURI
-    name = a.localName
-    b = oldAttributes.getNamedItemNS(ns, name)
+  for (i = newAttributes.length; i--; ) {
+    a = newAttributes[i];
+    ns = a.namespaceURI;
+    name = a.localName;
+    b = oldAttributes.getNamedItemNS(ns, name);
     if (!b) {
       // Add a new attribute.
-      newAttributes.removeNamedItemNS(ns, name)
-      oldAttributes.setNamedItemNS(a)
+      newAttributes.removeNamedItemNS(ns, name);
+      oldAttributes.setNamedItemNS(a);
     } else if (b.value !== a.value) {
       // Update existing attribute.
-      b.value = a.value
+      b.value = a.value;
     }
   }
 }
@@ -138,69 +141,73 @@ function setAttributes (oldAttributes, newAttributes) {
  * @param {Node} oldParent - The existing parent node.
  * @param {Node} newParent - The new parent node.
  */
-function setChildNodes (oldParent, newParent) {
-  var checkOld, oldKey, checkNew, newKey, foundNode, keyedNodes
-  var oldNode = oldParent.firstChild
-  var newNode = newParent.firstChild
-  var extra = 0
+function setChildNodes(oldParent, newParent) {
+  var checkOld, oldKey, checkNew, newKey, foundNode, keyedNodes;
+  var oldNode = oldParent.firstChild;
+  var newNode = newParent.firstChild;
+  var extra = 0;
 
   // Extract keyed nodes from previous children and keep track of total count.
   while (oldNode) {
-    extra++
-    checkOld = oldNode
-    oldKey = getKey(checkOld)
-    oldNode = oldNode.nextSibling
+    extra++;
+    checkOld = oldNode;
+    oldKey = getKey(checkOld);
+    oldNode = oldNode.nextSibling;
 
     if (oldKey) {
-      if (!keyedNodes) keyedNodes = {}
-      keyedNodes[oldKey] = checkOld
+      if (!keyedNodes) keyedNodes = {};
+      keyedNodes[oldKey] = checkOld;
     }
   }
 
   // Loop over new nodes and perform updates.
-  oldNode = oldParent.firstChild
+  oldNode = oldParent.firstChild;
   while (newNode) {
-    extra--
-    checkNew = newNode
-    newNode = newNode.nextSibling
+    extra--;
+    checkNew = newNode;
+    newNode = newNode.nextSibling;
 
-    if (keyedNodes && (newKey = getKey(checkNew)) && (foundNode = keyedNodes[newKey])) {
-      delete keyedNodes[newKey]
+    if (
+      keyedNodes &&
+      (newKey = getKey(checkNew)) &&
+      (foundNode = keyedNodes[newKey])
+    ) {
+      delete keyedNodes[newKey];
       // If we have a key and it existed before we move the previous node to the new position if needed and diff it.
       if (foundNode !== oldNode) {
-        oldParent.insertBefore(foundNode, oldNode)
+        oldParent.insertBefore(foundNode, oldNode);
       } else {
-        oldNode = oldNode.nextSibling
+        oldNode = oldNode.nextSibling;
       }
 
-      setNode(foundNode, checkNew)
+      setNode(foundNode, checkNew);
     } else if (oldNode) {
-      checkOld = oldNode
-      oldNode = oldNode.nextSibling
+      checkOld = oldNode;
+      oldNode = oldNode.nextSibling;
       if (getKey(checkOld)) {
         // If the old child had a key we skip over it until the end.
-        oldParent.insertBefore(checkNew, checkOld)
-        mount(checkNew)
+        oldParent.insertBefore(checkNew, checkOld);
+        mount(checkNew);
       } else {
         // Otherwise we diff the two non-keyed nodes.
-        setNode(checkOld, checkNew)
+        setNode(checkOld, checkNew);
       }
     } else {
       // Finally if there was no old node we add the new node.
-      oldParent.appendChild(checkNew)
-      mount(checkNew)
+      oldParent.appendChild(checkNew);
+      mount(checkNew);
     }
   }
 
   // Remove old keyed nodes.
   for (oldKey in keyedNodes) {
-    extra--
-    oldParent.removeChild(dismount(keyedNodes[oldKey]))
+    extra--;
+    oldParent.removeChild(dismount(keyedNodes[oldKey]));
   }
 
   // If we have any remaining unkeyed nodes remove them from the end.
   while (--extra >= 0) {
-    oldParent.removeChild(dismount(oldParent.lastChild))
+    oldParent.removeChild(dismount(oldParent.lastChild));
   }
 }
 
@@ -213,10 +220,10 @@ function setChildNodes (oldParent, newParent) {
  * @param {Node} node - The node to get the key for.
  * @return {string|void}
  */
-function getKey (node) {
-  if (node.nodeType !== ELEMENT_TYPE_ENUM) return
-  var key = node.getAttribute(setDOM.KEY) || node.id
-  if (key) return KEY_PREFIX + key
+function getKey(node) {
+  if (node.nodeType !== ELEMENT_TYPE_ENUM) return;
+  var key = node.getAttribute(setDOM.KEY) || node.id;
+  if (key) return KEY_PREFIX + key;
 }
 
 /**
@@ -227,8 +234,8 @@ function getKey (node) {
  * @param {Node} a - One of the nodes to compare.
  * @param {Node} b - Another node to compare.
  */
-function isEqualNode (a, b) {
-  const ignored = (isIgnored(a) && isIgnored(b));
+function isEqualNode(a, b) {
+  const ignored = isIgnored(a) && isIgnored(b);
   if (ignored) {
     ignoredNodes.push(a, b);
   }
@@ -236,10 +243,10 @@ function isEqualNode (a, b) {
     // Check if both nodes are ignored.
     ignored ||
     // Check if both nodes have the same checksum.
-    (getCheckSum(a) === getCheckSum(b)) ||
+    getCheckSum(a) === getCheckSum(b) ||
     // Fall back to native isEqualNode check.
     a.isEqualNode(b)
-  )
+  );
 }
 
 /**
@@ -251,8 +258,8 @@ function isEqualNode (a, b) {
  * @param {Node} node - The node to get the checksum for.
  * @return {string|NaN}
  */
-function getCheckSum (node) {
-  return node.getAttribute(setDOM.CHECKSUM) || NaN
+function getCheckSum(node) {
+  return node.getAttribute(setDOM.CHECKSUM) || NaN;
 }
 
 /**
@@ -264,8 +271,8 @@ function getCheckSum (node) {
  * @param {Node} node - The node to check if it should be ignored.
  * @return {boolean}
  */
-function isIgnored (node) {
-  return node.getAttribute(setDOM.IGNORE) != null
+function isIgnored(node) {
+  return node.getAttribute(setDOM.IGNORE) != null;
 }
 
 /**
@@ -274,8 +281,8 @@ function isIgnored (node) {
  * @param {Node} node - the node to mount.
  * @return {node}
  */
-function mount (node) {
-  return dispatch(node, 'mount')
+function mount(node) {
+  return dispatch(node, 'mount');
 }
 
 /**
@@ -284,8 +291,8 @@ function mount (node) {
  * @param {Node} node - the node to dismount.
  * @return {node}
  */
-function dismount (node) {
-  return dispatch(node, 'dismount')
+function dismount(node) {
+  return dispatch(node, 'dismount');
 }
 
 /**
@@ -295,21 +302,21 @@ function dismount (node) {
  * @param {Node} node - the initial node.
  * @return {Node}
  */
-function dispatch (node, type) {
+function dispatch(node, type) {
   // Trigger event for this element if it has a key.
   if (getKey(node)) {
-    var ev = document.createEvent('Event')
-    var prop = { value: node }
-    ev.initEvent(type, false, false)
-    Object.defineProperty(ev, 'target', prop)
-    Object.defineProperty(ev, 'srcElement', prop)
-    node.dispatchEvent(ev)
+    var ev = document.createEvent('Event');
+    var prop = {value: node};
+    ev.initEvent(type, false, false);
+    Object.defineProperty(ev, 'target', prop);
+    Object.defineProperty(ev, 'srcElement', prop);
+    node.dispatchEvent(ev);
   }
 
   // Dispatch to all children.
-  var child = node.firstChild
-  while (child) child = dispatch(child, type).nextSibling
-  return node
+  var child = node.firstChild;
+  while (child) child = dispatch(child, type).nextSibling;
+  return node;
 }
 
 /**
@@ -321,6 +328,6 @@ function dispatch (node, type) {
  * @param {string} msg - the error message on failure.
  * @throws {Error}
  */
-function assert (val, msg) {
-  if (!val) throw new Error('set-dom: ' + msg)
+function assert(val, msg) {
+  if (!val) throw new Error('set-dom: ' + msg);
 }

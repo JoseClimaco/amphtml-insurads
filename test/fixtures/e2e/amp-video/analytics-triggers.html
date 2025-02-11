@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html ⚡ lang="en">
   <head>
     <title>amp-video</title>
     <meta charset="utf-8" />
-    <link rel="canonical" href="/">
+    <link rel="canonical" href="/" />
     <meta name="viewport" content="width=device-width,minimum-scale=1" />
     <style amp-boilerplate>
       body {
@@ -64,8 +64,16 @@
       </style>
     </noscript>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
-    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script
+      async
+      custom-element="amp-video"
+      src="https://cdn.ampproject.org/v0/amp-video-0.1.js"
+    ></script>
+    <script
+      async
+      custom-element="amp-analytics"
+      src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+    ></script>
   </head>
   <body>
     <amp-analytics>
@@ -88,7 +96,7 @@
                 "percentages": [5]
               },
               "vars": {
-                  "id": "myVideo"
+                "id": "myVideo"
               }
             },
             "trackVideoQuartileCompleted": {
@@ -99,19 +107,31 @@
                 "percentages": [5]
               },
               "vars": {
-                  "id": "myVideo2"
+                "id": "myVideo2"
               }
             }
           }
         }
       </script>
     </amp-analytics>
-    <amp-video id="myVideo" src="/examples/av/ForBiggerJoyrides-short.mp4" width="358" height="204" layout="responsive">
+    <amp-video
+      id="myVideo"
+      src="/examples/av/ForBiggerJoyrides-short.mp4"
+      width="358"
+      height="204"
+      layout="responsive"
+    >
       <div placeholder>This is a placeholder</div>
       <div fallback>This is a fallback</div>
     </amp-video>
 
-    <amp-video id="myVideo2" src="/examples/av/ForBiggerJoyrides-short.mp4" width="358" height="204" layout="responsive">
+    <amp-video
+      id="myVideo2"
+      src="/examples/av/ForBiggerJoyrides-short.mp4"
+      width="358"
+      height="204"
+      layout="responsive"
+    >
       <div placeholder>This is a placeholder</div>
       <div fallback>This is a fallback</div>
     </amp-video>

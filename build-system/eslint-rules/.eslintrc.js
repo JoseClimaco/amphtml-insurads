@@ -1,5 +1,3 @@
-
-
 module.exports = {
   'plugins': ['eslint-plugin'],
   'extends': ['plugin:eslint-plugin/recommended'],

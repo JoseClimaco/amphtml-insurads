@@ -120,7 +120,7 @@ const TagRegion = {
   PRE_HTML: 1,
   PRE_HEAD: 2,
   IN_HEAD: 3,
-  PRE_BODY: 4,  // After closing head tag, but before open body tag.
+  PRE_BODY: 4, // After closing head tag, but before open body tag.
   IN_BODY: 5,
   IN_SVG: 6,
   // We don't track the region after the closing body tag.
@@ -229,8 +229,9 @@ class TagNameStack {
     // a manufactured one, or the first one encountered. However,
     // we collect all attributes in this.effectiveBodyAttribs_.
     if (tag.upperName() === 'BODY') {
-      this.effectiveBodyAttribs_ =
-          this.effectiveBodyAttribs_.concat(tag.attrs().slice());
+      this.effectiveBodyAttribs_ = this.effectiveBodyAttribs_.concat(
+        tag.attrs().slice()
+      );
     }
 
     // This section deals with manufacturing <head>, </head>, and <body> tags
@@ -298,8 +299,11 @@ class TagNameStack {
         break;
       case TagRegion.IN_HEAD:
         // Stray DOCTYPE/HTML/HEAD tags are ignored, not emitted twice.
-        if (tag.upperName() === '!DOCTYPE' || tag.upperName() === 'HTML' ||
-            tag.upperName() === 'HEAD') {
+        if (
+          tag.upperName() === '!DOCTYPE' ||
+          tag.upperName() === 'HTML' ||
+          tag.upperName() === 'HEAD'
+        ) {
           return;
         } else if (!HeadElements.hasOwnProperty(tag.upperName())) {
           this.endTag(new parserInterface.ParsedHtmlTag('HEAD'));
@@ -315,8 +319,11 @@ class TagNameStack {
         break;
       case TagRegion.PRE_BODY:
         // Stray DOCTYPE/HTML/HEAD tags are ignored, not emitted twice.
-        if (tag.upperName() === '!DOCTYPE' || tag.upperName() === 'HTML' ||
-            tag.upperName() === 'HEAD') {
+        if (
+          tag.upperName() === '!DOCTYPE' ||
+          tag.upperName() === 'HTML' ||
+          tag.upperName() === 'HEAD'
+        ) {
           return;
         } else if (tag.upperName() !== 'BODY') {
           if (this.handler_.markManufacturedBody) {
@@ -329,8 +336,11 @@ class TagNameStack {
         break;
       case TagRegion.IN_BODY:
         // Stray DOCTYPE/HTML/HEAD tags are ignored, not emitted twice.
-        if (tag.upperName() === '!DOCTYPE' || tag.upperName() === 'HTML' ||
-            tag.upperName() === 'HEAD') {
+        if (
+          tag.upperName() === '!DOCTYPE' ||
+          tag.upperName() === 'HTML' ||
+          tag.upperName() === 'HEAD'
+        ) {
           return;
         } else if (tag.upperName() === 'BODY') {
           // We only report the first body for each document - either
@@ -346,14 +356,17 @@ class TagNameStack {
           const parentTagName = this.stack_[this.stack_.length - 1];
           // <p> tags can be implicitly closed by certain other start tags.
           // See https://www.w3.org/TR/html-markup/p.html
-          if (parentTagName === 'P' &&
-              ElementsWhichClosePTag.hasOwnProperty(tag.upperName())) {
+          if (
+            parentTagName === 'P' &&
+            ElementsWhichClosePTag.hasOwnProperty(tag.upperName())
+          ) {
             this.endTag(new parserInterface.ParsedHtmlTag('P'));
             // <dd> and <dt> tags can be implicitly closed by other <dd> and
             // <dt> tags. See https://www.w3.org/TR/html-markup/dd.html
           } else if (
-              (tag.upperName() == 'DD' || tag.upperName() == 'DT') &&
-              (parentTagName == 'DD' || parentTagName == 'DT')) {
+            (tag.upperName() == 'DD' || tag.upperName() == 'DT') &&
+            (parentTagName == 'DD' || parentTagName == 'DT')
+          ) {
             this.endTag(new parserInterface.ParsedHtmlTag(parentTagName));
             // <li> tags can be implicitly closed by other <li> tags.
             // See https://www.w3.org/TR/html-markup/li.html
@@ -379,7 +392,8 @@ class TagNameStack {
       if (this.handler_.endTag) {
         // Ignore attributes in end tags.
         this.handler_.endTag(
-            new parserInterface.ParsedHtmlTag(tag.upperName()));
+          new parserInterface.ParsedHtmlTag(tag.upperName())
+        );
       }
     } else {
       this.stack_.push(tag.upperName());
@@ -416,7 +430,7 @@ class TagNameStack {
       // manufactured-body error and create the necessary implicit tags.
       switch (this.region_) {
         // Fallthroughs intentional.
-        case TagRegion.PRE_DOCTYPE:  // doctype is not manufactured
+        case TagRegion.PRE_DOCTYPE: // doctype is not manufactured
         case TagRegion.PRE_HTML:
           this.startTag(new parserInterface.ParsedHtmlTag('HTML'));
         case TagRegion.PRE_HEAD:
@@ -465,7 +479,8 @@ class TagNameStack {
           }
           if (this.handler_.endTag) {
             this.handler_.endTag(
-                new parserInterface.ParsedHtmlTag(this.stack_.pop()));
+              new parserInterface.ParsedHtmlTag(this.stack_.pop())
+            );
           }
         }
         return;
@@ -482,12 +497,12 @@ class TagNameStack {
     while (this.stack_.length > 0) {
       if (this.handler_.endTag) {
         this.handler_.endTag(
-            new parserInterface.ParsedHtmlTag(this.stack_.pop()));
+          new parserInterface.ParsedHtmlTag(this.stack_.pop())
+        );
       }
     }
   }
 }
-
 
 /**
  * An Html parser: `parse` takes a string and calls methods on
@@ -513,11 +528,11 @@ const HtmlParser = class {
    */
   parse(handler, htmlText) {
     let htmlUpper = null;
-    let inTag = false;   // True iff we're currently processing a tag.
-    const attribs = [];  // Accumulates attribute names and values.
-    let tagName;         // The name of the tag currently being processed.
-    let eflags;          // The element flags for the current tag.
-    let openTag;         // True if the current tag is an open tag.
+    let inTag = false; // True iff we're currently processing a tag.
+    const attribs = []; // Accumulates attribute names and values.
+    let tagName; // The name of the tag currently being processed.
+    let eflags; // The element flags for the current tag.
+    let openTag; // True if the current tag is an open tag.
     const tagStack = new TagNameStack(handler);
 
     // Only provide location information if the handler implements the
@@ -545,7 +560,8 @@ const HtmlParser = class {
 
       // TODO(goto): cleanup this code breaking it into separate methods.
       if (inTag) {
-        if (m[1]) {  // Attribute.
+        if (m[1]) {
+          // Attribute.
           // SetAttribute with uppercase names doesn't work on IE6.
           const attribName = parserInterface.toLowerCase(m[1]);
           // Use empty string as value for valueless attribs, so
@@ -554,34 +570,48 @@ const HtmlParser = class {
           let decodedValue = '';
           if (m[2]) {
             let encodedValue = m[3];
-            switch (encodedValue.charCodeAt(0)) {  // Strip quotes.
-              case 34:                             // double quote "
-              case 39:                             // single quote '
-                encodedValue =
-                    encodedValue.substring(1, encodedValue.length - 1);
+            switch (
+              encodedValue.charCodeAt(0) // Strip quotes.
+            ) {
+              case 34: // double quote "
+              case 39: // single quote '
+                encodedValue = encodedValue.substring(
+                  1,
+                  encodedValue.length - 1
+                );
                 break;
             }
-            decodedValue =
-                this.unescapeEntities_(this.stripNULs_(encodedValue));
+            decodedValue = this.unescapeEntities_(
+              this.stripNULs_(encodedValue)
+            );
           }
           attribs.push(attribName, decodedValue);
         } else if (m[4]) {
-          if (eflags !== void 0) {  // False if not in allowlist.
+          if (eflags !== void 0) {
+            // False if not in allowlist.
             if (openTag) {
-              tagStack.startTag(new parserInterface.ParsedHtmlTag(
-                  /** @type {string} */ (tagName), attribs));
+              tagStack.startTag(
+                new parserInterface.ParsedHtmlTag(
+                  /** @type {string} */ (tagName),
+                  attribs
+                )
+              );
             } else {
-              tagStack.endTag(new parserInterface.ParsedHtmlTag(
-                  /** @type {string} */ (tagName)));
+              tagStack.endTag(
+                new parserInterface.ParsedHtmlTag(
+                  /** @type {string} */ (tagName)
+                )
+              );
             }
           }
 
-          if (openTag && (eflags & (EFlags.CDATA | EFlags.RCDATA))) {
+          if (openTag && eflags & (EFlags.CDATA | EFlags.RCDATA)) {
             if (htmlUpper === null) {
               htmlUpper = parserInterface.toUpperCase(htmlText);
             } else {
-              htmlUpper =
-                  htmlUpper.substring(htmlUpper.length - htmlText.length);
+              htmlUpper = htmlUpper.substring(
+                htmlUpper.length - htmlText.length
+              );
             }
             let dataEnd = htmlUpper.indexOf('</' + tagName);
             if (dataEnd < 0) {
@@ -593,7 +623,8 @@ const HtmlParser = class {
               }
             } else if (handler.rcdata) {
               handler.rcdata(
-                  this.normalizeRCData_(htmlText.substring(0, dataEnd)));
+                this.normalizeRCData_(htmlText.substring(0, dataEnd))
+              );
             }
             if (locator) {
               locator.advancePos(htmlText.substring(0, dataEnd));
@@ -609,23 +640,28 @@ const HtmlParser = class {
           inTag = false;
         }
       } else {
-        if (m[1]) {  // Entity.
+        if (m[1]) {
+          // Entity.
           tagStack.pcdata(m[0]);
-        } else if (m[3]) {  // Tag.
+        } else if (m[3]) {
+          // Tag.
           openTag = !m[2];
           if (locator) {
             locator.snapshotPos();
           }
           inTag = true;
           tagName = parserInterface.toUpperCase(m[3]);
-          eflags = Elements.hasOwnProperty(tagName) ? Elements[tagName] :
-                                                      EFlags.UNKNOWN_OR_CUSTOM;
-        } else if (m[4]) {  // Text.
+          eflags = Elements.hasOwnProperty(tagName)
+            ? Elements[tagName]
+            : EFlags.UNKNOWN_OR_CUSTOM;
+        } else if (m[4]) {
+          // Text.
           if (locator) {
             locator.snapshotPos();
           }
           tagStack.pcdata(m[4]);
-        } else if (m[5]) {  // Cruft.
+        } else if (m[5]) {
+          // Cruft.
           switch (m[5]) {
             case '<':
               tagStack.pcdata('&lt;');
@@ -661,8 +697,9 @@ const HtmlParser = class {
   lookupEntity_(entity) {
     // TODO(goto): use {amp.htmlparserDecode} instead ?
     // TODO(goto): &pi; is different from &Pi;
-    const name =
-        parserInterface.toLowerCase(entity.substring(1, entity.length - 1));
+    const name = parserInterface.toLowerCase(
+      entity.substring(1, entity.length - 1)
+    );
     if (Entities.hasOwnProperty(name)) {
       return Entities[name];
     }
@@ -706,9 +743,10 @@ const HtmlParser = class {
    * @private
    */
   normalizeRCData_(rcdata) {
-    return rcdata.replace(LOOSE_AMP_RE_, '&amp;$1')
-        .replace(LT_RE, '&lt;')
-        .replace(GT_RE, '&gt;');
+    return rcdata
+      .replace(LOOSE_AMP_RE_, '&amp;$1')
+      .replace(LT_RE, '&lt;')
+      .replace(GT_RE, '&gt;');
   }
 };
 exports.HtmlParser = HtmlParser;
@@ -725,7 +763,7 @@ const Entities = {
   'amp': '&',
   'nbsp': '\u00a0',
   'quot': '"',
-  'apos': '\'',
+  'apos': "'",
 };
 exports.Entities = Entities;
 
@@ -863,14 +901,12 @@ exports.Elements = Elements;
  */
 const LOOSE_AMP_RE_ = /&([^a-z#]|#(?:[^0-9x]|x(?:[^0-9a-f]|$)|$)|$)/gi;
 
-
 /**
  * Regular expression that matches <.
  * @type {RegExp}
  * @package
  */
 const LT_RE = /</g;
-
 
 /**
  * Regular expression that matches >.
@@ -879,14 +915,12 @@ const LT_RE = /</g;
  */
 const GT_RE = />/g;
 
-
 /**
  * Regular expression that matches null characters.
  * @type {RegExp}
  * @private
  */
 const NULL_RE_ = /\0/g;
-
 
 /**
  * Regular expression that matches entities.
@@ -916,7 +950,7 @@ const SPACE_RE_ = /^[ \f\n\r\t]*$/;
  * @private
  */
 const CPP_SPACE_RE_ =
-    /^[ \f\n\r\t\v\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]*$/;
+  /^[ \f\n\r\t\v\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]*$/;
 
 /**
  * Regular expression that matches decimal numbers.
@@ -925,7 +959,6 @@ const CPP_SPACE_RE_ =
  */
 const DECIMAL_ESCAPE_RE_ = /^#(\d+)$/;
 
-
 /**
  * Regular expression that matches hexadecimal numbers.
  * @type {RegExp}
@@ -933,53 +966,52 @@ const DECIMAL_ESCAPE_RE_ = /^#(\d+)$/;
  */
 const HEX_ESCAPE_RE_ = /^#x([0-9A-Fa-f]+)$/;
 
-
 /**
  * Regular expression that matches the next token to be processed.
  * @type {RegExp}
  * @private
  */
 const INSIDE_TAG_TOKEN_ = new RegExp(
-    // Don't capture space. In this case, we don't use \s because it includes a
-    // nonbreaking space which gets included as an attribute in our validation.
-    '^[ \\t\\n\\f\\r\\v]*(?:' +
-        // Capture an attribute name in group 1, and value in group 3.
-        // We capture the fact that there was an attribute in group 2, since
-        // interpreters are inconsistent in whether a group that matches nothing
-        // is null, undefined, or the empty string.
-        ('(?:' +
-         // Allow attribute names to start with /, avoiding assigning the / in
-         // close-tag syntax */>.
-         '([^\\t\\r\\n /=>][^\\t\\r\\n =>]*|' +  // e.g. "href"
-         '[^\\t\\r\\n =>]+[^ >]|' +              // e.g. "/asdfs/asd"
-         '\/+(?!>))' +                           // e.g. "/"
-         // Optionally followed by:
-         ('(' +
-          '\\s*=\\s*' +
-          ('(' +
-           // A double quoted string.
-           '\"[^\"]*\"' +
-           // A single quoted string.
-           '|\'[^\']*\'' +
-           // The positive lookahead is used to make sure that in
-           // <foo bar= baz=boo>, the value for bar is blank, not "baz=boo".
-           // Note that <foo bar=baz=boo zik=zak>, the value for bar is
-           // "baz=boo" and the value for zip is "zak".
-           '|(?=[a-z][a-z-]*\\s+=)' +
-           // An unquoted value that is not an attribute name.
-           // We know it is not an attribute name because the previous
-           // zero-width match would've eliminated that possibility.
-           '|[^>\\s]*' +
-           ')') +
+  // Don't capture space. In this case, we don't use \s because it includes a
+  // nonbreaking space which gets included as an attribute in our validation.
+  '^[ \\t\\n\\f\\r\\v]*(?:' +
+    // Capture an attribute name in group 1, and value in group 3.
+    // We capture the fact that there was an attribute in group 2, since
+    // interpreters are inconsistent in whether a group that matches nothing
+    // is null, undefined, or the empty string.
+    ('(?:' +
+      // Allow attribute names to start with /, avoiding assigning the / in
+      // close-tag syntax */>.
+      '([^\\t\\r\\n /=>][^\\t\\r\\n =>]*|' + // e.g. "href"
+      '[^\\t\\r\\n =>]+[^ >]|' + // e.g. "/asdfs/asd"
+      '/+(?!>))' + // e.g. "/"
+      // Optionally followed by:
+      ('(' +
+        '\\s*=\\s*' +
+        ('(' +
+          // A double quoted string.
+          '"[^"]*"' +
+          // A single quoted string.
+          "|'[^']*'" +
+          // The positive lookahead is used to make sure that in
+          // <foo bar= baz=boo>, the value for bar is blank, not "baz=boo".
+          // Note that <foo bar=baz=boo zik=zak>, the value for bar is
+          // "baz=boo" and the value for zip is "zak".
+          '|(?=[a-z][a-z-]*\\s+=)' +
+          // An unquoted value that is not an attribute name.
+          // We know it is not an attribute name because the previous
+          // zero-width match would've eliminated that possibility.
+          '|[^>\\s]*' +
           ')') +
-         '?' +
-         ')') +
-        // End of tag captured in group 3.
-        '|(/?>)' +
-        // Don't capture cruft
-        '|[^a-z\\s>]+)',
-    'i');
-
+        ')') +
+      '?' +
+      ')') +
+    // End of tag captured in group 3.
+    '|(/?>)' +
+    // Don't capture cruft
+    '|[^a-z\\s>]+)',
+  'i'
+);
 
 /**
  * Regular expression that matches the next token to be processed when we are
@@ -988,23 +1020,23 @@ const INSIDE_TAG_TOKEN_ = new RegExp(
  * @private
  */
 const OUTSIDE_TAG_TOKEN_ = new RegExp(
-    '^(?:' +
-        // Entity captured in group 1.
-        '&(\\#[0-9]+|\\#[x][0-9a-f]+|\\w+);' +
-        // Comments not captured.
-        '|<[!]--[\\s\\S]*?(?:--[!]?>|$)' +
-        // '/' captured in group 2 for close tags, and name captured in group 3.
-        // The first character of a tag (after possibly '/') can be A-Z, a-z,
-        // '!' or '?'. The remaining characters are more easily expressed as a
-        // negative set of: '\0', ' ', '\n', '\r', '\t', '\f', '\v', '>', or
-        // '/'.
-        '|<(/)?([a-z!\\?][^\\0 \\n\\r\\t\\f\\v>/]*)' +
-        // Text captured in group 4.
-        '|([^<&>]+)' +
-        // Cruft captured in group 5.
-        '|([<&>]))',
-    'i');
-
+  '^(?:' +
+    // Entity captured in group 1.
+    '&(\\#[0-9]+|\\#[x][0-9a-f]+|\\w+);' +
+    // Comments not captured.
+    '|<[!]--[\\s\\S]*?(?:--[!]?>|$)' +
+    // '/' captured in group 2 for close tags, and name captured in group 3.
+    // The first character of a tag (after possibly '/') can be A-Z, a-z,
+    // '!' or '?'. The remaining characters are more easily expressed as a
+    // negative set of: '\0', ' ', '\n', '\r', '\t', '\f', '\v', '>', or
+    // '/'.
+    '|<(/)?([a-z!\\?][^\\0 \\n\\r\\t\\f\\v>/]*)' +
+    // Text captured in group 4.
+    '|([^<&>]+)' +
+    // Cruft captured in group 5.
+    '|([<&>]))',
+  'i'
+);
 
 /**
  * An implementation of the `parserInterface.DocLocator` parserInterface
@@ -1049,7 +1081,6 @@ const DocLocatorImpl = class extends parserInterface.DocLocator {
     this.line_ = 1;
     this.col_ = 0;
   }
-
 
   /**
    * Advances the internal position by the characters in {code tokenText}.

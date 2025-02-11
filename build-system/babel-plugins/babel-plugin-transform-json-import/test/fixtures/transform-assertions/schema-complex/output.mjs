@@ -8,23 +8,23 @@ const _schema = {
   e: 0,
   f: 0,
   g: 0,
-  i: 0
+  i: 0,
 };
-import { isIso4217CurrencyCode } from '#core/json-schema';
-"use strict";
+import {isIso4217CurrencyCode} from '#core/json-schema';
+('use strict');
 
 const _validate = validate0;
 const func0 = Object.prototype.hasOwnProperty;
 const wrapper0 = {
-  validate: validate1
+  validate: validate1,
 };
 
-function validate2(data, instancePath = "") {
+function validate2(data, instancePath = '') {
   let vErrors = null;
   let errors = 0;
 
-  if (!(typeof data == "number" && isFinite(data))) {
-    const err0 = (instancePath + ' ' + "must be number").trim();
+  if (!(typeof data == 'number' && isFinite(data))) {
+    const err0 = (instancePath + ' ' + 'must be number').trim();
 
     if (vErrors === null) {
       vErrors = [err0];
@@ -39,7 +39,7 @@ function validate2(data, instancePath = "") {
   return errors === 0;
 }
 
-function validate1(data, instancePath = "") {
+function validate1(data, instancePath = '') {
   let vErrors = null;
   let errors = 0;
 
@@ -49,9 +49,15 @@ function validate1(data, instancePath = "") {
     for (let i0 = 0; i0 < len0; i0++) {
       let data0 = data[i0];
 
-      if (data0 && typeof data0 == "object" && !Array.isArray(data0)) {
+      if (data0 && typeof data0 == 'object' && !Array.isArray(data0)) {
         if (data0.a === undefined) {
-          const err0 = (instancePath + "/" + i0 + ' ' + ("must have required property '" + "a" + "'")).trim();
+          const err0 = (
+            instancePath +
+            '/' +
+            i0 +
+            ' ' +
+            ("must have required property '" + 'a' + "'")
+          ).trim();
 
           if (vErrors === null) {
             vErrors = [err0];
@@ -63,7 +69,13 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.b === undefined) {
-          const err1 = (instancePath + "/" + i0 + ' ' + ("must have required property '" + "b" + "'")).trim();
+          const err1 = (
+            instancePath +
+            '/' +
+            i0 +
+            ' ' +
+            ("must have required property '" + 'b' + "'")
+          ).trim();
 
           if (vErrors === null) {
             vErrors = [err1];
@@ -75,7 +87,13 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.c === undefined) {
-          const err2 = (instancePath + "/" + i0 + ' ' + ("must have required property '" + "c" + "'")).trim();
+          const err2 = (
+            instancePath +
+            '/' +
+            i0 +
+            ' ' +
+            ("must have required property '" + 'c' + "'")
+          ).trim();
 
           if (vErrors === null) {
             vErrors = [err2];
@@ -87,7 +105,13 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.d === undefined) {
-          const err3 = (instancePath + "/" + i0 + ' ' + ("must have required property '" + "d" + "'")).trim();
+          const err3 = (
+            instancePath +
+            '/' +
+            i0 +
+            ' ' +
+            ("must have required property '" + 'd' + "'")
+          ).trim();
 
           if (vErrors === null) {
             vErrors = [err3];
@@ -99,7 +123,13 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.e === undefined) {
-          const err4 = (instancePath + "/" + i0 + ' ' + ("must have required property '" + "e" + "'")).trim();
+          const err4 = (
+            instancePath +
+            '/' +
+            i0 +
+            ' ' +
+            ("must have required property '" + 'e' + "'")
+          ).trim();
 
           if (vErrors === null) {
             vErrors = [err4];
@@ -111,7 +141,13 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.f === undefined) {
-          const err5 = (instancePath + "/" + i0 + ' ' + ("must have required property '" + "f" + "'")).trim();
+          const err5 = (
+            instancePath +
+            '/' +
+            i0 +
+            ' ' +
+            ("must have required property '" + 'f' + "'")
+          ).trim();
 
           if (vErrors === null) {
             vErrors = [err5];
@@ -123,7 +159,13 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.g === undefined) {
-          const err6 = (instancePath + "/" + i0 + ' ' + ("must have required property '" + "g" + "'")).trim();
+          const err6 = (
+            instancePath +
+            '/' +
+            i0 +
+            ' ' +
+            ("must have required property '" + 'g' + "'")
+          ).trim();
 
           if (vErrors === null) {
             vErrors = [err6];
@@ -135,7 +177,13 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.h === undefined) {
-          const err7 = (instancePath + "/" + i0 + ' ' + ("must have required property '" + "h" + "'")).trim();
+          const err7 = (
+            instancePath +
+            '/' +
+            i0 +
+            ' ' +
+            ("must have required property '" + 'h' + "'")
+          ).trim();
 
           if (vErrors === null) {
             vErrors = [err7];
@@ -147,7 +195,13 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.i === undefined) {
-          const err8 = (instancePath + "/" + i0 + ' ' + ("must have required property '" + "i" + "'")).trim();
+          const err8 = (
+            instancePath +
+            '/' +
+            i0 +
+            ' ' +
+            ("must have required property '" + 'i' + "'")
+          ).trim();
 
           if (vErrors === null) {
             vErrors = [err8];
@@ -160,7 +214,13 @@ function validate1(data, instancePath = "") {
 
         for (const key0 in data0) {
           if (!func0.call(_schema, key0)) {
-            const err9 = (instancePath + "/" + i0 + ' ' + "must NOT have additional properties").trim();
+            const err9 = (
+              instancePath +
+              '/' +
+              i0 +
+              ' ' +
+              'must NOT have additional properties'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err9];
@@ -173,8 +233,16 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.recursive !== undefined) {
-          if (!wrapper0.validate(data0.recursive, instancePath + "/" + i0 + "/recursive")) {
-            vErrors = vErrors === null ? wrapper0.validate.errors : vErrors.concat(wrapper0.validate.errors);
+          if (
+            !wrapper0.validate(
+              data0.recursive,
+              instancePath + '/' + i0 + '/recursive'
+            )
+          ) {
+            vErrors =
+              vErrors === null
+                ? wrapper0.validate.errors
+                : vErrors.concat(wrapper0.validate.errors);
             errors = vErrors.length;
           }
         }
@@ -186,8 +254,15 @@ function validate1(data, instancePath = "") {
           let passing0 = null;
           const _errs7 = errors;
 
-          if (typeof data2 !== "string") {
-            const err10 = (instancePath + "/" + i0 + "/a" + ' ' + "must be string").trim();
+          if (typeof data2 !== 'string') {
+            const err10 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/a' +
+              ' ' +
+              'must be string'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err10];
@@ -207,8 +282,15 @@ function validate1(data, instancePath = "") {
 
           const _errs9 = errors;
 
-          if (!(typeof data2 == "number" && isFinite(data2))) {
-            const err11 = (instancePath + "/" + i0 + "/a" + ' ' + "must be number").trim();
+          if (!(typeof data2 == 'number' && isFinite(data2))) {
+            const err11 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/a' +
+              ' ' +
+              'must be number'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err11];
@@ -232,7 +314,14 @@ function validate1(data, instancePath = "") {
           }
 
           if (!valid3) {
-            const err12 = (instancePath + "/" + i0 + "/a" + ' ' + "must match exactly one schema in oneOf").trim();
+            const err12 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/a' +
+              ' ' +
+              'must match exactly one schema in oneOf'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err12];
@@ -255,15 +344,25 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.b !== undefined) {
-          if (!validate2(data0.b, instancePath + "/" + i0 + "/b")) {
-            vErrors = vErrors === null ? validate2.errors : vErrors.concat(validate2.errors);
+          if (!validate2(data0.b, instancePath + '/' + i0 + '/b')) {
+            vErrors =
+              vErrors === null
+                ? validate2.errors
+                : vErrors.concat(validate2.errors);
             errors = vErrors.length;
           }
         }
 
         if (data0.c !== undefined) {
-          if (typeof data0.c !== "string") {
-            const err13 = (instancePath + "/" + i0 + "/c" + ' ' + "must be string").trim();
+          if (typeof data0.c !== 'string') {
+            const err13 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/c' +
+              ' ' +
+              'must be string'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err13];
@@ -276,8 +375,15 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.d !== undefined) {
-          if (typeof data0.d !== "string") {
-            const err14 = (instancePath + "/" + i0 + "/d" + ' ' + "must be string").trim();
+          if (typeof data0.d !== 'string') {
+            const err14 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/d' +
+              ' ' +
+              'must be string'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err14];
@@ -290,8 +396,15 @@ function validate1(data, instancePath = "") {
         }
 
         if (data0.h !== undefined) {
-          if (typeof data0.h !== "string") {
-            const err15 = (instancePath + "/" + i0 + "/h" + ' ' + "must be string").trim();
+          if (typeof data0.h !== 'string') {
+            const err15 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/h' +
+              ' ' +
+              'must be string'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err15];
@@ -306,9 +419,16 @@ function validate1(data, instancePath = "") {
         if (data0.e !== undefined) {
           let data7 = data0.e;
 
-          if (typeof data7 == "number" && isFinite(data7)) {
+          if (typeof data7 == 'number' && isFinite(data7)) {
             if (data7 < 0 || isNaN(data7)) {
-              const err16 = (instancePath + "/" + i0 + "/e" + ' ' + "must be >= 0").trim();
+              const err16 = (
+                instancePath +
+                '/' +
+                i0 +
+                '/e' +
+                ' ' +
+                'must be >= 0'
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err16];
@@ -319,7 +439,14 @@ function validate1(data, instancePath = "") {
               errors++;
             }
           } else {
-            const err17 = (instancePath + "/" + i0 + "/e" + ' ' + "must be number").trim();
+            const err17 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/e' +
+              ' ' +
+              'must be number'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err17];
@@ -333,7 +460,14 @@ function validate1(data, instancePath = "") {
 
         if (data0.f !== undefined) {
           if (!isIso4217CurrencyCode(data0.f)) {
-            const err18 = (instancePath + "/" + i0 + "/f" + ' ' + "must be a valid ISO 4217 currency code").trim();
+            const err18 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/f' +
+              ' ' +
+              'must be a valid ISO 4217 currency code'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err18];
@@ -354,9 +488,21 @@ function validate1(data, instancePath = "") {
             for (let i1 = 0; i1 < len1; i1++) {
               let data10 = data9[i1];
 
-              if (data10 && typeof data10 == "object" && !Array.isArray(data10)) {
+              if (
+                data10 &&
+                typeof data10 == 'object' &&
+                !Array.isArray(data10)
+              ) {
                 if (data10.url === undefined) {
-                  const err19 = (instancePath + "/" + i0 + "/g/" + i1 + ' ' + ("must have required property '" + "url" + "'")).trim();
+                  const err19 = (
+                    instancePath +
+                    '/' +
+                    i0 +
+                    '/g/' +
+                    i1 +
+                    ' ' +
+                    ("must have required property '" + 'url' + "'")
+                  ).trim();
 
                   if (vErrors === null) {
                     vErrors = [err19];
@@ -368,7 +514,15 @@ function validate1(data, instancePath = "") {
                 }
 
                 if (data10.altText === undefined) {
-                  const err20 = (instancePath + "/" + i0 + "/g/" + i1 + ' ' + ("must have required property '" + "altText" + "'")).trim();
+                  const err20 = (
+                    instancePath +
+                    '/' +
+                    i0 +
+                    '/g/' +
+                    i1 +
+                    ' ' +
+                    ("must have required property '" + 'altText' + "'")
+                  ).trim();
 
                   if (vErrors === null) {
                     vErrors = [err20];
@@ -380,8 +534,16 @@ function validate1(data, instancePath = "") {
                 }
 
                 for (const key1 in data10) {
-                  if (!(key1 === "url" || key1 === "altText")) {
-                    const err21 = (instancePath + "/" + i0 + "/g/" + i1 + ' ' + "must NOT have additional properties").trim();
+                  if (!(key1 === 'url' || key1 === 'altText')) {
+                    const err21 = (
+                      instancePath +
+                      '/' +
+                      i0 +
+                      '/g/' +
+                      i1 +
+                      ' ' +
+                      'must NOT have additional properties'
+                    ).trim();
 
                     if (vErrors === null) {
                       vErrors = [err21];
@@ -394,8 +556,17 @@ function validate1(data, instancePath = "") {
                 }
 
                 if (data10.url !== undefined) {
-                  if (typeof data10.url !== "string") {
-                    const err22 = (instancePath + "/" + i0 + "/g/" + i1 + "/url" + ' ' + "must be string").trim();
+                  if (typeof data10.url !== 'string') {
+                    const err22 = (
+                      instancePath +
+                      '/' +
+                      i0 +
+                      '/g/' +
+                      i1 +
+                      '/url' +
+                      ' ' +
+                      'must be string'
+                    ).trim();
 
                     if (vErrors === null) {
                       vErrors = [err22];
@@ -408,8 +579,17 @@ function validate1(data, instancePath = "") {
                 }
 
                 if (data10.altText !== undefined) {
-                  if (typeof data10.altText !== "string") {
-                    const err23 = (instancePath + "/" + i0 + "/g/" + i1 + "/altText" + ' ' + "must be string").trim();
+                  if (typeof data10.altText !== 'string') {
+                    const err23 = (
+                      instancePath +
+                      '/' +
+                      i0 +
+                      '/g/' +
+                      i1 +
+                      '/altText' +
+                      ' ' +
+                      'must be string'
+                    ).trim();
 
                     if (vErrors === null) {
                       vErrors = [err23];
@@ -421,7 +601,15 @@ function validate1(data, instancePath = "") {
                   }
                 }
               } else {
-                const err24 = (instancePath + "/" + i0 + "/g/" + i1 + ' ' + "must be object").trim();
+                const err24 = (
+                  instancePath +
+                  '/' +
+                  i0 +
+                  '/g/' +
+                  i1 +
+                  ' ' +
+                  'must be object'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err24];
@@ -433,7 +621,14 @@ function validate1(data, instancePath = "") {
               }
             }
           } else {
-            const err25 = (instancePath + "/" + i0 + "/g" + ' ' + "must be array").trim();
+            const err25 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/g' +
+              ' ' +
+              'must be array'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err25];
@@ -448,9 +643,16 @@ function validate1(data, instancePath = "") {
         if (data0.i !== undefined) {
           let data13 = data0.i;
 
-          if (data13 && typeof data13 == "object" && !Array.isArray(data13)) {
+          if (data13 && typeof data13 == 'object' && !Array.isArray(data13)) {
             if (data13.ratingValue === undefined) {
-              const err26 = (instancePath + "/" + i0 + "/i" + ' ' + ("must have required property '" + "ratingValue" + "'")).trim();
+              const err26 = (
+                instancePath +
+                '/' +
+                i0 +
+                '/i' +
+                ' ' +
+                ("must have required property '" + 'ratingValue' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err26];
@@ -462,7 +664,14 @@ function validate1(data, instancePath = "") {
             }
 
             if (data13.ratingCount === undefined) {
-              const err27 = (instancePath + "/" + i0 + "/i" + ' ' + ("must have required property '" + "ratingCount" + "'")).trim();
+              const err27 = (
+                instancePath +
+                '/' +
+                i0 +
+                '/i' +
+                ' ' +
+                ("must have required property '" + 'ratingCount' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err27];
@@ -474,7 +683,14 @@ function validate1(data, instancePath = "") {
             }
 
             if (data13.ratingUrl === undefined) {
-              const err28 = (instancePath + "/" + i0 + "/i" + ' ' + ("must have required property '" + "ratingUrl" + "'")).trim();
+              const err28 = (
+                instancePath +
+                '/' +
+                i0 +
+                '/i' +
+                ' ' +
+                ("must have required property '" + 'ratingUrl' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err28];
@@ -486,8 +702,21 @@ function validate1(data, instancePath = "") {
             }
 
             for (const key2 in data13) {
-              if (!(key2 === "ratingValue" || key2 === "ratingCount" || key2 === "ratingUrl")) {
-                const err29 = (instancePath + "/" + i0 + "/i" + ' ' + "must NOT have additional properties").trim();
+              if (
+                !(
+                  key2 === 'ratingValue' ||
+                  key2 === 'ratingCount' ||
+                  key2 === 'ratingUrl'
+                )
+              ) {
+                const err29 = (
+                  instancePath +
+                  '/' +
+                  i0 +
+                  '/i' +
+                  ' ' +
+                  'must NOT have additional properties'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err29];
@@ -502,9 +731,16 @@ function validate1(data, instancePath = "") {
             if (data13.ratingValue !== undefined) {
               let data14 = data13.ratingValue;
 
-              if (typeof data14 == "number" && isFinite(data14)) {
+              if (typeof data14 == 'number' && isFinite(data14)) {
                 if (data14 < 0 || isNaN(data14)) {
-                  const err30 = (instancePath + "/" + i0 + "/i/ratingValue" + ' ' + "must be >= 0").trim();
+                  const err30 = (
+                    instancePath +
+                    '/' +
+                    i0 +
+                    '/i/ratingValue' +
+                    ' ' +
+                    'must be >= 0'
+                  ).trim();
 
                   if (vErrors === null) {
                     vErrors = [err30];
@@ -515,7 +751,14 @@ function validate1(data, instancePath = "") {
                   errors++;
                 }
               } else {
-                const err31 = (instancePath + "/" + i0 + "/i/ratingValue" + ' ' + "must be number").trim();
+                const err31 = (
+                  instancePath +
+                  '/' +
+                  i0 +
+                  '/i/ratingValue' +
+                  ' ' +
+                  'must be number'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err31];
@@ -530,9 +773,16 @@ function validate1(data, instancePath = "") {
             if (data13.ratingCount !== undefined) {
               let data15 = data13.ratingCount;
 
-              if (typeof data15 == "number" && isFinite(data15)) {
+              if (typeof data15 == 'number' && isFinite(data15)) {
                 if (data15 < 0 || isNaN(data15)) {
-                  const err32 = (instancePath + "/" + i0 + "/i/ratingCount" + ' ' + "must be >= 0").trim();
+                  const err32 = (
+                    instancePath +
+                    '/' +
+                    i0 +
+                    '/i/ratingCount' +
+                    ' ' +
+                    'must be >= 0'
+                  ).trim();
 
                   if (vErrors === null) {
                     vErrors = [err32];
@@ -543,7 +793,14 @@ function validate1(data, instancePath = "") {
                   errors++;
                 }
               } else {
-                const err33 = (instancePath + "/" + i0 + "/i/ratingCount" + ' ' + "must be number").trim();
+                const err33 = (
+                  instancePath +
+                  '/' +
+                  i0 +
+                  '/i/ratingCount' +
+                  ' ' +
+                  'must be number'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err33];
@@ -556,8 +813,15 @@ function validate1(data, instancePath = "") {
             }
 
             if (data13.ratingUrl !== undefined) {
-              if (typeof data13.ratingUrl !== "string") {
-                const err34 = (instancePath + "/" + i0 + "/i/ratingUrl" + ' ' + "must be string").trim();
+              if (typeof data13.ratingUrl !== 'string') {
+                const err34 = (
+                  instancePath +
+                  '/' +
+                  i0 +
+                  '/i/ratingUrl' +
+                  ' ' +
+                  'must be string'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err34];
@@ -569,7 +833,14 @@ function validate1(data, instancePath = "") {
               }
             }
           } else {
-            const err35 = (instancePath + "/" + i0 + "/i" + ' ' + "must be object").trim();
+            const err35 = (
+              instancePath +
+              '/' +
+              i0 +
+              '/i' +
+              ' ' +
+              'must be object'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err35];
@@ -581,7 +852,7 @@ function validate1(data, instancePath = "") {
           }
         }
       } else {
-        const err36 = (instancePath + "/" + i0 + ' ' + "must be object").trim();
+        const err36 = (instancePath + '/' + i0 + ' ' + 'must be object').trim();
 
         if (vErrors === null) {
           vErrors = [err36];
@@ -593,7 +864,7 @@ function validate1(data, instancePath = "") {
       }
     }
   } else {
-    const err37 = (instancePath + ' ' + "must be array").trim();
+    const err37 = (instancePath + ' ' + 'must be array').trim();
 
     if (vErrors === null) {
       vErrors = [err37];
@@ -608,15 +879,18 @@ function validate1(data, instancePath = "") {
   return errors === 0;
 }
 
-function validate0(data, instancePath = "") {
+function validate0(data, instancePath = '') {
   /*# sourceURL="my-id" */
-  ;
   let vErrors = null;
   let errors = 0;
 
-  if (data && typeof data == "object" && !Array.isArray(data)) {
+  if (data && typeof data == 'object' && !Array.isArray(data)) {
     if (data.items === undefined) {
-      const err0 = (instancePath + ' ' + ("must have required property '" + "items" + "'")).trim();
+      const err0 = (
+        instancePath +
+        ' ' +
+        ("must have required property '" + 'items' + "'")
+      ).trim();
 
       if (vErrors === null) {
         vErrors = [err0];
@@ -628,8 +902,12 @@ function validate0(data, instancePath = "") {
     }
 
     for (const key0 in data) {
-      if (!(key0 === "recursive" || key0 === "items")) {
-        const err1 = (instancePath + ' ' + "must NOT have additional properties").trim();
+      if (!(key0 === 'recursive' || key0 === 'items')) {
+        const err1 = (
+          instancePath +
+          ' ' +
+          'must NOT have additional properties'
+        ).trim();
 
         if (vErrors === null) {
           vErrors = [err1];
@@ -642,8 +920,11 @@ function validate0(data, instancePath = "") {
     }
 
     if (data.recursive !== undefined) {
-      if (!validate0(data.recursive, instancePath + "/recursive")) {
-        vErrors = vErrors === null ? validate0.errors : vErrors.concat(validate0.errors);
+      if (!validate0(data.recursive, instancePath + '/recursive')) {
+        vErrors =
+          vErrors === null
+            ? validate0.errors
+            : vErrors.concat(validate0.errors);
         errors = vErrors.length;
       }
     }
@@ -657,9 +938,15 @@ function validate0(data, instancePath = "") {
         for (let i0 = 0; i0 < len0; i0++) {
           let data2 = data1[i0];
 
-          if (data2 && typeof data2 == "object" && !Array.isArray(data2)) {
+          if (data2 && typeof data2 == 'object' && !Array.isArray(data2)) {
             if (data2.a === undefined) {
-              const err2 = (instancePath + "/items/" + i0 + ' ' + ("must have required property '" + "a" + "'")).trim();
+              const err2 = (
+                instancePath +
+                '/items/' +
+                i0 +
+                ' ' +
+                ("must have required property '" + 'a' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err2];
@@ -671,7 +958,13 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.b === undefined) {
-              const err3 = (instancePath + "/items/" + i0 + ' ' + ("must have required property '" + "b" + "'")).trim();
+              const err3 = (
+                instancePath +
+                '/items/' +
+                i0 +
+                ' ' +
+                ("must have required property '" + 'b' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err3];
@@ -683,7 +976,13 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.c === undefined) {
-              const err4 = (instancePath + "/items/" + i0 + ' ' + ("must have required property '" + "c" + "'")).trim();
+              const err4 = (
+                instancePath +
+                '/items/' +
+                i0 +
+                ' ' +
+                ("must have required property '" + 'c' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err4];
@@ -695,7 +994,13 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.d === undefined) {
-              const err5 = (instancePath + "/items/" + i0 + ' ' + ("must have required property '" + "d" + "'")).trim();
+              const err5 = (
+                instancePath +
+                '/items/' +
+                i0 +
+                ' ' +
+                ("must have required property '" + 'd' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err5];
@@ -707,7 +1012,13 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.e === undefined) {
-              const err6 = (instancePath + "/items/" + i0 + ' ' + ("must have required property '" + "e" + "'")).trim();
+              const err6 = (
+                instancePath +
+                '/items/' +
+                i0 +
+                ' ' +
+                ("must have required property '" + 'e' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err6];
@@ -719,7 +1030,13 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.f === undefined) {
-              const err7 = (instancePath + "/items/" + i0 + ' ' + ("must have required property '" + "f" + "'")).trim();
+              const err7 = (
+                instancePath +
+                '/items/' +
+                i0 +
+                ' ' +
+                ("must have required property '" + 'f' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err7];
@@ -731,7 +1048,13 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.g === undefined) {
-              const err8 = (instancePath + "/items/" + i0 + ' ' + ("must have required property '" + "g" + "'")).trim();
+              const err8 = (
+                instancePath +
+                '/items/' +
+                i0 +
+                ' ' +
+                ("must have required property '" + 'g' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err8];
@@ -743,7 +1066,13 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.h === undefined) {
-              const err9 = (instancePath + "/items/" + i0 + ' ' + ("must have required property '" + "h" + "'")).trim();
+              const err9 = (
+                instancePath +
+                '/items/' +
+                i0 +
+                ' ' +
+                ("must have required property '" + 'h' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err9];
@@ -755,7 +1084,13 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.i === undefined) {
-              const err10 = (instancePath + "/items/" + i0 + ' ' + ("must have required property '" + "i" + "'")).trim();
+              const err10 = (
+                instancePath +
+                '/items/' +
+                i0 +
+                ' ' +
+                ("must have required property '" + 'i' + "'")
+              ).trim();
 
               if (vErrors === null) {
                 vErrors = [err10];
@@ -768,7 +1103,13 @@ function validate0(data, instancePath = "") {
 
             for (const key1 in data2) {
               if (!func0.call(_schema, key1)) {
-                const err11 = (instancePath + "/items/" + i0 + ' ' + "must NOT have additional properties").trim();
+                const err11 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  ' ' +
+                  'must NOT have additional properties'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err11];
@@ -781,8 +1122,16 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.recursive !== undefined) {
-              if (!validate1(data2.recursive, instancePath + "/items/" + i0 + "/recursive")) {
-                vErrors = vErrors === null ? validate1.errors : vErrors.concat(validate1.errors);
+              if (
+                !validate1(
+                  data2.recursive,
+                  instancePath + '/items/' + i0 + '/recursive'
+                )
+              ) {
+                vErrors =
+                  vErrors === null
+                    ? validate1.errors
+                    : vErrors.concat(validate1.errors);
                 errors = vErrors.length;
               }
             }
@@ -794,8 +1143,15 @@ function validate0(data, instancePath = "") {
               let passing0 = null;
               const _errs11 = errors;
 
-              if (typeof data4 !== "string") {
-                const err12 = (instancePath + "/items/" + i0 + "/a" + ' ' + "must be string").trim();
+              if (typeof data4 !== 'string') {
+                const err12 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/a' +
+                  ' ' +
+                  'must be string'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err12];
@@ -815,8 +1171,15 @@ function validate0(data, instancePath = "") {
 
               const _errs13 = errors;
 
-              if (!(typeof data4 == "number" && isFinite(data4))) {
-                const err13 = (instancePath + "/items/" + i0 + "/a" + ' ' + "must be number").trim();
+              if (!(typeof data4 == 'number' && isFinite(data4))) {
+                const err13 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/a' +
+                  ' ' +
+                  'must be number'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err13];
@@ -840,7 +1203,14 @@ function validate0(data, instancePath = "") {
               }
 
               if (!valid4) {
-                const err14 = (instancePath + "/items/" + i0 + "/a" + ' ' + "must match exactly one schema in oneOf").trim();
+                const err14 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/a' +
+                  ' ' +
+                  'must match exactly one schema in oneOf'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err14];
@@ -863,15 +1233,25 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.b !== undefined) {
-              if (!validate2(data2.b, instancePath + "/items/" + i0 + "/b")) {
-                vErrors = vErrors === null ? validate2.errors : vErrors.concat(validate2.errors);
+              if (!validate2(data2.b, instancePath + '/items/' + i0 + '/b')) {
+                vErrors =
+                  vErrors === null
+                    ? validate2.errors
+                    : vErrors.concat(validate2.errors);
                 errors = vErrors.length;
               }
             }
 
             if (data2.c !== undefined) {
-              if (typeof data2.c !== "string") {
-                const err15 = (instancePath + "/items/" + i0 + "/c" + ' ' + "must be string").trim();
+              if (typeof data2.c !== 'string') {
+                const err15 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/c' +
+                  ' ' +
+                  'must be string'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err15];
@@ -884,8 +1264,15 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.d !== undefined) {
-              if (typeof data2.d !== "string") {
-                const err16 = (instancePath + "/items/" + i0 + "/d" + ' ' + "must be string").trim();
+              if (typeof data2.d !== 'string') {
+                const err16 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/d' +
+                  ' ' +
+                  'must be string'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err16];
@@ -898,8 +1285,15 @@ function validate0(data, instancePath = "") {
             }
 
             if (data2.h !== undefined) {
-              if (typeof data2.h !== "string") {
-                const err17 = (instancePath + "/items/" + i0 + "/h" + ' ' + "must be string").trim();
+              if (typeof data2.h !== 'string') {
+                const err17 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/h' +
+                  ' ' +
+                  'must be string'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err17];
@@ -914,9 +1308,16 @@ function validate0(data, instancePath = "") {
             if (data2.e !== undefined) {
               let data9 = data2.e;
 
-              if (typeof data9 == "number" && isFinite(data9)) {
+              if (typeof data9 == 'number' && isFinite(data9)) {
                 if (data9 < 0 || isNaN(data9)) {
-                  const err18 = (instancePath + "/items/" + i0 + "/e" + ' ' + "must be >= 0").trim();
+                  const err18 = (
+                    instancePath +
+                    '/items/' +
+                    i0 +
+                    '/e' +
+                    ' ' +
+                    'must be >= 0'
+                  ).trim();
 
                   if (vErrors === null) {
                     vErrors = [err18];
@@ -927,7 +1328,14 @@ function validate0(data, instancePath = "") {
                   errors++;
                 }
               } else {
-                const err19 = (instancePath + "/items/" + i0 + "/e" + ' ' + "must be number").trim();
+                const err19 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/e' +
+                  ' ' +
+                  'must be number'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err19];
@@ -941,7 +1349,14 @@ function validate0(data, instancePath = "") {
 
             if (data2.f !== undefined) {
               if (!isIso4217CurrencyCode(data2.f)) {
-                const err20 = (instancePath + "/items/" + i0 + "/f" + ' ' + "must be a valid ISO 4217 currency code").trim();
+                const err20 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/f' +
+                  ' ' +
+                  'must be a valid ISO 4217 currency code'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err20];
@@ -962,9 +1377,21 @@ function validate0(data, instancePath = "") {
                 for (let i1 = 0; i1 < len1; i1++) {
                   let data12 = data11[i1];
 
-                  if (data12 && typeof data12 == "object" && !Array.isArray(data12)) {
+                  if (
+                    data12 &&
+                    typeof data12 == 'object' &&
+                    !Array.isArray(data12)
+                  ) {
                     if (data12.url === undefined) {
-                      const err21 = (instancePath + "/items/" + i0 + "/g/" + i1 + ' ' + ("must have required property '" + "url" + "'")).trim();
+                      const err21 = (
+                        instancePath +
+                        '/items/' +
+                        i0 +
+                        '/g/' +
+                        i1 +
+                        ' ' +
+                        ("must have required property '" + 'url' + "'")
+                      ).trim();
 
                       if (vErrors === null) {
                         vErrors = [err21];
@@ -976,7 +1403,15 @@ function validate0(data, instancePath = "") {
                     }
 
                     if (data12.altText === undefined) {
-                      const err22 = (instancePath + "/items/" + i0 + "/g/" + i1 + ' ' + ("must have required property '" + "altText" + "'")).trim();
+                      const err22 = (
+                        instancePath +
+                        '/items/' +
+                        i0 +
+                        '/g/' +
+                        i1 +
+                        ' ' +
+                        ("must have required property '" + 'altText' + "'")
+                      ).trim();
 
                       if (vErrors === null) {
                         vErrors = [err22];
@@ -988,8 +1423,16 @@ function validate0(data, instancePath = "") {
                     }
 
                     for (const key2 in data12) {
-                      if (!(key2 === "url" || key2 === "altText")) {
-                        const err23 = (instancePath + "/items/" + i0 + "/g/" + i1 + ' ' + "must NOT have additional properties").trim();
+                      if (!(key2 === 'url' || key2 === 'altText')) {
+                        const err23 = (
+                          instancePath +
+                          '/items/' +
+                          i0 +
+                          '/g/' +
+                          i1 +
+                          ' ' +
+                          'must NOT have additional properties'
+                        ).trim();
 
                         if (vErrors === null) {
                           vErrors = [err23];
@@ -1002,8 +1445,17 @@ function validate0(data, instancePath = "") {
                     }
 
                     if (data12.url !== undefined) {
-                      if (typeof data12.url !== "string") {
-                        const err24 = (instancePath + "/items/" + i0 + "/g/" + i1 + "/url" + ' ' + "must be string").trim();
+                      if (typeof data12.url !== 'string') {
+                        const err24 = (
+                          instancePath +
+                          '/items/' +
+                          i0 +
+                          '/g/' +
+                          i1 +
+                          '/url' +
+                          ' ' +
+                          'must be string'
+                        ).trim();
 
                         if (vErrors === null) {
                           vErrors = [err24];
@@ -1016,8 +1468,17 @@ function validate0(data, instancePath = "") {
                     }
 
                     if (data12.altText !== undefined) {
-                      if (typeof data12.altText !== "string") {
-                        const err25 = (instancePath + "/items/" + i0 + "/g/" + i1 + "/altText" + ' ' + "must be string").trim();
+                      if (typeof data12.altText !== 'string') {
+                        const err25 = (
+                          instancePath +
+                          '/items/' +
+                          i0 +
+                          '/g/' +
+                          i1 +
+                          '/altText' +
+                          ' ' +
+                          'must be string'
+                        ).trim();
 
                         if (vErrors === null) {
                           vErrors = [err25];
@@ -1029,7 +1490,15 @@ function validate0(data, instancePath = "") {
                       }
                     }
                   } else {
-                    const err26 = (instancePath + "/items/" + i0 + "/g/" + i1 + ' ' + "must be object").trim();
+                    const err26 = (
+                      instancePath +
+                      '/items/' +
+                      i0 +
+                      '/g/' +
+                      i1 +
+                      ' ' +
+                      'must be object'
+                    ).trim();
 
                     if (vErrors === null) {
                       vErrors = [err26];
@@ -1041,7 +1510,14 @@ function validate0(data, instancePath = "") {
                   }
                 }
               } else {
-                const err27 = (instancePath + "/items/" + i0 + "/g" + ' ' + "must be array").trim();
+                const err27 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/g' +
+                  ' ' +
+                  'must be array'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err27];
@@ -1056,9 +1532,20 @@ function validate0(data, instancePath = "") {
             if (data2.i !== undefined) {
               let data15 = data2.i;
 
-              if (data15 && typeof data15 == "object" && !Array.isArray(data15)) {
+              if (
+                data15 &&
+                typeof data15 == 'object' &&
+                !Array.isArray(data15)
+              ) {
                 if (data15.ratingValue === undefined) {
-                  const err28 = (instancePath + "/items/" + i0 + "/i" + ' ' + ("must have required property '" + "ratingValue" + "'")).trim();
+                  const err28 = (
+                    instancePath +
+                    '/items/' +
+                    i0 +
+                    '/i' +
+                    ' ' +
+                    ("must have required property '" + 'ratingValue' + "'")
+                  ).trim();
 
                   if (vErrors === null) {
                     vErrors = [err28];
@@ -1070,7 +1557,14 @@ function validate0(data, instancePath = "") {
                 }
 
                 if (data15.ratingCount === undefined) {
-                  const err29 = (instancePath + "/items/" + i0 + "/i" + ' ' + ("must have required property '" + "ratingCount" + "'")).trim();
+                  const err29 = (
+                    instancePath +
+                    '/items/' +
+                    i0 +
+                    '/i' +
+                    ' ' +
+                    ("must have required property '" + 'ratingCount' + "'")
+                  ).trim();
 
                   if (vErrors === null) {
                     vErrors = [err29];
@@ -1082,7 +1576,14 @@ function validate0(data, instancePath = "") {
                 }
 
                 if (data15.ratingUrl === undefined) {
-                  const err30 = (instancePath + "/items/" + i0 + "/i" + ' ' + ("must have required property '" + "ratingUrl" + "'")).trim();
+                  const err30 = (
+                    instancePath +
+                    '/items/' +
+                    i0 +
+                    '/i' +
+                    ' ' +
+                    ("must have required property '" + 'ratingUrl' + "'")
+                  ).trim();
 
                   if (vErrors === null) {
                     vErrors = [err30];
@@ -1094,8 +1595,21 @@ function validate0(data, instancePath = "") {
                 }
 
                 for (const key3 in data15) {
-                  if (!(key3 === "ratingValue" || key3 === "ratingCount" || key3 === "ratingUrl")) {
-                    const err31 = (instancePath + "/items/" + i0 + "/i" + ' ' + "must NOT have additional properties").trim();
+                  if (
+                    !(
+                      key3 === 'ratingValue' ||
+                      key3 === 'ratingCount' ||
+                      key3 === 'ratingUrl'
+                    )
+                  ) {
+                    const err31 = (
+                      instancePath +
+                      '/items/' +
+                      i0 +
+                      '/i' +
+                      ' ' +
+                      'must NOT have additional properties'
+                    ).trim();
 
                     if (vErrors === null) {
                       vErrors = [err31];
@@ -1110,9 +1624,16 @@ function validate0(data, instancePath = "") {
                 if (data15.ratingValue !== undefined) {
                   let data16 = data15.ratingValue;
 
-                  if (typeof data16 == "number" && isFinite(data16)) {
+                  if (typeof data16 == 'number' && isFinite(data16)) {
                     if (data16 < 0 || isNaN(data16)) {
-                      const err32 = (instancePath + "/items/" + i0 + "/i/ratingValue" + ' ' + "must be >= 0").trim();
+                      const err32 = (
+                        instancePath +
+                        '/items/' +
+                        i0 +
+                        '/i/ratingValue' +
+                        ' ' +
+                        'must be >= 0'
+                      ).trim();
 
                       if (vErrors === null) {
                         vErrors = [err32];
@@ -1123,7 +1644,14 @@ function validate0(data, instancePath = "") {
                       errors++;
                     }
                   } else {
-                    const err33 = (instancePath + "/items/" + i0 + "/i/ratingValue" + ' ' + "must be number").trim();
+                    const err33 = (
+                      instancePath +
+                      '/items/' +
+                      i0 +
+                      '/i/ratingValue' +
+                      ' ' +
+                      'must be number'
+                    ).trim();
 
                     if (vErrors === null) {
                       vErrors = [err33];
@@ -1138,9 +1666,16 @@ function validate0(data, instancePath = "") {
                 if (data15.ratingCount !== undefined) {
                   let data17 = data15.ratingCount;
 
-                  if (typeof data17 == "number" && isFinite(data17)) {
+                  if (typeof data17 == 'number' && isFinite(data17)) {
                     if (data17 < 0 || isNaN(data17)) {
-                      const err34 = (instancePath + "/items/" + i0 + "/i/ratingCount" + ' ' + "must be >= 0").trim();
+                      const err34 = (
+                        instancePath +
+                        '/items/' +
+                        i0 +
+                        '/i/ratingCount' +
+                        ' ' +
+                        'must be >= 0'
+                      ).trim();
 
                       if (vErrors === null) {
                         vErrors = [err34];
@@ -1151,7 +1686,14 @@ function validate0(data, instancePath = "") {
                       errors++;
                     }
                   } else {
-                    const err35 = (instancePath + "/items/" + i0 + "/i/ratingCount" + ' ' + "must be number").trim();
+                    const err35 = (
+                      instancePath +
+                      '/items/' +
+                      i0 +
+                      '/i/ratingCount' +
+                      ' ' +
+                      'must be number'
+                    ).trim();
 
                     if (vErrors === null) {
                       vErrors = [err35];
@@ -1164,8 +1706,15 @@ function validate0(data, instancePath = "") {
                 }
 
                 if (data15.ratingUrl !== undefined) {
-                  if (typeof data15.ratingUrl !== "string") {
-                    const err36 = (instancePath + "/items/" + i0 + "/i/ratingUrl" + ' ' + "must be string").trim();
+                  if (typeof data15.ratingUrl !== 'string') {
+                    const err36 = (
+                      instancePath +
+                      '/items/' +
+                      i0 +
+                      '/i/ratingUrl' +
+                      ' ' +
+                      'must be string'
+                    ).trim();
 
                     if (vErrors === null) {
                       vErrors = [err36];
@@ -1177,7 +1726,14 @@ function validate0(data, instancePath = "") {
                   }
                 }
               } else {
-                const err37 = (instancePath + "/items/" + i0 + "/i" + ' ' + "must be object").trim();
+                const err37 = (
+                  instancePath +
+                  '/items/' +
+                  i0 +
+                  '/i' +
+                  ' ' +
+                  'must be object'
+                ).trim();
 
                 if (vErrors === null) {
                   vErrors = [err37];
@@ -1189,7 +1745,13 @@ function validate0(data, instancePath = "") {
               }
             }
           } else {
-            const err38 = (instancePath + "/items/" + i0 + ' ' + "must be object").trim();
+            const err38 = (
+              instancePath +
+              '/items/' +
+              i0 +
+              ' ' +
+              'must be object'
+            ).trim();
 
             if (vErrors === null) {
               vErrors = [err38];
@@ -1201,7 +1763,7 @@ function validate0(data, instancePath = "") {
           }
         }
       } else {
-        const err39 = (instancePath + "/items" + ' ' + "must be array").trim();
+        const err39 = (instancePath + '/items' + ' ' + 'must be array').trim();
 
         if (vErrors === null) {
           vErrors = [err39];
@@ -1213,7 +1775,7 @@ function validate0(data, instancePath = "") {
       }
     }
   } else {
-    const err40 = (instancePath + ' ' + "must be object").trim();
+    const err40 = (instancePath + ' ' + 'must be object').trim();
 
     if (vErrors === null) {
       vErrors = [err40];
@@ -1228,8 +1790,9 @@ function validate0(data, instancePath = "") {
   return errors === 0;
 }
 
-const validate = (data, schemaName = "complex") => _validate(data, schemaName) ? [] : _validate.errors;
+const validate = (data, schemaName = 'complex') =>
+  _validate(data, schemaName) ? [] : _validate.errors;
 
-console.
-/*OK*/
-log(validate({}));
+console
+  /*OK*/
+  .log(validate({}));

@@ -1,2 +1,2 @@
 // No arguments, should be indirected.
-dev().createError(["0"]);
+dev().createError(['0']);

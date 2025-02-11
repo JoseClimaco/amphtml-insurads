@@ -260,7 +260,7 @@ class AccountCreationRequest {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.complete_, // field 1 - complete
+      this.complete_, // field 1 - complete
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -313,7 +313,7 @@ class ActionRequest {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.action_, // field 1 - action
+      this.action_, // field 1 - action
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -383,8 +383,8 @@ class AlreadySubscribedResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.subscriberOrMember_, // field 1 - subscriber_or_member
-        this.linkRequested_, // field 2 - link_requested
+      this.subscriberOrMember_, // field 1 - subscriber_or_member
+      this.linkRequested_, // field 2 - link_requested
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -661,20 +661,20 @@ class AnalyticsContext {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.embedderOrigin_, // field 1 - embedder_origin
-        this.transactionId_, // field 2 - transaction_id
-        this.referringOrigin_, // field 3 - referring_origin
-        this.utmSource_, // field 4 - utm_source
-        this.utmCampaign_, // field 5 - utm_campaign
-        this.utmMedium_, // field 6 - utm_medium
-        this.sku_, // field 7 - sku
-        this.readyToPay_, // field 8 - ready_to_pay
-        this.label_, // field 9 - label
-        this.clientVersion_, // field 10 - client_version
-        this.url_, // field 11 - url
-        this.clientTimestamp_ ? this.clientTimestamp_.toArray(includeLabel) : [], // field 12 - client_timestamp
-        this.readerSurfaceType_, // field 13 - reader_surface_type
-        this.integrationVersion_, // field 14 - integration_version
+      this.embedderOrigin_, // field 1 - embedder_origin
+      this.transactionId_, // field 2 - transaction_id
+      this.referringOrigin_, // field 3 - referring_origin
+      this.utmSource_, // field 4 - utm_source
+      this.utmCampaign_, // field 5 - utm_campaign
+      this.utmMedium_, // field 6 - utm_medium
+      this.sku_, // field 7 - sku
+      this.readyToPay_, // field 8 - ready_to_pay
+      this.label_, // field 9 - label
+      this.clientVersion_, // field 10 - client_version
+      this.url_, // field 11 - url
+      this.clientTimestamp_ ? this.clientTimestamp_.toArray(includeLabel) : [], // field 12 - client_timestamp
+      this.readerSurfaceType_, // field 13 - reader_surface_type
+      this.integrationVersion_, // field 14 - integration_version
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -744,8 +744,8 @@ class AnalyticsEventMeta {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.eventOriginator_, // field 1 - event_originator
-        this.isFromUserAction_, // field 2 - is_from_user_action
+      this.eventOriginator_, // field 1 - event_originator
+      this.isFromUserAction_, // field 2 - is_from_user_action
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -858,10 +858,10 @@ class AnalyticsRequest {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.context_ ? this.context_.toArray(includeLabel) : [], // field 1 - context
-        this.event_, // field 2 - event
-        this.meta_ ? this.meta_.toArray(includeLabel) : [], // field 3 - meta
-        this.params_ ? this.params_.toArray(includeLabel) : [], // field 4 - params
+      this.context_ ? this.context_.toArray(includeLabel) : [], // field 1 - context
+      this.event_, // field 2 - event
+      this.meta_ ? this.meta_.toArray(includeLabel) : [], // field 3 - meta
+      this.params_ ? this.params_.toArray(includeLabel) : [], // field 4 - params
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -914,7 +914,7 @@ class AudienceActivityClientLogsRequest {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.event_, // field 1 - event
+      this.event_, // field 1 - event
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1018,10 +1018,10 @@ class CompleteAudienceActionResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.swgUserToken_, // field 1 - swg_user_token
-        this.actionCompleted_, // field 2 - action_completed
-        this.userEmail_, // field 3 - user_email
-        this.alreadyCompleted_, // field 4 - already_completed
+      this.swgUserToken_, // field 1 - swg_user_token
+      this.actionCompleted_, // field 2 - action_completed
+      this.userEmail_, // field 3 - user_email
+      this.alreadyCompleted_, // field 4 - already_completed
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1091,8 +1091,8 @@ class EntitlementJwt {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.jwt_, // field 1 - jwt
-        this.source_, // field 2 - source
+      this.jwt_, // field 1 - jwt
+      this.source_, // field 2 - source
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1256,13 +1256,15 @@ class EntitlementsRequest {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.usedEntitlement_ ? this.usedEntitlement_.toArray(includeLabel) : [], // field 1 - used_entitlement
-        this.clientEventTime_ ? this.clientEventTime_.toArray(includeLabel) : [], // field 2 - client_event_time
-        this.entitlementSource_, // field 3 - entitlement_source
-        this.entitlementResult_, // field 4 - entitlement_result
-        this.token_, // field 5 - token
-        this.isUserRegistered_, // field 6 - is_user_registered
-        this.subscriptionTimestamp_ ? this.subscriptionTimestamp_.toArray(includeLabel) : [], // field 7 - subscription_timestamp
+      this.usedEntitlement_ ? this.usedEntitlement_.toArray(includeLabel) : [], // field 1 - used_entitlement
+      this.clientEventTime_ ? this.clientEventTime_.toArray(includeLabel) : [], // field 2 - client_event_time
+      this.entitlementSource_, // field 3 - entitlement_source
+      this.entitlementResult_, // field 4 - entitlement_result
+      this.token_, // field 5 - token
+      this.isUserRegistered_, // field 6 - is_user_registered
+      this.subscriptionTimestamp_
+        ? this.subscriptionTimestamp_.toArray(includeLabel)
+        : [], // field 7 - subscription_timestamp
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1332,8 +1334,8 @@ class EntitlementsResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.jwt_, // field 1 - jwt
-        this.swgUserToken_, // field 2 - swg_user_token
+      this.jwt_, // field 1 - jwt
+      this.swgUserToken_, // field 2 - swg_user_token
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1508,14 +1510,16 @@ class EventParams {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.smartboxMessage_, // field 1 - smartbox_message
-        this.gpayTransactionId_, // field 2 - gpay_transaction_id
-        this.hadLogged_, // field 3 - had_logged
-        this.sku_, // field 4 - sku
-        this.oldTransactionId_, // field 5 - old_transaction_id
-        this.isUserRegistered_, // field 6 - is_user_registered
-        this.subscriptionFlow_, // field 7 - subscription_flow
-        this.subscriptionTimestamp_ ? this.subscriptionTimestamp_.toArray(includeLabel) : [], // field 8 - subscription_timestamp
+      this.smartboxMessage_, // field 1 - smartbox_message
+      this.gpayTransactionId_, // field 2 - gpay_transaction_id
+      this.hadLogged_, // field 3 - had_logged
+      this.sku_, // field 4 - sku
+      this.oldTransactionId_, // field 5 - old_transaction_id
+      this.isUserRegistered_, // field 6 - is_user_registered
+      this.subscriptionFlow_, // field 7 - subscription_flow
+      this.subscriptionTimestamp_
+        ? this.subscriptionTimestamp_.toArray(includeLabel)
+        : [], // field 8 - subscription_timestamp
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1585,8 +1589,8 @@ class FinishedLoggingResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.complete_, // field 1 - complete
-        this.error_, // field 2 - error
+      this.complete_, // field 1 - complete
+      this.error_, // field 2 - error
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1656,8 +1660,8 @@ class LinkSaveTokenRequest {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.authCode_, // field 1 - auth_code
-        this.token_, // field 2 - token
+      this.authCode_, // field 1 - auth_code
+      this.token_, // field 2 - token
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1710,7 +1714,7 @@ class LinkingInfoResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.requested_, // field 1 - requested
+      this.requested_, // field 1 - requested
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1763,7 +1767,7 @@ class OpenDialogRequest {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.urlPath_, // field 1 - url_path
+      this.urlPath_, // field 1 - url_path
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1935,14 +1939,14 @@ class SkuSelectedResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.sku_, // field 1 - sku
-        this.oldSku_, // field 2 - old_sku
-        this.oneTime_, // field 3 - one_time
-        this.playOffer_, // field 4 - play_offer
-        this.oldPlayOffer_, // field 5 - old_play_offer
-        this.customMessage_, // field 6 - custom_message
-        this.anonymous_, // field 7 - anonymous
-        this.sharingPolicyEnabled_, // field 8 - sharing_policy_enabled
+      this.sku_, // field 1 - sku
+      this.oldSku_, // field 2 - old_sku
+      this.oneTime_, // field 3 - one_time
+      this.playOffer_, // field 4 - play_offer
+      this.oldPlayOffer_, // field 5 - old_play_offer
+      this.customMessage_, // field 6 - custom_message
+      this.anonymous_, // field 7 - anonymous
+      this.sharingPolicyEnabled_, // field 8 - sharing_policy_enabled
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -1995,7 +1999,7 @@ class SmartBoxMessage {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.isClicked_, // field 1 - is_clicked
+      this.isClicked_, // field 1 - is_clicked
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2048,7 +2052,7 @@ class SubscribeResponse$1 {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.subscribe_, // field 1 - subscribe
+      this.subscribe_, // field 1 - subscribe
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2118,8 +2122,8 @@ class SubscriptionLinkingCompleteResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.publisherProvidedId_, // field 1 - publisher_provided_id
-        this.success_, // field 2 - success
+      this.publisherProvidedId_, // field 1 - publisher_provided_id
+      this.success_, // field 2 - success
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2172,7 +2176,7 @@ class SubscriptionLinkingResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.publisherProvidedId_, // field 1 - publisher_provided_id
+      this.publisherProvidedId_, // field 1 - publisher_provided_id
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2259,9 +2263,9 @@ class SurveyAnswer {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.answerId_, // field 1 - answer_id
-        this.answerText_, // field 2 - answer_text
-        this.answerCategory_, // field 3 - answer_category
+      this.answerId_, // field 1 - answer_id
+      this.answerText_, // field 2 - answer_text
+      this.answerCategory_, // field 3 - answer_category
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2290,7 +2294,9 @@ class SurveyDataTransferRequest {
     const base = includesLabel ? 1 : 0;
 
     /** @private {!Array<!SurveyQuestion>} */
-    this.surveyQuestions_ = (data[base] || []).map(item => new SurveyQuestion(item, includesLabel));
+    this.surveyQuestions_ = (data[base] || []).map(
+      (item) => new SurveyQuestion(item, includesLabel)
+    );
   }
 
   /**
@@ -2314,7 +2320,9 @@ class SurveyDataTransferRequest {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.surveyQuestions_ ? this.surveyQuestions_.map(item => item.toArray(includeLabel)) : [], // field 1 - survey_questions
+      this.surveyQuestions_
+        ? this.surveyQuestions_.map((item) => item.toArray(includeLabel))
+        : [], // field 1 - survey_questions
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2367,7 +2375,7 @@ class SurveyDataTransferResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.success_, // field 1 - success
+      this.success_, // field 1 - success
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2405,7 +2413,9 @@ class SurveyQuestion {
     this.questionCategory_ = data[2 + base] == null ? null : data[2 + base];
 
     /** @private {!Array<!SurveyAnswer>} */
-    this.surveyAnswers_ = (data[3 + base] || []).map(item => new SurveyAnswer(item, includesLabel));
+    this.surveyAnswers_ = (data[3 + base] || []).map(
+      (item) => new SurveyAnswer(item, includesLabel)
+    );
   }
 
   /**
@@ -2471,10 +2481,12 @@ class SurveyQuestion {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.questionId_, // field 1 - question_id
-        this.questionText_, // field 2 - question_text
-        this.questionCategory_, // field 3 - question_category
-        this.surveyAnswers_ ? this.surveyAnswers_.map(item => item.toArray(includeLabel)) : [], // field 4 - survey_answers
+      this.questionId_, // field 1 - question_id
+      this.questionText_, // field 2 - question_text
+      this.questionCategory_, // field 3 - question_category
+      this.surveyAnswers_
+        ? this.surveyAnswers_.map((item) => item.toArray(includeLabel))
+        : [], // field 4 - survey_answers
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2544,8 +2556,8 @@ class Timestamp {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.seconds_, // field 1 - seconds
-        this.nanos_, // field 2 - nanos
+      this.seconds_, // field 1 - seconds
+      this.nanos_, // field 2 - nanos
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2598,7 +2610,7 @@ class ToastCloseRequest {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.close_, // field 1 - close
+      this.close_, // field 1 - close
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -2651,7 +2663,7 @@ class ViewSubscriptionsResponse {
    */
   toArray(includeLabel = true) {
     const arr = [
-        this.native_, // field 1 - native
+      this.native_, // field 1 - native
     ];
     if (includeLabel) {
       arr.unshift(this.label());
@@ -3103,8 +3115,8 @@ function getRandomInts(numInts, maxVal) {
     maxVal < 256
       ? new Uint8Array(numInts)
       : maxVal < 32768
-      ? new Uint16Array(numInts)
-      : new Uint32Array(numInts);
+        ? new Uint16Array(numInts)
+        : new Uint32Array(numInts);
 
   const isIE = !!self['msCrypto'];
   const localCrypto = isIE ? self['msCrypto'] : self.crypto;
@@ -6970,7 +6982,12 @@ class ActivityPorts$1 {
    * @return {!Promise<!ActivityIframePort>}
    */
   openActivityIframePort_(iframe, url, args) {
-    const activityPort = new ActivityIframePort$1(iframe, url, this.deps_, args);
+    const activityPort = new ActivityIframePort$1(
+      iframe,
+      url,
+      this.deps_,
+      args
+    );
     return activityPort.connect().then(() => activityPort);
   }
 
@@ -7601,8 +7618,8 @@ function parseSelection(s) {
   return s == Selection.EXPERIMENT
     ? Selection.EXPERIMENT
     : s == Selection.CONTROL
-    ? Selection.CONTROL
-    : null;
+      ? Selection.CONTROL
+      : null;
 }
 
 /**
@@ -10203,7 +10220,8 @@ class DeferredAccountFlow {
   }
 }
 
-const CSS$1 = "body{margin:0;padding:0}swg-container,swg-loading,swg-loading-animate,swg-loading-image{display:block}swg-loading-container{-ms-flex-align:center!important;-ms-flex-pack:center!important;align-items:center!important;bottom:0!important;display:-ms-flexbox!important;display:flex!important;height:100%!important;justify-content:center!important;margin-top:5px!important;min-height:148px!important;width:100%!important;z-index:2147483647!important}@media (min-height:630px),(min-width:630px){swg-loading-container{background-color:#fff!important;border-top-left-radius:8px!important;border-top-right-radius:8px!important;box-shadow:0 1px 1px rgba(60,64,67,.3),0 1px 4px 1px rgba(60,64,67,.15)!important;margin-left:auto!important;margin-right:auto!important;width:560px!important}swg-loading-container.centered-on-desktop{border-radius:8px!important;height:120px!important;min-height:120px!important}}swg-loading{animation:mspin-rotate 1568.63ms linear infinite;height:36px;overflow:hidden;width:36px;z-index:2147483647!important}swg-loading-animate{animation:mspin-revrot 5332ms steps(4) infinite}swg-loading-image{animation:swg-loading-film 5332ms steps(324) infinite;background-image:url(https://news.google.com/swg/js/v1/loader.svg);background-size:100%;height:36px;width:11664px}@keyframes swg-loading-film{0%{transform:translateX(0)}to{transform:translateX(-11664px)}}@keyframes mspin-rotate{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@keyframes mspin-revrot{0%{transform:rotate(0deg)}to{transform:rotate(-1turn)}}\n/*# sourceURL=/./src/ui/ui.css*/\n";
+const CSS$1 =
+  'body{margin:0;padding:0}swg-container,swg-loading,swg-loading-animate,swg-loading-image{display:block}swg-loading-container{-ms-flex-align:center!important;-ms-flex-pack:center!important;align-items:center!important;bottom:0!important;display:-ms-flexbox!important;display:flex!important;height:100%!important;justify-content:center!important;margin-top:5px!important;min-height:148px!important;width:100%!important;z-index:2147483647!important}@media (min-height:630px),(min-width:630px){swg-loading-container{background-color:#fff!important;border-top-left-radius:8px!important;border-top-right-radius:8px!important;box-shadow:0 1px 1px rgba(60,64,67,.3),0 1px 4px 1px rgba(60,64,67,.15)!important;margin-left:auto!important;margin-right:auto!important;width:560px!important}swg-loading-container.centered-on-desktop{border-radius:8px!important;height:120px!important;min-height:120px!important}}swg-loading{animation:mspin-rotate 1568.63ms linear infinite;height:36px;overflow:hidden;width:36px;z-index:2147483647!important}swg-loading-animate{animation:mspin-revrot 5332ms steps(4) infinite}swg-loading-image{animation:swg-loading-film 5332ms steps(324) infinite;background-image:url(https://news.google.com/swg/js/v1/loader.svg);background-size:100%;height:36px;width:11664px}@keyframes swg-loading-film{0%{transform:translateX(0)}to{transform:translateX(-11664px)}}@keyframes mspin-rotate{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@keyframes mspin-revrot{0%{transform:rotate(0deg)}to{transform:rotate(-1turn)}}\n/*# sourceURL=/./src/ui/ui.css*/\n';
 
 /**
  * Copyright 2018 The Subscribe with Google Authors. All Rights Reserved.
@@ -10979,7 +10997,12 @@ class Dialog {
 
       animating = this.animate_(() => {
         this.graypane_.hide(/* animate */ true);
-        return transition$1(this.getElement(), transitionStyles, 300, 'ease-out');
+        return transition$1(
+          this.getElement(),
+          transitionStyles,
+          300,
+          'ease-out'
+        );
       });
     } else {
       animating = Promise.resolve();
@@ -11651,8 +11674,8 @@ class MeterToastApi {
         this.meterClientUserAttribute_ === ANONYMOUS_USER_ATTRIBUTE
           ? MeterType.UNKNOWN
           : KNOWN_USER_ATTRIBUTES.includes(this.meterClientUserAttribute_)
-          ? MeterType.KNOWN
-          : MeterType.SUPPRESSED;
+            ? MeterType.KNOWN
+            : MeterType.SUPPRESSED;
     }
 
     // Exit flow and do not show prompt for Suppressed MeterType
@@ -11991,9 +12014,12 @@ class Toast {
         });
 
         // Close the Toast after the specified duration.
-        this.doc_.getWin().setTimeout(() => {
-          this.close();
-        }, (toastDurationSeconds + 1) * 1000);
+        this.doc_.getWin().setTimeout(
+          () => {
+            this.close();
+          },
+          (toastDurationSeconds + 1) * 1000
+        );
       });
   }
 
@@ -14891,7 +14917,7 @@ Constants.ButtonType = {
  * @enum {string}
  */
 Constants.ButtonColor = {
-  DEFAULT: 'default',  // Currently defaults to black.
+  DEFAULT: 'default', // Currently defaults to black.
   BLACK: 'black',
   WHITE: 'white',
 };
@@ -14910,16 +14936,14 @@ Constants.STORAGE_KEY_PREFIX = 'google.payments.api.storage';
 
 /** @const {string} */
 Constants.IS_READY_TO_PAY_RESULT_KEY =
-    Constants.STORAGE_KEY_PREFIX + '.isreadytopay.result';
+  Constants.STORAGE_KEY_PREFIX + '.isreadytopay.result';
 
 /** @const {string} */
 Constants.UPI_CAN_MAKE_PAYMENT_CACHE_KEY =
-    Constants.STORAGE_KEY_PREFIX + '.upi.canMakePaymentCache';
-
+  Constants.STORAGE_KEY_PREFIX + '.upi.canMakePaymentCache';
 
 Constants.CLASS_PREFIX = 'google-payments-';
-Constants.IFRAME_ACTIVE_CONTAINER_CLASS =
-    `${Constants.CLASS_PREFIX}activeContainer`;
+Constants.IFRAME_ACTIVE_CONTAINER_CLASS = `${Constants.CLASS_PREFIX}activeContainer`;
 Constants.IFRAME_CONTAINER_CLASS = `${Constants.CLASS_PREFIX}dialogContainer`;
 Constants.IFRAME_STYLE_CENTER_CLASS = `${Constants.CLASS_PREFIX}dialogCenter`;
 Constants.IFRAME_STYLE_CLASS = `${Constants.CLASS_PREFIX}dialog`;
@@ -14999,7 +15023,7 @@ Constants.IFRAME_STYLE_CENTER = `
 `;
 
 Constants.GPAY_BUTTON_WITH_CARD_INFO_IMAGE =
-    'background-image: url(https://pay.google.com/gp/p/generate_gpay_btn_img);';
+  'background-image: url(https://pay.google.com/gp/p/generate_gpay_btn_img);';
 
 Constants.BUTTON_LOCALE_TO_MIN_WIDTH = {
   'en': 152,
@@ -15103,47 +15127,47 @@ Constants.GPAY_BUTTON_WITH_OFFER_ICON_ADDITIONAL_STYLE = 'position: relative;';
 Constants.GPAY_OFFER_ICON_CLASS = 'gpay-offer-icon';
 
 Constants.GPAY_OFFER_ICON_SVG =
-    "<svg width=\"20px\" height=\"20px\" viewBox=\"0 0 20 20\" " +
-    "version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=" +
-    "\"http://www.w3.org/1999/xlink\" class=\"gpay-offer-icon\"><defs><path d=\"M19.41,9.58 L10.41,0.58 " +
-    "C10.05,0.22 9.55,0 9,0 L2,0 C0.9,0 0,0.9 0,2 L0,9 C0,9.55 0.22,10.05 " +
-    "0.59,10.42 L9.59,19.42 C9.95,19.78 10.45,20 11,20 C11.55,20 12.05,19.78 " +
-    "12.41,19.41 L19.41,12.41 C19.78,12.05 20,11.55 20,11 C20,10.45 19.77," +
-    "9.94 19.41,9.58 Z\" id=\"path-1\"></path></defs><g id=\"buttons_10.05\"" +
-    " stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">" +
-    "<g id=\"Artboard\" transform=\"translate(-40.000000, -43.000000)\">" +
-    "<g id=\"Group-3\" transform=\"translate(40.000000, 43.000000)\">" +
-    "<g id=\"Group-2-Copy-2\"><g id=\"Group-Copy\"><g id=\"ic_loyalty_24px\">" +
-    "<mask id=\"mask-2\" fill=\"white\"><use xlink:href=\"#path-1\"></use>" +
-    "</mask><use id=\"gpay-Shape\" fill=\"#FF6100\" fill-rule=\"nonzero\" " +
-    "xlink:href=\"#path-1\"></use><path d=\"M3.5,5 C2.67,5 2,4.33 2,3.5 C2," +
-    "2.67 2.67,2 3.5,2 C4.33,2 5,2.67 5,3.5 C5,4.33 4.33,5 3.5,5 Z\" " +
-    "id=\"Path\" fill=\"#FFFFFF\" fill-rule=\"nonzero\" mask=\"url(#mask-2)\">" +
-    "</path></g></g></g><g id=\"Group-13-Copy-7\" transform=\"translate" +
-    "(6.000000, 6.000000)\" fill=\"#FFFFFF\" fill-rule=\"nonzero\">" +
-    "<g id=\"Group-13-Copy-2\"><path d=\"M2.15217391,4.55172414 C0.963561082," +
-    "4.55172414 1.99840144e-14,3.53278598 1.99840144e-14,2.27586207 " +
-    "C1.99840144e-14,1.01893816 0.963561082,6.30606678e-14 2.15217391,6." +
-    "30606678e-14 C3.34078674,6.30606678e-14 4.30434783,1.01893816 4.30434783," +
-    "2.27586207 C4.30434783,3.53278598 3.34078674,4.55172414 2.15217391," +
-    "4.55172414 Z M2.15217391,3.31034483 C2.69245247,3.31034483 3.13043478,2." +
-    "84719112 3.13043478,2.27586207 C3.13043478,1.70453302 2.69245247," +
-    "1.24137931 2.15217391,1.24137931 C1.61189535,1.24137931 1.17391304,1" +
-    ".70453302 1.17391304,2.27586207 C1.17391304,2.84719112 1.61189535,3." +
-    "31034483 2.15217391,3.31034483 Z\" id=\"Combined-Shape\"></path>" +
-    "<path d=\"M6.84782609,9 C5.65921326,9 4.69565217,7.98106184 4.69565217," +
-    "6.72413793 C4.69565217,5.46721402 5.65921326,4.44827586 6.84782609," +
-    "4.44827586 C8.03643892,4.44827586 9,5.46721402 9,6.72413793 C9,7.98106184" +
-    " 8.03643892,9 6.84782609,9 Z M6.84782609,7.75862069 C7.38810465," +
-    "7.75862069 7.82608696,7.29546698 7.82608696,6.72413793 C7.82608696" +
-    ",6.15280888 7.38810465,5.68965517 6.84782609,5.68965517 C6.30754753," +
-    "5.68965517 5.86956522,6.15280888 5.86956522,6.72413793 C5.86956522," +
-    "7.29546698 6.30754753,7.75862069 6.84782609,7.75862069 Z\" " +
-    "id=\"Combined-Shape\"></path><polygon id=\"Rectangle\" " +
-    "transform=\"translate(4.497720, 4.541938) rotate(34.000000) " +
-    "translate(-4.497720, -4.541938) \" points=\"3.77901778 -0.202295978 " +
-    "4.9740273 -0.171019161 5.21642263 9.28617278 4.02141311 9.25489596\">" +
-    "</polygon></g></g></g></g></g></svg>";
+  '<svg width="20px" height="20px" viewBox="0 0 20 20" ' +
+  'version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink=' +
+  '"http://www.w3.org/1999/xlink" class="gpay-offer-icon"><defs><path d="M19.41,9.58 L10.41,0.58 ' +
+  'C10.05,0.22 9.55,0 9,0 L2,0 C0.9,0 0,0.9 0,2 L0,9 C0,9.55 0.22,10.05 ' +
+  '0.59,10.42 L9.59,19.42 C9.95,19.78 10.45,20 11,20 C11.55,20 12.05,19.78 ' +
+  '12.41,19.41 L19.41,12.41 C19.78,12.05 20,11.55 20,11 C20,10.45 19.77,' +
+  '9.94 19.41,9.58 Z" id="path-1"></path></defs><g id="buttons_10.05"' +
+  ' stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">' +
+  '<g id="Artboard" transform="translate(-40.000000, -43.000000)">' +
+  '<g id="Group-3" transform="translate(40.000000, 43.000000)">' +
+  '<g id="Group-2-Copy-2"><g id="Group-Copy"><g id="ic_loyalty_24px">' +
+  '<mask id="mask-2" fill="white"><use xlink:href="#path-1"></use>' +
+  '</mask><use id="gpay-Shape" fill="#FF6100" fill-rule="nonzero" ' +
+  'xlink:href="#path-1"></use><path d="M3.5,5 C2.67,5 2,4.33 2,3.5 C2,' +
+  '2.67 2.67,2 3.5,2 C4.33,2 5,2.67 5,3.5 C5,4.33 4.33,5 3.5,5 Z" ' +
+  'id="Path" fill="#FFFFFF" fill-rule="nonzero" mask="url(#mask-2)">' +
+  '</path></g></g></g><g id="Group-13-Copy-7" transform="translate' +
+  '(6.000000, 6.000000)" fill="#FFFFFF" fill-rule="nonzero">' +
+  '<g id="Group-13-Copy-2"><path d="M2.15217391,4.55172414 C0.963561082,' +
+  '4.55172414 1.99840144e-14,3.53278598 1.99840144e-14,2.27586207 ' +
+  'C1.99840144e-14,1.01893816 0.963561082,6.30606678e-14 2.15217391,6.' +
+  '30606678e-14 C3.34078674,6.30606678e-14 4.30434783,1.01893816 4.30434783,' +
+  '2.27586207 C4.30434783,3.53278598 3.34078674,4.55172414 2.15217391,' +
+  '4.55172414 Z M2.15217391,3.31034483 C2.69245247,3.31034483 3.13043478,2.' +
+  '84719112 3.13043478,2.27586207 C3.13043478,1.70453302 2.69245247,' +
+  '1.24137931 2.15217391,1.24137931 C1.61189535,1.24137931 1.17391304,1' +
+  '.70453302 1.17391304,2.27586207 C1.17391304,2.84719112 1.61189535,3.' +
+  '31034483 2.15217391,3.31034483 Z" id="Combined-Shape"></path>' +
+  '<path d="M6.84782609,9 C5.65921326,9 4.69565217,7.98106184 4.69565217,' +
+  '6.72413793 C4.69565217,5.46721402 5.65921326,4.44827586 6.84782609,' +
+  '4.44827586 C8.03643892,4.44827586 9,5.46721402 9,6.72413793 C9,7.98106184' +
+  ' 8.03643892,9 6.84782609,9 Z M6.84782609,7.75862069 C7.38810465,' +
+  '7.75862069 7.82608696,7.29546698 7.82608696,6.72413793 C7.82608696' +
+  ',6.15280888 7.38810465,5.68965517 6.84782609,5.68965517 C6.30754753,' +
+  '5.68965517 5.86956522,6.15280888 5.86956522,6.72413793 C5.86956522,' +
+  '7.29546698 6.30754753,7.75862069 6.84782609,7.75862069 Z" ' +
+  'id="Combined-Shape"></path><polygon id="Rectangle" ' +
+  'transform="translate(4.497720, 4.541938) rotate(34.000000) ' +
+  'translate(-4.497720, -4.541938) " points="3.77901778 -0.202295978 ' +
+  '4.9740273 -0.171019161 5.21642263 9.28617278 4.02141311 9.25489596">' +
+  '</polygon></g></g></g></g></g></svg>';
 
 Constants.GPAY_OFFER_ICON_STYLE = `
 .${Constants.GPAY_OFFER_ICON_CLASS} {
@@ -15218,7 +15242,6 @@ Constants.GPAY_BUTTON_CARD_INFO_BUTTON_STYLE = `
     background-color: #3c4043;
   }
   `;
-
 
 /**
  * Trusted domain for secure context validation
@@ -15382,15 +15405,16 @@ class PayFrameHelper {
       return;
     }
     const initOptions =
-        /** @type {!PaymentOptions} */ (window['gpayInitParams']) || {};
+      /** @type {!PaymentOptions} */ (window['gpayInitParams']) || {};
     environment = initOptions.environment || Constants.Environment.PRODUCTION;
     iframe = document.createElement('iframe');
     // Pass in origin because document.referrer inside iframe is empty in
     // certain cases
     // Can be replaced by iframe.src=... in non Google context.
     iframe.src = PayFrameHelper.getIframeUrl_(
-            window.location.origin,
-            initOptions.merchantInfo && initOptions.merchantInfo.merchantId);
+      window.location.origin,
+      initOptions.merchantInfo && initOptions.merchantInfo.merchantId
+    );
     PayFrameHelper.postMessage({
       'eventType': PostMessageEventType.LOG_PAY_FRAME_REQUESTED,
       'clientLatencyStartMs': Date.now(),
@@ -15399,7 +15423,7 @@ class PayFrameHelper {
     iframe.width = '0';
     iframe.style.display = 'none';
     iframe.style.visibility = 'hidden';
-    iframe.onload = function() {
+    iframe.onload = function () {
       PayFrameHelper.postMessage({
         'eventType': PostMessageEventType.LOG_PAY_FRAME_LOADED_WITH_ALL_JS,
         'clientLatencyStartMs': Date.now(),
@@ -15412,8 +15436,9 @@ class PayFrameHelper {
     if (document.body) {
       PayFrameHelper.initialize_();
     } else {
-      document.addEventListener(
-          'DOMContentLoaded', () => PayFrameHelper.initialize_());
+      document.addEventListener('DOMContentLoaded', () =>
+        PayFrameHelper.initialize_()
+      );
     }
   }
 
@@ -15436,7 +15461,11 @@ class PayFrameHelper {
    * @param {function(!Event)} responseHandler
    */
   static sendAndWaitForResponse(
-      data, eventType, responseType, responseHandler) {
+    data,
+    eventType,
+    responseType,
+    responseHandler
+  ) {
     function callback(event) {
       if (event.data[responseType]) {
         responseHandler(event);
@@ -15483,14 +15512,17 @@ class PayFrameHelper {
       return;
     }
     const postMessageData = Object.assign(
-        {
-          'buyFlowActivityMode': buyFlowActivityMode,
-          'googleTransactionId': googleTransactionId,
-          'originTimeMs': originTimeMs,
-        },
-        data);
+      {
+        'buyFlowActivityMode': buyFlowActivityMode,
+        'googleTransactionId': googleTransactionId,
+        'originTimeMs': originTimeMs,
+      },
+      data
+    );
     postMessageService.postMessage(
-        postMessageData, PayFrameHelper.getIframeOrigin_());
+      postMessageData,
+      PayFrameHelper.getIframeOrigin_()
+    );
   }
 
   /**
@@ -15553,7 +15585,7 @@ class PayFrameHelper {
    */
   static iframeLoaded() {
     iframeLoaded = true;
-    buffer.forEach(function(data) {
+    buffer.forEach(function (data) {
       PayFrameHelper.postMessage(data);
     });
     buffer.length = 0;
@@ -15604,9 +15636,13 @@ class PayFrameHelper {
    */
   static getIframeUrl_(origin, merchantId) {
     // TrustedResourceUrl header needs to start with https or '//'.
-    const iframeUrl = `https://pay${environment == Constants.Environment.PREPROD ?
-             '-preprod.sandbox' :
-             environment == Constants.Environment.SANDBOX ? '.sandbox' : ''}.google.com/gp/p/ui/payframe?origin=${origin}&mid=%{merchantId}`;
+    const iframeUrl = `https://pay${
+      environment == Constants.Environment.PREPROD
+        ? '-preprod.sandbox'
+        : environment == Constants.Environment.SANDBOX
+          ? '.sandbox'
+          : ''
+    }.google.com/gp/p/ui/payframe?origin=${origin}&mid=%{merchantId}`;
     return iframeUrl;
   }
 }
@@ -15654,34 +15690,42 @@ class PaymentsRequestDelegate {
     /** @type{!PaymentRequest} */
     const paymentRequest = this.createPaymentRequest_(isReadyToPayRequest);
     return new Promise((resolve, reject) => {
-      paymentRequest.canMakePayment()
-          .then(result => {
-            window.sessionStorage.setItem(
-                Constants.IS_READY_TO_PAY_RESULT_KEY, result.toString());
-            const response = {'result': result};
-            if (isReadyToPayRequest.apiVersion >= 2 &&
-                isReadyToPayRequest.existingPaymentMethodRequired) {
-              // For apiVersion 2, we always use native to only check for
-              // tokenized cards.
-              // For tokenized cards native always does a presence check so
-              // we can say that if canMakePayment is true for native for
-              // tokenizedCards then the user has a payment method which is
-              // present.
-              response['paymentMethodPresent'] = result;
-            }
-            resolve(response);
-          })
-          .catch(function(err) {
-            if (window.sessionStorage.getItem(
-                    Constants.IS_READY_TO_PAY_RESULT_KEY)) {
-              resolve({
-                'result': window.sessionStorage.getItem(
-                              Constants.IS_READY_TO_PAY_RESULT_KEY) == 'true'
-              });
-            } else {
-              resolve({'result': false});
-            }
-          });
+      paymentRequest
+        .canMakePayment()
+        .then((result) => {
+          window.sessionStorage.setItem(
+            Constants.IS_READY_TO_PAY_RESULT_KEY,
+            result.toString()
+          );
+          const response = {'result': result};
+          if (
+            isReadyToPayRequest.apiVersion >= 2 &&
+            isReadyToPayRequest.existingPaymentMethodRequired
+          ) {
+            // For apiVersion 2, we always use native to only check for
+            // tokenized cards.
+            // For tokenized cards native always does a presence check so
+            // we can say that if canMakePayment is true for native for
+            // tokenizedCards then the user has a payment method which is
+            // present.
+            response['paymentMethodPresent'] = result;
+          }
+          resolve(response);
+        })
+        .catch(function (err) {
+          if (
+            window.sessionStorage.getItem(Constants.IS_READY_TO_PAY_RESULT_KEY)
+          ) {
+            resolve({
+              'result':
+                window.sessionStorage.getItem(
+                  Constants.IS_READY_TO_PAY_RESULT_KEY
+                ) == 'true',
+            });
+          } else {
+            resolve({'result': false});
+          }
+        });
     });
   }
 
@@ -15690,9 +15734,11 @@ class PaymentsRequestDelegate {
     // Creating PaymentRequest instance will call
     // Gcore isReadyToPay internally which will prefetch tempaltes.
     this.createPaymentRequest_(
-        paymentDataRequest, this.environment_,
-        paymentDataRequest.transactionInfo.currencyCode,
-        paymentDataRequest.transactionInfo.totalPrice);
+      paymentDataRequest,
+      this.environment_,
+      paymentDataRequest.transactionInfo.currencyCode,
+      paymentDataRequest.transactionInfo.totalPrice
+    );
   }
 
   /** @override */
@@ -15731,10 +15777,12 @@ class PaymentsRequestDelegate {
       data['environment'] = environment;
     }
 
-    const supportedInstruments = [{
-      'supportedMethods': ['https://google.com/pay'],
-      'data': data,
-    }];
+    const supportedInstruments = [
+      {
+        'supportedMethods': ['https://google.com/pay'],
+        'data': data,
+      },
+    ];
 
     const details = {
       'total': {
@@ -15746,8 +15794,8 @@ class PaymentsRequestDelegate {
           // this requirement.
           'currency': currencyCode || 'USD',
           'value': totalPrice || '0',
-        }
-      }
+        },
+      },
     };
 
     return new PaymentRequest(supportedInstruments, details);
@@ -15759,31 +15807,42 @@ class PaymentsRequestDelegate {
    * @private
    */
   loadPaymentDataThroughPaymentRequest_(paymentDataRequest) {
-    const currencyCode = (paymentDataRequest.transactionInfo &&
-                          paymentDataRequest.transactionInfo.currencyCode) ||
-        undefined;
-    const totalPrice = (paymentDataRequest.transactionInfo &&
-                        paymentDataRequest.transactionInfo.totalPrice) ||
-        undefined;
+    const currencyCode =
+      (paymentDataRequest.transactionInfo &&
+        paymentDataRequest.transactionInfo.currencyCode) ||
+      undefined;
+    const totalPrice =
+      (paymentDataRequest.transactionInfo &&
+        paymentDataRequest.transactionInfo.totalPrice) ||
+      undefined;
     const paymentRequest = this.createPaymentRequest_(
-        paymentDataRequest, this.environment_, currencyCode, totalPrice);
+      paymentDataRequest,
+      this.environment_,
+      currencyCode,
+      totalPrice
+    );
     this.callback_(
-        /** @type{!Promise<!PaymentData>} */
-        (paymentRequest.show()
-             .then(
-                 /**
-                  * @param {!PaymentResponse} paymentResponse
-                  * @return {!PaymentData}
-                  */
-                 (paymentResponse) => {
-                   // Should be called to dismiss any remaining UI
-                   paymentResponse.complete('success');
-                   return paymentResponse.details;
-                 })
-             .catch(function(err) {
-               err['statusCode'] = Constants.ResponseStatus.CANCELED;
-               throw err;
-             })));
+      /** @type{!Promise<!PaymentData>} */
+      (
+        paymentRequest
+          .show()
+          .then(
+            /**
+             * @param {!PaymentResponse} paymentResponse
+             * @return {!PaymentData}
+             */
+            (paymentResponse) => {
+              // Should be called to dismiss any remaining UI
+              paymentResponse.complete('success');
+              return paymentResponse.details;
+            }
+          )
+          .catch(function (err) {
+            err['statusCode'] = Constants.ResponseStatus.CANCELED;
+            throw err;
+          })
+      )
+    );
   }
 }
 
@@ -15806,9 +15865,7 @@ class PaymentsRequestDelegate {
 
 const MAX_Z_INDEX = 2147483647;
 
-
 class Graypane {
-
   /**
    * @param {!Document} doc
    */
@@ -15855,9 +15912,14 @@ class Graypane {
       'display': 'block',
       'opacity': 0,
     });
-    return transition(this.element_, {
-      'opacity': 1,
-    }, 300, 'ease-out');
+    return transition(
+      this.element_,
+      {
+        'opacity': 1,
+      },
+      300,
+      'ease-out'
+    );
   }
 
   /**
@@ -15871,15 +15933,19 @@ class Graypane {
       // This could be possible after redirect.
       return;
     }
-    return transition(this.element_, {
-      'opacity': 0,
-    }, 300, 'ease-out').then(() => {
+    return transition(
+      this.element_,
+      {
+        'opacity': 0,
+      },
+      300,
+      'ease-out'
+    ).then(() => {
       setImportantStyles(this.element_, {'display': 'none'});
       this.doc_.body.removeChild(this.element_);
     });
   }
 }
-
 
 /**
  * Sets the CSS styles of the specified element with !important. The styles
@@ -15897,7 +15963,6 @@ function setImportantStyles(element, styles) {
   }
 }
 
-
 /**
  * Returns a promise which is resolved after the given duration of animation
  * @param {!Element} el - Element to be observed.
@@ -15909,19 +15974,31 @@ function setImportantStyles(element, styles) {
 function transition(el, props, durationMillis, curve) {
   const win = el.ownerDocument.defaultView;
   const previousTransitionValue = el.style.transition || '';
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     win.setTimeout(() => {
       win.setTimeout(resolve, durationMillis);
       const tr = `${durationMillis}ms ${curve}`;
-      setImportantStyles(el, Object.assign({
-        'transition': `transform ${tr}, opacity ${tr}`,
-      }, props));
+      setImportantStyles(
+        el,
+        Object.assign(
+          {
+            'transition': `transform ${tr}, opacity ${tr}`,
+          },
+          props
+        )
+      );
     });
   }).then(() => {
     // Stop transition and make sure that the final properties get set.
-    setImportantStyles(el, Object.assign({
-      'transition': previousTransitionValue,
-    }, props));
+    setImportantStyles(
+      el,
+      Object.assign(
+        {
+          'transition': previousTransitionValue,
+        },
+        props
+      )
+    );
   });
 }
 
@@ -15947,22 +16024,25 @@ function transition(el, props, durationMillis, curve) {
  */
 function chromeSupportsPaymentHandler() {
   // Check if feature is enabled for user
-  if (typeof google == 'undefined' ||
-      !null) {
+  if (typeof google == 'undefined' || !null) {
     return false;
   }
 
   // Payment handler isn't supported on mobile
   const mobilePlatform = window.navigator.userAgent.match(
-      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile/i);
+    /Android|iPhone|iPad|iPod|BlackBerry|IEMobile/i
+  );
   if (mobilePlatform != null) {
     return false;
   }
 
   const chromeVersion = window.navigator.userAgent.match(/Chrome\/([0-9]+)\./i);
-  return 'PaymentRequest' in window && chromeVersion != null &&
-      Number(chromeVersion[1]) >= 68 &&
-      window.navigator.vendor == 'Google Inc.';
+  return (
+    'PaymentRequest' in window &&
+    chromeVersion != null &&
+    Number(chromeVersion[1]) >= 68 &&
+    window.navigator.vendor == 'Google Inc.'
+  );
 }
 
 /**
@@ -15981,11 +16061,15 @@ function chromeSupportsPaymentRequest() {
 
   const androidPlatform = window.navigator.userAgent.match(/Android/i);
   const chromeVersion = window.navigator.userAgent.match(/Chrome\/([0-9]+)\./i);
-  return androidPlatform != null && 'PaymentRequest' in window &&
-      // Make sure skipping PaymentRequest UI when only one PaymentMethod is
-      // supported (starts on Google Chrome 59).
-      window.navigator.vendor == 'Google Inc.' && chromeVersion != null &&
-      Number(chromeVersion[1]) >= 59;
+  return (
+    androidPlatform != null &&
+    'PaymentRequest' in window &&
+    // Make sure skipping PaymentRequest UI when only one PaymentMethod is
+    // supported (starts on Google Chrome 59).
+    window.navigator.vendor == 'Google Inc.' &&
+    chromeVersion != null &&
+    Number(chromeVersion[1]) >= 59
+  );
 }
 
 /**
@@ -15996,15 +16080,20 @@ function chromeSupportsPaymentRequest() {
 function doesMerchantSupportOnlyTokenizedCards(isReadyToPayRequest) {
   if (isReadyToPayRequest.apiVersion >= 2) {
     const allowedAuthMethods =
-        extractAllowedAuthMethodsForCards_(isReadyToPayRequest);
-    if (allowedAuthMethods && allowedAuthMethods.length == 1 &&
-        allowedAuthMethods[0] == Constants.AuthMethod.CRYPTOGRAM_3DS) {
+      extractAllowedAuthMethodsForCards_(isReadyToPayRequest);
+    if (
+      allowedAuthMethods &&
+      allowedAuthMethods.length == 1 &&
+      allowedAuthMethods[0] == Constants.AuthMethod.CRYPTOGRAM_3DS
+    ) {
       return true;
     }
   }
-  return isReadyToPayRequest.allowedPaymentMethods.length == 1 &&
-      isReadyToPayRequest.allowedPaymentMethods[0] ==
-      Constants.PaymentMethod.TOKENIZED_CARD;
+  return (
+    isReadyToPayRequest.allowedPaymentMethods.length == 1 &&
+    isReadyToPayRequest.allowedPaymentMethods[0] ==
+      Constants.PaymentMethod.TOKENIZED_CARD
+  );
 }
 
 /**
@@ -16014,10 +16103,12 @@ function doesMerchantSupportOnlyTokenizedCards(isReadyToPayRequest) {
  * @return {boolean} true if the merchant supports pan cards.
  */
 function apiV2DoesMerchantSupportSpecifiedCardType(
-    isReadyToPayRequest, apiV2AuthMethod) {
+  isReadyToPayRequest,
+  apiV2AuthMethod
+) {
   if (isReadyToPayRequest.apiVersion >= 2) {
     const allowedAuthMethods =
-        extractAllowedAuthMethodsForCards_(isReadyToPayRequest);
+      extractAllowedAuthMethodsForCards_(isReadyToPayRequest);
     if (allowedAuthMethods && allowedAuthMethods.includes(apiV2AuthMethod)) {
       return true;
     }
@@ -16045,9 +16136,9 @@ function validateSecureContext() {
     // for the unsupported browser.
     return null;
   }
-  return window.isSecureContext ?
-      null :
-      'Google Pay APIs should be called in secure context!';
+  return window.isSecureContext
+    ? null
+    : 'Google Pay APIs should be called in secure context!';
 }
 
 /**
@@ -16056,12 +16147,15 @@ function validateSecureContext() {
  * @param {!PaymentOptions} paymentOptions
  */
 function validatePaymentOptions(paymentOptions) {
-  if (paymentOptions.environment &&
-      !Object.values(Constants.Environment)
-           .includes(paymentOptions.environment)) {
+  if (
+    paymentOptions.environment &&
+    !Object.values(Constants.Environment).includes(paymentOptions.environment)
+  ) {
     throw new Error(
-        'Parameter environment in PaymentOptions can optionally be set to ' +
-        'PRODUCTION, otherwise it defaults to TEST. ' + paymentOptions.environment);
+      'Parameter environment in PaymentOptions can optionally be set to ' +
+        'PRODUCTION, otherwise it defaults to TEST. ' +
+        paymentOptions.environment
+    );
   }
 }
 
@@ -16078,9 +16172,11 @@ function validateIsReadyToPayRequest(isReadyToPayRequest) {
     if (!('apiVersionMinor' in isReadyToPayRequest)) {
       return 'apiVersionMinor must be set!';
     }
-    if (!isReadyToPayRequest.allowedPaymentMethods ||
-        !Array.isArray(isReadyToPayRequest.allowedPaymentMethods) ||
-        isReadyToPayRequest.allowedPaymentMethods.length == 0) {
+    if (
+      !isReadyToPayRequest.allowedPaymentMethods ||
+      !Array.isArray(isReadyToPayRequest.allowedPaymentMethods) ||
+      isReadyToPayRequest.allowedPaymentMethods.length == 0
+    ) {
       return 'for v2 allowedPaymentMethods must be set to an array containing a list of accepted payment methods';
     }
     for (var i = 0; i < isReadyToPayRequest.allowedPaymentMethods.length; i++) {
@@ -16090,29 +16186,40 @@ function validateIsReadyToPayRequest(isReadyToPayRequest) {
           return 'Field parameters must be setup in each allowedPaymentMethod';
         }
         var allowedCardNetworks =
-            allowedPaymentMethod['parameters']['allowedCardNetworks'];
-        if (!allowedCardNetworks || !Array.isArray(allowedCardNetworks) ||
-            allowedCardNetworks.length == 0) {
+          allowedPaymentMethod['parameters']['allowedCardNetworks'];
+        if (
+          !allowedCardNetworks ||
+          !Array.isArray(allowedCardNetworks) ||
+          allowedCardNetworks.length == 0
+        ) {
           return 'allowedCardNetworks must be setup in parameters for type CARD';
         }
         var allowedAuthMethods =
-            allowedPaymentMethod['parameters']['allowedAuthMethods'];
-        if (!allowedAuthMethods || !Array.isArray(allowedAuthMethods) ||
-            allowedAuthMethods.length == 0 ||
-            !allowedAuthMethods.every(isAuthMethodValid)) {
-          return 'allowedAuthMethods must be setup in parameters for type \'CARD\' ' +
-              ' and must contain \'CRYPTOGRAM_3DS\' and/or \'PAN_ONLY\'';
+          allowedPaymentMethod['parameters']['allowedAuthMethods'];
+        if (
+          !allowedAuthMethods ||
+          !Array.isArray(allowedAuthMethods) ||
+          allowedAuthMethods.length == 0 ||
+          !allowedAuthMethods.every(isAuthMethodValid)
+        ) {
+          return (
+            "allowedAuthMethods must be setup in parameters for type 'CARD' " +
+            " and must contain 'CRYPTOGRAM_3DS' and/or 'PAN_ONLY'"
+          );
         }
       }
     }
     return null;
   } else if (
-      !isReadyToPayRequest.allowedPaymentMethods ||
-      !Array.isArray(isReadyToPayRequest.allowedPaymentMethods) ||
-      isReadyToPayRequest.allowedPaymentMethods.length == 0 ||
-      !isReadyToPayRequest.allowedPaymentMethods.every(isPaymentMethodValid)) {
-    return 'allowedPaymentMethods must be set to an array containing \'CARD\' ' +
-        'and/or \'TOKENIZED_CARD\'!';
+    !isReadyToPayRequest.allowedPaymentMethods ||
+    !Array.isArray(isReadyToPayRequest.allowedPaymentMethods) ||
+    isReadyToPayRequest.allowedPaymentMethods.length == 0 ||
+    !isReadyToPayRequest.allowedPaymentMethods.every(isPaymentMethodValid)
+  ) {
+    return (
+      "allowedPaymentMethods must be set to an array containing 'CARD' " +
+      "and/or 'TOKENIZED_CARD'!"
+    );
   }
   return null;
 }
@@ -16154,17 +16261,24 @@ function validatePaymentDataRequest(paymentDataRequest) {
   } else if (!paymentDataRequest.transactionInfo.currencyCode) {
     return 'currencyCode in transactionInfo must be set!';
   } else if (
-      !paymentDataRequest.transactionInfo.totalPriceStatus ||
-      !Object.values(Constants.TotalPriceStatus)
-           .includes(paymentDataRequest.transactionInfo.totalPriceStatus)) {
-    return 'totalPriceStatus in transactionInfo must be set to one of' +
-        ' NOT_CURRENTLY_KNOWN, ESTIMATED or FINAL!';
+    !paymentDataRequest.transactionInfo.totalPriceStatus ||
+    !Object.values(Constants.TotalPriceStatus).includes(
+      paymentDataRequest.transactionInfo.totalPriceStatus
+    )
+  ) {
+    return (
+      'totalPriceStatus in transactionInfo must be set to one of' +
+      ' NOT_CURRENTLY_KNOWN, ESTIMATED or FINAL!'
+    );
   } else if (
-      paymentDataRequest.transactionInfo.totalPriceStatus !==
-          'NOT_CURRENTLY_KNOWN' &&
-      !paymentDataRequest.transactionInfo.totalPrice) {
-    return 'totalPrice in transactionInfo must be set when' +
-        ' totalPriceStatus is ESTIMATED or FINAL!';
+    paymentDataRequest.transactionInfo.totalPriceStatus !==
+      'NOT_CURRENTLY_KNOWN' &&
+    !paymentDataRequest.transactionInfo.totalPrice
+  ) {
+    return (
+      'totalPrice in transactionInfo must be set when' +
+      ' totalPriceStatus is ESTIMATED or FINAL!'
+    );
   }
 
   // Validate payment data request for UPI payment method
@@ -16184,14 +16298,17 @@ function validatePaymentDataRequest(paymentDataRequest) {
     } else if (!parameters['mcc']) {
       return 'mcc in allowedPaymentMethod parameters must be set!';
     } else if (!parameters['transactionReferenceId']) {
-      return 'transactionReferenceId in allowedPaymentMethod parameters' +
-          ' must be set!';
+      return (
+        'transactionReferenceId in allowedPaymentMethod parameters' +
+        ' must be set!'
+      );
     }
 
     if (paymentDataRequest['transactionInfo']['currencyCode'] !== 'INR') {
       return 'currencyCode in transactionInfo must be set to INR!';
     } else if (
-        paymentDataRequest['transactionInfo']['totalPriceStatus'] !== 'FINAL') {
+      paymentDataRequest['transactionInfo']['totalPriceStatus'] !== 'FINAL'
+    ) {
       return 'totalPriceStatus in transactionInfo must be set to FINAL!';
     } else if (!paymentDataRequest['transactionInfo']['transactionNote']) {
       return 'transactionNote in transactionInfo must be set!';
@@ -16208,8 +16325,11 @@ function validatePaymentDataRequest(paymentDataRequest) {
  * @return {?Object}
  */
 function getUpiPaymentMethod(request) {
-  if (!chromeSupportsPaymentRequest() || request.apiVersion < 2 ||
-      !request.allowedPaymentMethods) {
+  if (
+    !chromeSupportsPaymentRequest() ||
+    request.apiVersion < 2 ||
+    !request.allowedPaymentMethods
+  ) {
     return null;
   }
   return getAllowedPaymentMethodForType_(request, Constants.PaymentMethod.UPI);
@@ -16241,7 +16361,9 @@ function validatePaymentDataRequestForSwg(swgParameters) {
 function extractAllowedAuthMethodsForCards_(isReadyToPayRequest) {
   if (isReadyToPayRequest.allowedPaymentMethods) {
     const allowedPaymentMethod = getAllowedPaymentMethodForType_(
-        isReadyToPayRequest, Constants.PaymentMethod.CARD);
+      isReadyToPayRequest,
+      Constants.PaymentMethod.CARD
+    );
     if (allowedPaymentMethod && allowedPaymentMethod.parameters) {
       return allowedPaymentMethod.parameters['allowedAuthMethods'];
     }
@@ -16257,7 +16379,9 @@ function extractAllowedAuthMethodsForCards_(isReadyToPayRequest) {
  * @private
  */
 function getAllowedPaymentMethodForType_(
-    isReadyToPayRequest, paymentMethodType) {
+  isReadyToPayRequest,
+  paymentMethodType
+) {
   for (var i = 0; i < isReadyToPayRequest.allowedPaymentMethods.length; i++) {
     const allowedPaymentMethod = isReadyToPayRequest.allowedPaymentMethods[i];
     if (allowedPaymentMethod.type == paymentMethodType) {
@@ -16295,8 +16419,9 @@ function injectIframe(iframeClassName) {
   const iframeContainer = document.createElement('div');
   iframeContainer.classList.add('iframeContainer');
   /** @private @const {!HTMLIFrameElement} */
-  const iframe =
-      /** @type {!HTMLIFrameElement} */ (document.createElement('iframe'));
+  const iframe = /** @type {!HTMLIFrameElement} */ (
+    document.createElement('iframe')
+  );
   iframe.classList.add(iframeClassName);
   iframe.setAttribute('frameborder', '0');
   iframe.setAttribute('scrolling', 'no');
@@ -16799,9 +16924,7 @@ class PaymentsWebActivityDelegate {
    * @private
    */
   isVerticalCenterExperimentEnabled_(paymentDataRequest) {
-    return (
-      null  
-    );
+    return null;
   }
 
   /**
@@ -16986,17 +17109,19 @@ class UpiHandler {
   loadPaymentData(paymentDataRequest, upiPaymentMethod, onResultCallback) {
     const parameters = upiPaymentMethod['parameters'];
     const transactionInfo = paymentDataRequest['transactionInfo'];
-    const supportedInstruments = [{
-          'supportedMethods': ['https://tez.google.com/pay'],
-          'data': {
-            'pa': parameters['payeeVpa'],
-            'pn': parameters['payeeName'],
-            'tr': parameters['transactionReferenceId'],
-            'url': parameters['referenceUrl'],
-            'mc': parameters['mcc'],
-            'tn': transactionInfo['transactionNote'],
-          },
-        }];
+    const supportedInstruments = [
+      {
+        'supportedMethods': ['https://tez.google.com/pay'],
+        'data': {
+          'pa': parameters['payeeVpa'],
+          'pn': parameters['payeeName'],
+          'tr': parameters['transactionReferenceId'],
+          'url': parameters['referenceUrl'],
+          'mc': parameters['mcc'],
+          'tn': transactionInfo['transactionNote'],
+        },
+      },
+    ];
 
     if (parameters['transactionId']) {
       supportedInstruments[0]['data']['tid'] = parameters['transactionId'];
@@ -17010,34 +17135,40 @@ class UpiHandler {
           'value': transactionInfo['totalPrice'],
         },
       },
-      'displayItems': [{
-        'label': 'Original Amount',
-        'amount': {
-          'currency': transactionInfo['currencyCode'],
-          'value': transactionInfo['totalPrice'],
+      'displayItems': [
+        {
+          'label': 'Original Amount',
+          'amount': {
+            'currency': transactionInfo['currencyCode'],
+            'value': transactionInfo['totalPrice'],
+          },
         },
-      }],
+      ],
     };
 
     let request = new PaymentRequest(supportedInstruments, details);
 
     onResultCallback(
-        this.checkCanMakePayment_(request)
-            .then(result => {
-              if (result) {
-                return this.showUi_(request);
-              } else {
-                return this.redirectToGooglePlay_();
-              }
-            })
-            .then(paymentData => {
-              return this.processData_(
-                  paymentData, paymentDataRequest, upiPaymentMethod);
-            })
-            .catch(error => {
-              error['statusCode'] = Constants.ResponseStatus.CANCELED;
-              return Promise.reject(error);
-            }));
+      this.checkCanMakePayment_(request)
+        .then((result) => {
+          if (result) {
+            return this.showUi_(request);
+          } else {
+            return this.redirectToGooglePlay_();
+          }
+        })
+        .then((paymentData) => {
+          return this.processData_(
+            paymentData,
+            paymentDataRequest,
+            upiPaymentMethod
+          );
+        })
+        .catch((error) => {
+          error['statusCode'] = Constants.ResponseStatus.CANCELED;
+          return Promise.reject(error);
+        })
+    );
   }
 
   /**
@@ -17048,7 +17179,7 @@ class UpiHandler {
    * @return {!Promise<!PaymentData>} A promise containing payment response.
    */
   showUi_(request) {
-    return request.show().then(paymentResponse => {
+    return request.show().then((paymentResponse) => {
       paymentResponse.complete('success');
       return paymentResponse.details;
     });
@@ -17064,8 +17195,9 @@ class UpiHandler {
    */
   checkCanMakePayment_(request) {
     // Checks canMakePayment cache, and use the cache result if it exists.
-    const cacheResult =
-        window.sessionStorage.getItem(Constants.UPI_CAN_MAKE_PAYMENT_CACHE_KEY);
+    const cacheResult = window.sessionStorage.getItem(
+      Constants.UPI_CAN_MAKE_PAYMENT_CACHE_KEY
+    );
     if (cacheResult) {
       return Promise.resolve(cacheResult === 'true');
     }
@@ -17077,14 +17209,16 @@ class UpiHandler {
 
     let canMakePaymentPromise = request.canMakePayment();
 
-    return canMakePaymentPromise.then(result => {
+    return canMakePaymentPromise.then((result) => {
       // Store the result in cache if the result is true to avoid quota error
       // caused by querying multiple times with different data.
       // Doesn't store false because if we do so, user will be redirected to
       // Google Play again after installing Google Pay if Chrome is not closed.
       if (result) {
         window.sessionStorage.setItem(
-            Constants.UPI_CAN_MAKE_PAYMENT_CACHE_KEY, result.toString());
+          Constants.UPI_CAN_MAKE_PAYMENT_CACHE_KEY,
+          result.toString()
+        );
       }
       return result;
     });
@@ -17098,10 +17232,12 @@ class UpiHandler {
    */
   redirectToGooglePlay_() {
     window.location.replace(
-        // NOLINT
-            'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user');  // NOLINT
-    return Promise.reject(
-        {'errorMessage': 'Cannot redirect to Tez page in Google Play.'});
+      // NOLINT
+      'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user'
+    ); // NOLINT
+    return Promise.reject({
+      'errorMessage': 'Cannot redirect to Tez page in Google Play.',
+    });
   }
 
   /**
@@ -17125,14 +17261,14 @@ class UpiHandler {
           // payment failure due to invalid MPIN
           error = {
             'errorCode': PublicErrorCode.BUYER_ACCOUNT_ERROR,
-            'errorMessage': 'Payment failure due to invalid MPIN.'
+            'errorMessage': 'Payment failure due to invalid MPIN.',
           };
           break;
         case 'Z9':
           // payment failure due to insufficient funds
           error = {
             'errorCode': PublicErrorCode.BUYER_ACCOUNT_ERROR,
-            'errorMessage': 'Payment failure due to insufficient funds.'
+            'errorMessage': 'Payment failure due to insufficient funds.',
           };
           break;
         case '91':
@@ -17140,8 +17276,8 @@ class UpiHandler {
           error = {
             'errorCode': PublicErrorCode.INTERNAL_ERROR,
             'errorMessage':
-                'Payment failure due to transaction timeout or connection' +
-                ' issue.'
+              'Payment failure due to transaction timeout or connection' +
+              ' issue.',
           };
           break;
         default:
@@ -17156,10 +17292,10 @@ class UpiHandler {
       'payeeVpa': upiPaymentMethod['parameters']['payeeVpa'],
       'status': tezResponse['Status'],
       'transactionReferenceId':
-          upiPaymentMethod['parameters']['transactionReferenceId'],
-      'transactionId': upiPaymentMethod['parameters']['transactionId'] ?
-          upiPaymentMethod['parameters']['transactionId'] :
-          tezResponse['txnId'],
+        upiPaymentMethod['parameters']['transactionReferenceId'],
+      'transactionId': upiPaymentMethod['parameters']['transactionId']
+        ? upiPaymentMethod['parameters']['transactionId']
+        : tezResponse['txnId'],
       'transactionInfo': paymentDataRequest['transactionInfo'],
     };
 
@@ -17175,10 +17311,10 @@ class UpiHandler {
             // TODO: Verify that response comes from tez and
             // add signature and encrypt signed message here
             'signature': '',
-            'signedMessage': signedMessage
-          }
-        }
-      }
+            'signedMessage': signedMessage,
+          },
+        },
+      },
     };
     return Promise.resolve(paymentData);
   }
@@ -17217,63 +17353,70 @@ Dual licensed under the MIT and GPL licenses.
  *   "098F4D35"
  */
 
-class Random_uuid {}  // Private array of chars to use
-  var CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+class Random_uuid {} // Private array of chars to use
+var CHARS =
+  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
 
-  Random_uuid.uuid = function (len, radix) {
-    var chars = CHARS, uuid = [], i;
-    radix = radix || chars.length;
+Random_uuid.uuid = function (len, radix) {
+  var chars = CHARS,
+    uuid = [],
+    i;
+  radix = radix || chars.length;
 
-    if (len) {
-      // Compact form
-      for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];
+  if (len) {
+    // Compact form
+    for (i = 0; i < len; i++) uuid[i] = chars[0 | (Math.random() * radix)];
+  } else {
+    // rfc4122, version 4 form
+    var r;
+
+    // rfc4122 requires these characters
+    uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+    uuid[14] = '4';
+
+    // Fill in random data.  At i==19 set the high bits of clock sequence as
+    // per rfc4122, sec. 4.1.5
+    for (i = 0; i < 36; i++) {
+      if (!uuid[i]) {
+        r = 0 | (Math.random() * 16);
+        uuid[i] = chars[i == 19 ? (r & 0x3) | 0x8 : r];
+      }
+    }
+  }
+
+  return uuid.join('');
+};
+
+// A more performant, but slightly bulkier, RFC4122v4 solution.  We boost performance
+// by minimizing calls to random()
+Random_uuid.uuidFast = function () {
+  var chars = CHARS,
+    uuid = new Array(36),
+    rnd = 0,
+    r;
+  for (var i = 0; i < 36; i++) {
+    if (i == 8 || i == 13 || i == 18 || i == 23) {
+      uuid[i] = '-';
+    } else if (i == 14) {
+      uuid[i] = '4';
     } else {
-      // rfc4122, version 4 form
-      var r;
-
-      // rfc4122 requires these characters
-      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-      uuid[14] = '4';
-
-      // Fill in random data.  At i==19 set the high bits of clock sequence as
-      // per rfc4122, sec. 4.1.5
-      for (i = 0; i < 36; i++) {
-        if (!uuid[i]) {
-          r = 0 | Math.random()*16;
-          uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
-        }
-      }
+      if (rnd <= 0x02) rnd = (0x2000000 + Math.random() * 0x1000000) | 0;
+      r = rnd & 0xf;
+      rnd = rnd >> 4;
+      uuid[i] = chars[i == 19 ? (r & 0x3) | 0x8 : r];
     }
+  }
+  return uuid.join('');
+};
 
-    return uuid.join('');
-  };
-
-  // A more performant, but slightly bulkier, RFC4122v4 solution.  We boost performance
-  // by minimizing calls to random()
-  Random_uuid.uuidFast = function() {
-    var chars = CHARS, uuid = new Array(36), rnd=0, r;
-    for (var i = 0; i < 36; i++) {
-      if (i==8 || i==13 ||  i==18 || i==23) {
-        uuid[i] = '-';
-      } else if (i==14) {
-        uuid[i] = '4';
-      } else {
-        if (rnd <= 0x02) rnd = 0x2000000 + (Math.random()*0x1000000)|0;
-        r = rnd & 0xf;
-        rnd = rnd >> 4;
-        uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
-      }
-    }
-    return uuid.join('');
-  };
-
-  // A more compact, but less performant, RFC4122v4 solution:
-  Random_uuid.uuidCompact = function() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-      return v.toString(16);
-    });
-  };
+// A more compact, but less performant, RFC4122v4 solution:
+Random_uuid.uuidCompact = function () {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
 
 /**
  * @license
@@ -17362,11 +17505,13 @@ class PaymentsAsyncClient {
     this.environment_ =
       paymentOptions.environment || Constants.Environment.TEST;
     if (!PaymentsAsyncClient.googleTransactionId_) {
-      PaymentsAsyncClient.googleTransactionId_ = /** @type {string} */ (this.isInTrustedDomain_() &&
-      paymentOptions['i'] &&
-      paymentOptions['i']['googleTransactionId']
-        ? paymentOptions['i']['googleTransactionId']
-        : createGoogleTransactionId(this.environment_));
+      PaymentsAsyncClient.googleTransactionId_ = /** @type {string} */ (
+        this.isInTrustedDomain_() &&
+        paymentOptions['i'] &&
+        paymentOptions['i']['googleTransactionId']
+          ? paymentOptions['i']['googleTransactionId']
+          : createGoogleTransactionId(this.environment_)
+      );
     }
 
     /** @private @const {!PaymentOptions} */
@@ -17498,9 +17643,8 @@ class PaymentsAsyncClient {
         // If the merchant supports only Tokenized cards then just rely on
         // delegate to give us the result.
         // This will need to change once b/78519188 is fixed.
-        const webPromise = this.webActivityDelegate_.isReadyToPay(
-          isReadyToPayRequest
-        );
+        const webPromise =
+          this.webActivityDelegate_.isReadyToPay(isReadyToPayRequest);
         const nativePromise = this.delegate_.isReadyToPay(isReadyToPayRequest);
         if (
           doesMerchantSupportOnlyTokenizedCards(isReadyToPayRequest) &&
@@ -17513,9 +17657,8 @@ class PaymentsAsyncClient {
         return nativePromise.then(() => webPromise);
       }
     }
-    const webPromise = this.webActivityDelegate_.isReadyToPay(
-      isReadyToPayRequest
-    );
+    const webPromise =
+      this.webActivityDelegate_.isReadyToPay(isReadyToPayRequest);
     return webPromise;
   }
 
@@ -18692,7 +18835,8 @@ class Propensity {
   }
 }
 
-const CSS = ".swg-dialog,.swg-toast{background-color:#fff!important;box-sizing:border-box}.swg-toast{border:none!important;bottom:0!important;max-height:46px!important;position:fixed!important;z-index:2147483647!important}@media (min-width:871px) and (min-height:641px){.swg-dialog.swg-wide-dialog{left:-435px!important;width:870px!important}}@media (max-height:640px),(max-width:640px){.swg-dialog,.swg-toast{border-top-left-radius:8px!important;border-top-right-radius:8px!important;box-shadow:0 1px 1px rgba(60,64,67,.3),0 1px 4px 1px rgba(60,64,67,.15)!important;left:-240px!important;margin-left:50vw!important;width:480px!important}}@media (min-width:641px) and (min-height:641px){.swg-dialog{background-color:transparent!important;border:none!important;left:-315px!important;margin-left:50vw!important;width:630px!important}.swg-toast{border-radius:4px!important;bottom:8px!important;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)!important;left:8px!important}}@media (max-width:480px){.swg-dialog,.swg-toast{left:0!important;margin-left:0!important;right:0!important;width:100%!important}}html>body.swg-disable-scroll{height:100vh!important;overflow:hidden!important}html>body.swg-disable-scroll *{overflow:hidden!important}\n/*# sourceURL=/./src/components/dialog.css*/\n";
+const CSS =
+  '.swg-dialog,.swg-toast{background-color:#fff!important;box-sizing:border-box}.swg-toast{border:none!important;bottom:0!important;max-height:46px!important;position:fixed!important;z-index:2147483647!important}@media (min-width:871px) and (min-height:641px){.swg-dialog.swg-wide-dialog{left:-435px!important;width:870px!important}}@media (max-height:640px),(max-width:640px){.swg-dialog,.swg-toast{border-top-left-radius:8px!important;border-top-right-radius:8px!important;box-shadow:0 1px 1px rgba(60,64,67,.3),0 1px 4px 1px rgba(60,64,67,.15)!important;left:-240px!important;margin-left:50vw!important;width:480px!important}}@media (min-width:641px) and (min-height:641px){.swg-dialog{background-color:transparent!important;border:none!important;left:-315px!important;margin-left:50vw!important;width:630px!important}.swg-toast{border-radius:4px!important;bottom:8px!important;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)!important;left:8px!important}}@media (max-width:480px){.swg-dialog,.swg-toast{left:0!important;margin-left:0!important;right:0!important;width:100%!important}}html>body.swg-disable-scroll{height:100vh!important;overflow:hidden!important}html>body.swg-disable-scroll *{overflow:hidden!important}\n/*# sourceURL=/./src/components/dialog.css*/\n';
 
 /**
  * Copyright 2018 The Subscribe with Google Authors. All Rights Reserved.
@@ -19577,4 +19721,18 @@ class ConfiguredRuntime {
   }
 }
 
-export { AnalyticsEvent, ClientEvent, ClientEventManagerApi, ConfiguredRuntime, DeferredAccountCreationResponse, Entitlement, Entitlements, EventOriginator, Fetcher, FilterResult, PurchaseData, SubscribeResponse, UserData };
+export {
+  AnalyticsEvent,
+  ClientEvent,
+  ClientEventManagerApi,
+  ConfiguredRuntime,
+  DeferredAccountCreationResponse,
+  Entitlement,
+  Entitlements,
+  EventOriginator,
+  Fetcher,
+  FilterResult,
+  PurchaseData,
+  SubscribeResponse,
+  UserData,
+};

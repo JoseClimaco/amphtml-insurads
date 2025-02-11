@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html ⚡ lang="en">
   <!-- prettier-ignore -->
   <head>
@@ -181,11 +181,26 @@
     <script async custom-element="amp-story-subscriptions" src="https://cdn.ampproject.org/v0/amp-story-subscriptions-0.1.js"></script>
   </head>
   <body>
-    <amp-story standalone title="My story" publisher="Monocle" publisher-logo-src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/tbvbvipimh2camf5nb2q" poster-portrait-src="POSTER-IMAGE-URL">
+    <amp-story
+      standalone
+      title="My story"
+      publisher="Monocle"
+      publisher-logo-src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/tbvbvipimh2camf5nb2q"
+      poster-portrait-src="POSTER-IMAGE-URL"
+    >
       <amp-story-page id="cover" auto-advance-after="5s">
-        <amp-story-grid-layer template="vertical" class="box" aspect-ratio="9:16">
-          <div class="cover-title"><p>Amazing</p><p>Kyoto</p></div>
-          <div class="cover-subtitle"><p>Modern culture meets ancient traditions and beauty</p></div>
+        <amp-story-grid-layer
+          template="vertical"
+          class="box"
+          aspect-ratio="9:16"
+        >
+          <div class="cover-title">
+            <p>Amazing</p>
+            <p>Kyoto</p>
+          </div>
+          <div class="cover-subtitle">
+            <p>Modern culture meets ancient traditions and beauty</p>
+          </div>
         </amp-story-grid-layer>
       </amp-story-page>
 
@@ -193,8 +208,19 @@
         <amp-story-grid-layer template="vertical" aspect-ratio="9:16">
           <div class="text-section">
             <h3>Amazing Kyoto</h3>
-            <p>Kyoto is a true embodiment of Old Japan awash with beautiful vestiges of its past glory. Beyond the futuristic Kyoto Station, modern shopping complexes, and sleek luxury hotels, lies a city with celebrated centuries-old wonders, breathtaking temples, serene Zen gardens, narrow cobbled alleyways, bustling markets and a vibrant nightlife.</p>
-            <p>By effortlessly blending the past and present, Kyoto is poised to be an alluring destination for history buffs and art lovers, gourmands, and outdoor enthusiasts. —Nano Betts</p>
+            <p>
+              Kyoto is a true embodiment of Old Japan awash with beautiful
+              vestiges of its past glory. Beyond the futuristic Kyoto Station,
+              modern shopping complexes, and sleek luxury hotels, lies a city
+              with celebrated centuries-old wonders, breathtaking temples,
+              serene Zen gardens, narrow cobbled alleyways, bustling markets and
+              a vibrant nightlife.
+            </p>
+            <p>
+              By effortlessly blending the past and present, Kyoto is poised to
+              be an alluring destination for history buffs and art lovers,
+              gourmands, and outdoor enthusiasts. —Nano Betts
+            </p>
           </div>
         </amp-story-grid-layer>
       </amp-story-page>
@@ -203,7 +229,14 @@
         <amp-story-grid-layer template="vertical" aspect-ratio="9:16">
           <div class="text-section">
             <h3>arashiyama</h3>
-            <p>The rolling foothills of Arashiyama are home to the iconic Sagano Bamboo Forest. The verdant grove is accessed via the 14th-century Buddhist temple Tenryu-ji. A unique serenity is experienced from the wind rustling through the soaring trees making a zawa zawa sound and the filtered sunlight filling the space with a tranquil green glow.</p>
+            <p>
+              The rolling foothills of Arashiyama are home to the iconic Sagano
+              Bamboo Forest. The verdant grove is accessed via the 14th-century
+              Buddhist temple Tenryu-ji. A unique serenity is experienced from
+              the wind rustling through the soaring trees making a zawa zawa
+              sound and the filtered sunlight filling the space with a tranquil
+              green glow.
+            </p>
           </div>
         </amp-story-grid-layer>
       </amp-story-page>
@@ -212,17 +245,26 @@
         <amp-story-grid-layer template="vertical" aspect-ratio="9:16">
           <div class="text-section">
             <h3>Cultral Experiences</h3>
-            <p>As a birthplace of Sado, or Japanese tea ceremony, the historic neighborhoods of Gion and Higashiyama are perfect places to visit machiyas and learn about the ancient art of tea-making. During the ritual performed on a tatami floor by a professional tea master, you'll have a chance to learn about the philosophy and etiquette of drinking tea, as well as master the basics of making matcha.</p>
+            <p>
+              As a birthplace of Sado, or Japanese tea ceremony, the historic
+              neighborhoods of Gion and Higashiyama are perfect places to visit
+              machiyas and learn about the ancient art of tea-making. During the
+              ritual performed on a tatami floor by a professional tea master,
+              you'll have a chance to learn about the philosophy and etiquette
+              of drinking tea, as well as master the basics of making matcha.
+            </p>
           </div>
         </amp-story-grid-layer>
       </amp-story-page>
 
-      <amp-story-subscriptions layout='container'
-        price='$0.50/week'
-        headline='Information at your fingertips'
-        description='Subscribe for unlimited access.'
-        additional-description='Cancel anytime.'>
-      </amp-story-subscriptions>
-    </amp-story>>
+      <amp-story-subscriptions
+        layout="container"
+        price="$0.50/week"
+        headline="Information at your fingertips"
+        description="Subscribe for unlimited access."
+        additional-description="Cancel anytime."
+      >
+      </amp-story-subscriptions> </amp-story
+    >>
   </body>
 </html>

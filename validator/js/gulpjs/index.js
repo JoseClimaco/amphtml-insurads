@@ -17,8 +17,7 @@ const STATUS_UNKNOWN = 'UNKNOWN';
  * @param {?Object} validator - amphtml validator
  * @return {!stream} gulp file stream
  */
-module.exports.validate = function(validator) {
-
+module.exports.validate = function (validator) {
   if (!validator) {
     validator = amphtmlValidator;
   }
@@ -28,28 +27,31 @@ module.exports.validate = function(validator) {
       return callback(null, file);
     }
     if (file.isStream()) {
-      this.emit('error', new PluginError(PLUGIN_NAME,
-          'Streams not supported!'));
+      this.emit(
+        'error',
+        new PluginError(PLUGIN_NAME, 'Streams not supported!')
+      );
     }
     if (file.isBuffer()) {
-      validator.getInstance()
-          .then(function(validatorInstance) {
-            const inputString = file.contents.toString();
-            file.ampValidationResult =
-                validatorInstance.validateString(inputString);
-            return callback(null, file);
-          })
-          .catch(function(err) {
+      validator
+        .getInstance()
+        .then(function (validatorInstance) {
+          const inputString = file.contents.toString();
+          file.ampValidationResult =
+            validatorInstance.validateString(inputString);
+          return callback(null, file);
+        })
+        .catch(function (err) {
           // This happens if the validator download failed. We don't fail the
           // build, but map the exception to an validation error instead. This
           // makes it possible to configure via failAfterError whether this
           // should fail the build or not.
-            console.log(colors.red(err.message));
-            file.ampValidationResult = {
-              status: STATUS_UNKNOWN,
-            };
-            return callback(null, file);
-          });
+          console.log(colors.red(err.message));
+          file.ampValidationResult = {
+            status: STATUS_UNKNOWN,
+          };
+          return callback(null, file);
+        });
     }
   }
   return through.obj(runValidation);
@@ -61,8 +63,7 @@ module.exports.validate = function(validator) {
  * @param {?Object} logger - logger used for printing the results (optional)
  * @return {!stream} gulp file stream
  */
-module.exports.format = function(logger) {
-
+module.exports.format = function (logger) {
   const results = [];
   if (!logger) {
     logger = console.log;
@@ -76,8 +77,9 @@ module.exports.format = function(logger) {
   }
 
   function formatResults(callback) {
-    logger.info('AMP Validation results:\n\n' +
-        results.map(printResult).join('\n'));
+    logger.info(
+      'AMP Validation results:\n\n' + results.map(printResult).join('\n')
+    );
     return callback();
   }
 
@@ -86,16 +88,23 @@ module.exports.format = function(logger) {
     let report = file.relative + ': ';
     if (validationResult.status === STATUS_PASS) {
       report += colors.green(validationResult.status);
-      report += '\nReview our \'publishing checklist\' to ensure '
-          + 'successful AMP document distribution. '
-          + 'See https://go.amp.dev/publishing-checklist';
+      report +=
+        "\nReview our 'publishing checklist' to ensure " +
+        'successful AMP document distribution. ' +
+        'See https://go.amp.dev/publishing-checklist';
     } else if (validationResult.status === STATUS_UNKNOWN) {
       report += colors.red(validationResult.status);
     } else {
       report += colors.red(validationResult.status);
       for (let ii = 0; ii < validationResult.errors.length; ii++) {
         const error = validationResult.errors[ii];
-        let msg = file.relative + ':' + error.line + ':' + error.col + ' ' +
+        let msg =
+          file.relative +
+          ':' +
+          error.line +
+          ':' +
+          error.col +
+          ' ' +
           colors.red(error.message);
         if (error.specUrl) {
           msg += ' (see ' + error.specUrl + ')';
@@ -131,8 +140,13 @@ function failAfter(isFailure) {
 
   function failOnError(callback) {
     if (failedFiles > 0) {
-      this.emit('error', new PluginError(PLUGIN_NAME,
-          '\nAMPHTML Validation failed for ' + failedFiles + ' files.'));
+      this.emit(
+        'error',
+        new PluginError(
+          PLUGIN_NAME,
+          '\nAMPHTML Validation failed for ' + failedFiles + ' files.'
+        )
+      );
     }
     callback();
   }
@@ -145,10 +159,12 @@ function failAfter(isFailure) {
  *
  * @return {!stream} gulp file stream
  */
-module.exports.failAfterError = function() {
-  return failAfter(function(ampValidationResult) {
-    return ampValidationResult.status === STATUS_FAIL ||
-        ampValidationResult.status === STATUS_UNKNOWN;
+module.exports.failAfterError = function () {
+  return failAfter(function (ampValidationResult) {
+    return (
+      ampValidationResult.status === STATUS_FAIL ||
+      ampValidationResult.status === STATUS_UNKNOWN
+    );
   });
 };
 
@@ -158,10 +174,12 @@ module.exports.failAfterError = function() {
  *
  * @return {!stream} gulp file stream
  */
-module.exports.failAfterWarningOrError = function() {
-  return failAfter(function(ampValidationResult) {
-    return ampValidationResult.errors.length > 0 ||
-        ampValidationResult.status === STATUS_FAIL ||
-        ampValidationResult.status === STATUS_UNKNOWN;
+module.exports.failAfterWarningOrError = function () {
+  return failAfter(function (ampValidationResult) {
+    return (
+      ampValidationResult.errors.length > 0 ||
+      ampValidationResult.status === STATUS_FAIL ||
+      ampValidationResult.status === STATUS_UNKNOWN
+    );
   });
 };

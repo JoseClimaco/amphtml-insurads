@@ -1,5 +1,3 @@
-
-
 .i-amphtml-story-interactive-img-container {
   --i-amphtml-interactive-img-option-size: 7.5em !important;
   --i-amphtml-interactive-img-option-gap: 1em !important;
@@ -66,7 +64,9 @@
   outline: none !important;
 }
 
-.i-amphtml-story-interactive-active:not(.i-amphtml-story-interactive-post-selection)
+.i-amphtml-story-interactive-active:not(
+    .i-amphtml-story-interactive-post-selection
+  )
   .i-amphtml-story-interactive-img-option:focus
   .i-amphtml-story-interactive-img-option-img {
   transform: var(--i-amphtml-interactive-img-transform) !important;
@@ -84,7 +84,8 @@
 
 .i-amphtml-story-interactive-option-selected
   .i-amphtml-story-interactive-img-option-img {
-  box-shadow: inset 0 0 0 0.25em var(--i-amphtml-interactive-option-post-color),
+  box-shadow:
+    inset 0 0 0 0.25em var(--i-amphtml-interactive-option-post-color),
     var(--i-amphtml-interactive-img-border) !important;
 }
 
@@ -108,7 +109,9 @@
   text-shadow: 0 0 0.7em rgba(0, 0, 0, 0.5) !important;
 }
 
-.i-amphtml-story-interactive-active:not(.i-amphtml-story-interactive-post-selection)
+.i-amphtml-story-interactive-active:not(
+    .i-amphtml-story-interactive-post-selection
+  )
   .i-amphtml-story-interactive-img-option-img {
   animation: i-amphtml-story-interactive-img-option-img-landing-animation
     var(--i-amphtml-interactive-animation-time) !important;
@@ -117,7 +120,9 @@
   ) !important;
 }
 
-.i-amphtml-story-interactive-active:not(.i-amphtml-story-interactive-post-selection)
+.i-amphtml-story-interactive-active:not(
+    .i-amphtml-story-interactive-post-selection
+  )
   .i-amphtml-story-interactive-img-option:nth-of-type(2)
   .i-amphtml-story-interactive-img-option-img {
   animation-delay: var(
@@ -125,7 +130,9 @@
   ) !important;
 }
 
-.i-amphtml-story-interactive-active:not(.i-amphtml-story-interactive-post-selection)
+.i-amphtml-story-interactive-active:not(
+    .i-amphtml-story-interactive-post-selection
+  )
   .i-amphtml-story-interactive-img-option:nth-of-type(3)
   .i-amphtml-story-interactive-img-option-img {
   animation-delay: var(
@@ -133,7 +140,9 @@
   ) !important;
 }
 
-.i-amphtml-story-interactive-active:not(.i-amphtml-story-interactive-post-selection)
+.i-amphtml-story-interactive-active:not(
+    .i-amphtml-story-interactive-post-selection
+  )
   .i-amphtml-story-interactive-img-option:nth-of-type(4)
   .i-amphtml-story-interactive-img-option-img {
   animation-delay: var(

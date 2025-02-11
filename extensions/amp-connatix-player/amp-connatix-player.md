@@ -43,6 +43,7 @@ This can be found at the Library section in the Connatix management dashboard.
 All `data-param-*` prefixed attributes are turned into URL parameters and passed to iframe src.
 
 ### `dock`
+
 Requires `amp-video-docking` extension. If this attribute is present and the video is playing manually, the video will be "minimized" and fixed to a corner or an element when the user scrolls out of the video component's visual area.
 For more details, see [documentation on the docking extension itself](https://github.com/ampproject/amphtml/blob/master/extensions/amp-video-docking/amp-video-docking.md).
 

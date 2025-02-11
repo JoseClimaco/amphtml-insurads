@@ -1,6 +1,6 @@
 function without() {}
 
-'use strict';
+('use strict');
 
 function named() {}
 

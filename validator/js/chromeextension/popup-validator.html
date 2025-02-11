@@ -2,8 +2,8 @@
 <html>
   <head>
     <script src="./bower_components/webcomponentsjs/CustomElements.min.js"></script>
-    <link href="polymer.html" rel="import">
-    <link href="polymer-extension-toolbar.html" rel="import">
+    <link href="polymer.html" rel="import" />
+    <link href="polymer-extension-toolbar.html" rel="import" />
     <script src="./validator_wasm.js"></script>
     <style is="custom-style">
       body {
@@ -99,11 +99,19 @@
               <div class="column">{{ item.col }}</div>
               <div class="issue">
                 {{ getIssue(item) }}
-                <a href="{{ item.webuiUrl }}" target="_blank"
-                    rel="noopener noreferrer">Debug</a>.
+                <a
+                  href="{{ item.webuiUrl }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Debug</a
+                >.
                 <template is="dom-if" if="{{ item.specUrl }}">
-                  <a href="{{ item.specUrl }}" target="_blank"
-                      rel="noopener noreferrer">Learn more</a>.
+                  <a
+                    href="{{ item.specUrl }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Learn more</a
+                  >.
                 </template>
               </div>
             </paper-item>
@@ -111,23 +119,25 @@
         </paper-listbox>
       </template>
       <script>
-        amp.validator.init().then(function() {
+        amp.validator.init().then(function () {
           Polymer({
             is: 'results-page',
-            getIssue: function(item) {
+            getIssue: function (item) {
               return amp.validator.renderErrorMessage(item);
             },
-            hasResults: function(results) {
+            hasResults: function (results) {
               return results.length > 0;
             },
             properties: {
               emptyResultsText: {
                 type: String,
-                value: chrome.i18n.getMessage("emptyResultsText"),
+                value: chrome.i18n.getMessage('emptyResultsText'),
               },
               results: {
                 type: Array,
-                value: function() { return []; },
+                value: function () {
+                  return [];
+                },
                 notify: true,
               },
             },
@@ -160,20 +170,24 @@
       <script>
         Polymer({
           is: 'extension-content',
-          selectTab: function(index) {
+          selectTab: function (index) {
             this.$.tabs.selected = index;
           },
-          setErrors: function(errors) {
+          setErrors: function (errors) {
             var errorsPage = this.$.errorsPage;
             errorsPage.results = errors;
-            this.$.errorsTab.textContent =
-              chrome.i18n.getMessage("errorsTabText", [errors.length]);
+            this.$.errorsTab.textContent = chrome.i18n.getMessage(
+              'errorsTabText',
+              [errors.length]
+            );
           },
-          setWarnings: function(warnings) {
+          setWarnings: function (warnings) {
             var warningsPage = this.$.warningsPage;
             warningsPage.results = warnings;
-            this.$.warningsTab.textContent =
-              chrome.i18n.getMessage("warningsTabText", [warnings.length]);
+            this.$.warningsTab.textContent = chrome.i18n.getMessage(
+              'warningsTabText',
+              [warnings.length]
+            );
           },
         });
       </script>
@@ -191,37 +205,45 @@
       <script>
         Polymer({
           is: 'popup-validator',
-          ready: function() {
+          ready: function () {
             var toolbar = this.$.toolbar;
             var content = this.$.content;
-            chrome.tabs.query({active: true, currentWindow: true},
-                function(tabs) { processTab(tabs, toolbar, content); });
+            chrome.tabs.query(
+              {active: true, currentWindow: true},
+              function (tabs) {
+                processTab(tabs, toolbar, content);
+              }
+            );
           },
         });
         function processTab(tabs, toolbar, content) {
           const url = tabs[0].url.split('#')[0];
-          chrome.runtime.sendMessage(url).then(function(result) {
-            console.log('worker response: ' + result);
-            const validationResult = JSON.parse(result);
-            if (validationResult) {
-              processResult(validationResult, toolbar, content, url);
-            } else {
-              throw new Error();
-            }
-          }).catch(function() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function () {
-              if (xhr.readyState === 4) {
-                amp.validator.init().then(function () {
-                  validationResult =
-                    amp.validator.validateString(xhr.responseText);
-                  processResult(validationResult, toolbar, content, url);
-                });
+          chrome.runtime
+            .sendMessage(url)
+            .then(function (result) {
+              console.log('worker response: ' + result);
+              const validationResult = JSON.parse(result);
+              if (validationResult) {
+                processResult(validationResult, toolbar, content, url);
+              } else {
+                throw new Error();
               }
-            };
-            xhr.send();
-          });
+            })
+            .catch(function () {
+              var xhr = new XMLHttpRequest();
+              xhr.open('GET', url, true);
+              xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                  amp.validator.init().then(function () {
+                    validationResult = amp.validator.validateString(
+                      xhr.responseText
+                    );
+                    processResult(validationResult, toolbar, content, url);
+                  });
+                }
+              };
+              xhr.send();
+            });
         }
         function processResult(validationResult, toolbar, content, url) {
           const webuiDomain = 'validator.amp.dev';
@@ -241,8 +263,7 @@
           }
           content.setErrors(validationErrors);
           content.setWarnings(validationWarnings);
-          if (validationErrors.length === 0 &&
-              validationWarnings.length > 0) {
+          if (validationErrors.length === 0 && validationWarnings.length > 0) {
             content.selectTab(1);
           } else {
             content.selectTab(0);

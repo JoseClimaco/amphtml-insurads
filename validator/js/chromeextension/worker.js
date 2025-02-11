@@ -17,11 +17,15 @@ globals.userAgentHeader = 'X-AMP-Validator-UA';
 globals.validAmpBgcolor = '#ffd700';
 globals.validAmpIconPrefix = 'valid';
 globals.validAmpTitle = chrome.i18n.getMessage('pagePassesValidationTitle');
-globals.validatorNotPresentBadge = chrome.i18n.getMessage('validatorNotPresentBadge');
+globals.validatorNotPresentBadge = chrome.i18n.getMessage(
+  'validatorNotPresentBadge'
+);
 globals.validatorNotPresentBgColor = '#b71c1c';
 globals.validatorNotPresentIconPrefix = 'validator-not-present';
 globals.validatorNotPresentPopup = 'popup-validator-not-present.build.html';
-globals.validatorNotPresentTitle = chrome.i18n.getMessage('validatorNotPresentTitle');
+globals.validatorNotPresentTitle = chrome.i18n.getMessage(
+  'validatorNotPresentTitle'
+);
 globals.validatorPopup = 'popup-validator.build.html';
 
 /**
@@ -32,13 +36,20 @@ globals.validatorPopup = 'popup-validator.build.html';
  */
 function hex2rgba(hex) {
   // Remove the '#' char if necessary.
-  if (hex.charAt(0) === '#') { hex = hex.slice(1); }
+  if (hex.charAt(0) === '#') {
+    hex = hex.slice(1);
+  }
   hex = hex.toUpperCase();
-  let hexAlpha = '0123456789ABCDEF', value = new Array(4), k = 0, int1, int2, i;
+  let hexAlpha = '0123456789ABCDEF',
+    value = new Array(4),
+    k = 0,
+    int1,
+    int2,
+    i;
   for (i = 0; i < 6; i += 2) {
     int1 = hexAlpha.indexOf(hex.charAt(i));
     int2 = hexAlpha.indexOf(hex.charAt(i + 1));
-    value[k] = (int1 * 16) + int2;
+    value[k] = int1 * 16 + int2;
     k += 1;
   }
   value[3] = 255;
@@ -56,8 +67,12 @@ function getErrorSeverityCounts(errors) {
   let numErrors = 0;
   let numWarnings = 0;
   for (const error in errors) {
-    if (errors[error].severity == 'ERROR') {numErrors += 1;}
-    if (errors[error].severity == 'WARNING') {numWarnings += 1;}
+    if (errors[error].severity == 'ERROR') {
+      numErrors += 1;
+    }
+    if (errors[error].severity == 'WARNING') {
+      numWarnings += 1;
+    }
   }
   return {'ERROR': numErrors, 'WARNING': numWarnings};
 }
@@ -91,8 +106,10 @@ function getNumberOfWarnings(errors) {
  * @return {boolean}
  */
 function onlyErrorIsDevMode(validationResult) {
-  return ((validationResult.errors.length == 1) &&
-      (validationResult.errors[0].code == 'DEV_MODE_ONLY'));
+  return (
+    validationResult.errors.length == 1 &&
+    validationResult.errors[0].code == 'DEV_MODE_ONLY'
+  );
 }
 
 /**
@@ -103,17 +120,18 @@ function onlyErrorIsDevMode(validationResult) {
  */
 function handleAmpCache(tabId, ampHref) {
   updateTabStatus(
-      tabId, globals.ampCacheIconPrefix, globals.ampCacheTitle,
-      '' /*text*/, globals.ampCacheBgcolor);
-  chrome.action.onClicked.addListener(
-      function loadAmpHref(tab) {
-        if (tab.id == tabId) {
-          chrome.action.onClicked.removeListener(loadAmpHref);
-          chrome.tabs.sendMessage(tab.id,
-              {'loadAmp': true, 'ampHref': ampHref});
-        }
-      }
+    tabId,
+    globals.ampCacheIconPrefix,
+    globals.ampCacheTitle,
+    '' /*text*/,
+    globals.ampCacheBgcolor
   );
+  chrome.action.onClicked.addListener(function loadAmpHref(tab) {
+    if (tab.id == tabId) {
+      chrome.action.onClicked.removeListener(loadAmpHref);
+      chrome.tabs.sendMessage(tab.id, {'loadAmp': true, 'ampHref': ampHref});
+    }
+  });
 }
 
 /**
@@ -123,8 +141,12 @@ function handleAmpCache(tabId, ampHref) {
  */
 function handleAmpDevMode(tabId) {
   updateTabStatus(
-      tabId, globals.devModeAmpIconPrefix, globals.devModeAmpTitle,
-      '' /*text*/, globals.devModeAmpBgColor);
+    tabId,
+    globals.devModeAmpIconPrefix,
+    globals.devModeAmpTitle,
+    '' /*text*/,
+    globals.devModeAmpBgColor
+  );
   updateTabPopup(tabId);
 }
 
@@ -137,8 +159,12 @@ function handleAmpDevMode(tabId) {
 function handleAmpFail(tabId, validationResult) {
   const numErrors = getNumberOfErrors(validationResult.errors);
   updateTabStatus(
-      tabId, globals.invalidAmpIconPrefix, globals.invalidAmpTitle,
-      numErrors.toString(), globals.invalidAmpBgcolor);
+    tabId,
+    globals.invalidAmpIconPrefix,
+    globals.invalidAmpTitle,
+    numErrors.toString(),
+    globals.invalidAmpBgcolor
+  );
   updateTabPopup(tabId);
 }
 
@@ -150,17 +176,18 @@ function handleAmpFail(tabId, validationResult) {
  */
 function handleAmpLink(tabId, ampHref) {
   updateTabStatus(
-      tabId, globals.linkToAmpIconPrefix, globals.linkToAmpTitle,
-      '' /*text*/, globals.linkToAmpBgColor);
-  chrome.action.onClicked.addListener(
-      function loadAmpHref(tab) {
-        if (tab.id == tabId) {
-          chrome.action.onClicked.removeListener(loadAmpHref);
-          chrome.tabs.sendMessage(tab.id,
-              {'loadAmp': true, 'ampHref': ampHref});
-        }
-      }
+    tabId,
+    globals.linkToAmpIconPrefix,
+    globals.linkToAmpTitle,
+    '' /*text*/,
+    globals.linkToAmpBgColor
   );
+  chrome.action.onClicked.addListener(function loadAmpHref(tab) {
+    if (tab.id == tabId) {
+      chrome.action.onClicked.removeListener(loadAmpHref);
+      chrome.tabs.sendMessage(tab.id, {'loadAmp': true, 'ampHref': ampHref});
+    }
+  });
 }
 
 /**
@@ -172,15 +199,25 @@ function handleAmpLink(tabId, ampHref) {
 function handleAmpPass(tabId, validationResult) {
   const numWarnings = getNumberOfWarnings(validationResult.errors);
   updateTabStatus(
-      tabId, globals.validAmpIconPrefix, globals.validAmpTitle,
-      '' /*text*/, globals.validAmpBgcolor);
-  if (numWarnings > 0) {updateTabPopup(tabId);}
+    tabId,
+    globals.validAmpIconPrefix,
+    globals.validAmpTitle,
+    '' /*text*/,
+    globals.validAmpBgcolor
+  );
+  if (numWarnings > 0) {
+    updateTabPopup(tabId);
+  }
 }
 
 function handleValidatorNotPresent(tabId) {
-  updateTabStatus(tabId, globals.validatorNotPresentIconPrefix,
-      globals.validatorNotPresentTitle, globals.validatorNotPresentBadge,
-      globals.validatorNotPresentBgColor);
+  updateTabStatus(
+    tabId,
+    globals.validatorNotPresentIconPrefix,
+    globals.validatorNotPresentTitle,
+    globals.validatorNotPresentBadge,
+    globals.validatorNotPresentBgColor
+  );
   chrome.tabs.get(tabId, () => {
     if (!chrome.runtime.lastError) {
       chrome.action.setPopup({
@@ -198,7 +235,7 @@ function handleValidatorNotPresent(tabId) {
  * @return {boolean}
  */
 function isForbiddenUrl(url) {
-  return (url.startsWith('chrome://') || url.startsWith('view-source'));
+  return url.startsWith('chrome://') || url.startsWith('view-source');
 }
 
 /**
@@ -209,17 +246,15 @@ function isForbiddenUrl(url) {
  */
 function updateTab(tab) {
   if (!isForbiddenUrl(tab.url)) {
-    chrome.tabs.sendMessage(
-        tab.id, {'getAmpDetails': true}, response => {
-          if (response && response.fromAmpCache && response.ampHref) {
-            handleAmpCache(tab.id, response.ampHref);
-          } else if (response && response.isAmp) {
-            validateUrlFromTab(tab, response.userAgent);
-          } else if (response && !response.isAmp && response.ampHref) {
-            handleAmpLink(tab.id, response.ampHref);
-          }
-        }
-    );
+    chrome.tabs.sendMessage(tab.id, {'getAmpDetails': true}, (response) => {
+      if (response && response.fromAmpCache && response.ampHref) {
+        handleAmpCache(tab.id, response.ampHref);
+      } else if (response && response.isAmp) {
+        validateUrlFromTab(tab, response.userAgent);
+      } else if (response && !response.isAmp && response.ampHref) {
+        handleAmpLink(tab.id, response.ampHref);
+      }
+    });
   }
 }
 
@@ -232,8 +267,7 @@ function updateTabPopup(tabId) {
   // Verify tab still exists
   chrome.tabs.get(tabId, () => {
     if (!chrome.runtime.lastError) {
-      chrome.action.setPopup(
-          {tabId, popup: globals.validatorPopup});
+      chrome.action.setPopup({tabId, popup: globals.validatorPopup});
     }
   });
 }
@@ -258,13 +292,15 @@ function updateTabStatus(tabId, iconPrefix, title, text, color) {
         },
         tabId,
       });
-      if (title !== undefined)
-      {chrome.action.setTitle({title, tabId});}
-      if (text !== undefined)
-      {chrome.action.setBadgeText({text, tabId});}
-      if (color !== undefined)
-      {chrome.action.setBadgeBackgroundColor(
-          {color: hex2rgba(color), tabId});}
+      if (title !== undefined) {
+        chrome.action.setTitle({title, tabId});
+      }
+      if (text !== undefined) {
+        chrome.action.setBadgeText({text, tabId});
+      }
+      if (color !== undefined) {
+        chrome.action.setBadgeBackgroundColor({color: hex2rgba(color), tabId});
+      }
     }
   });
 }
@@ -288,32 +324,34 @@ function validateUrlFromTab(tab, userAgent) {
     method: 'GET',
     headers: {
       'user-agent': userAgent,
-    }
-  }).then(resp => {
-    if (resp.ok) {
-      return resp.text();
-    }
-  }).then(async text => {
-    await amp.validator.init();
-    const validationResult = amp.validator.validateString(text);
-    chrome.storage.session.set({
-      [url]: JSON.stringify(validationResult)
+    },
+  })
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.text();
+      }
+    })
+    .then(async (text) => {
+      await amp.validator.init();
+      const validationResult = amp.validator.validateString(text);
+      chrome.storage.session.set({
+        [url]: JSON.stringify(validationResult),
+      });
+      if (validationResult.status == 'PASS') {
+        handleAmpPass(tab.id, validationResult);
+      } else if (onlyErrorIsDevMode(validationResult)) {
+        handleAmpDevMode(tab.id);
+      } else {
+        handleAmpFail(tab.id, validationResult);
+      }
     });
-    if (validationResult.status == 'PASS') {
-      handleAmpPass(tab.id, validationResult);
-    } else if (onlyErrorIsDevMode(validationResult)) {
-      handleAmpDevMode(tab.id);
-    } else {
-      handleAmpFail(tab.id, validationResult);
-    }
-  });
 }
 
 /**
  * Remove the URL from storage when the tab is closed.
  */
 function removeTab(tabId) {
-  chrome.tabs.get(tabId, tab => {
+  chrome.tabs.get(tabId, (tab) => {
     if (!chrome.runtime.lastError) {
       chrome.storage.session.remove(tab.url);
     }
@@ -338,7 +376,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
  */
 chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
   removeTab(removedTabId);
-  chrome.tabs.get(addedTabId, tab => {
+  chrome.tabs.get(addedTabId, (tab) => {
     updateTab(tab);
   });
 });
@@ -346,7 +384,7 @@ chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
 chrome.runtime.onMessage.addListener((url, sender, sendResponse) => {
   // To ensure that the browser does not drop the reply.
   (async () => {
-    chrome.storage.session.get(url, result => {
+    chrome.storage.session.get(url, (result) => {
       sendResponse(result[url]);
     });
   })();

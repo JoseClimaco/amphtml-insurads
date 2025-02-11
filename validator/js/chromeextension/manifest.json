@@ -20,12 +20,8 @@
   },
   "content_scripts": [
     {
-      "js": [
-        "content_script.js"
-      ],
-      "matches": [
-        "<all_urls>"
-      ],
+      "js": ["content_script.js"],
+      "matches": ["<all_urls>"],
       "run_at": "document_start"
     }
   ],
@@ -33,12 +29,6 @@
     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
   },
   "homepage_url": "https://amp.dev",
-  "permissions": [
-    "tabs",
-    "storage"
-  ],
-  "host_permissions": [
-    "*://*/",
-    "<all_urls>"
-  ]
+  "permissions": ["tabs", "storage"],
+  "host_permissions": ["*://*/", "<all_urls>"]
 }

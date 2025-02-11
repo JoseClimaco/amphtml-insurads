@@ -1,4 +1,4 @@
-@import "./amp-story-draggable-drawer.css";
+@import './amp-story-draggable-drawer.css';
 @import './amp-story-form.css';
 
 /** Remote attachment styles. */
@@ -15,12 +15,12 @@
   --i-amphtml-outlink-cta-text-color: black !important;
 }
 
-[theme="dark"].i-amphtml-story-page-attachment-remote {
+[theme='dark'].i-amphtml-story-page-attachment-remote {
   --i-amphtml-outlink-cta-background-color: black !important;
   --i-amphtml-outlink-cta-text-color: white !important;
 }
 
-amp-story[desktop] .i-amphtml-story-page-attachment-remote  {
+amp-story[desktop] .i-amphtml-story-page-attachment-remote {
   /* Shows outlink url preview on mobile only. */
   display: none !important;
 }
@@ -30,7 +30,8 @@ amp-story[desktop] .i-amphtml-story-page-attachment-remote  {
   display: none !important;
 }
 
-.i-amphtml-story-page-attachment-remote .i-amphtml-story-draggable-drawer-container {
+.i-amphtml-story-page-attachment-remote
+  .i-amphtml-story-draggable-drawer-container {
   height: 100% !important;
   border-radius: 8px 8px 0 0 !important;
   box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.12) !important;
@@ -52,9 +53,10 @@ amp-story[desktop] .i-amphtml-story-page-attachment-remote  {
   background: var(--i-amphtml-outlink-cta-background-color) !important;
 }
 
-
-.i-amphtml-story-page-attachment-remote-content .i-amphtml-story-page-attachment-remote-img,
-.i-amphtml-story-page-attachment-remote-content .i-amphtml-story-page-open-attachment-link-icon {
+.i-amphtml-story-page-attachment-remote-content
+  .i-amphtml-story-page-attachment-remote-img,
+.i-amphtml-story-page-attachment-remote-content
+  .i-amphtml-story-page-open-attachment-link-icon {
   width: 32px !important;
   height: 32px !important;
   flex-shrink: 0 !important;
@@ -87,7 +89,7 @@ amp-story[desktop] .i-amphtml-story-page-attachment-remote  {
 
 .i-amphtml-story-page-attachment-remote-title :first-child:after {
   /* For RTL supportted space. */
-  content: "\00a0 " !important;
+  content: '\00a0 ' !important;
 }
 
 .i-amphtml-story-page-attachment-remote-title :nth-child(2) {
@@ -112,20 +114,21 @@ amp-story[desktop] .i-amphtml-story-page-attachment-remote  {
   position: relative !important;
   width: 100% !important;
   height: 100% !important;
-  background: #FFF !important;
+  background: #fff !important;
   z-index: 100000 !important; /** System layer + 1 */
-  animation: i-amphtml-open-3p-attachment 120ms cubic-bezier(0.0, 0.0, 0.2, 1) forwards !important;
+  animation: i-amphtml-open-3p-attachment 120ms cubic-bezier(0, 0, 0.2, 1)
+    forwards !important;
 }
 
 @keyframes i-amphtml-open-3p-attachment {
- 0% {
-  transform: scaleX(0);
-  opacity: 0.3;
- }
- 100% {
-  transform: scaleX(1);
-  opacity: 1;
- }
+  0% {
+    transform: scaleX(0);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
 }
 
 /** Scrim on amp-story-page when attachment is active */
@@ -139,7 +142,8 @@ amp-story[desktop] .i-amphtml-story-page-attachment-remote  {
   position: absolute !important;
   background: #000 !important;
   z-index: 3 !important;
-  animation: i-amphtml-attachment-overlay-opacity 0.3s cubic-bezier(0.0, 0.0, 0.2, 1) forwards !important;
+  animation: i-amphtml-attachment-overlay-opacity 0.3s
+    cubic-bezier(0, 0, 0.2, 1) forwards !important;
 }
 
 @keyframes i-amphtml-attachment-overlay-opacity {

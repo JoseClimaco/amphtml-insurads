@@ -3,7 +3,7 @@
  * - display:block element
  * - size-defined element
  */
- bento-jwplayer {
+bento-jwplayer {
   display: block;
   overflow: hidden;
   position: relative;

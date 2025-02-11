@@ -9,11 +9,14 @@ const enumInFile = {
 };
 
 isEnumValue(enumInFile, x);
-isEnumValue({
-  FOO: 'FOO',
-  BAR: 100,
-  BAZ: 2,
-}, y);
+isEnumValue(
+  {
+    FOO: 'FOO',
+    BAR: 100,
+    BAZ: 2,
+  },
+  y
+);
 
 isEnumValue({SINGLE_ITEM: 'single-item'}, foo);
 

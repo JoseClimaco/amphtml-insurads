@@ -1,4 +1,4 @@
-import { getMode } from '../../../../../../../src/mode';
+import {getMode} from '../../../../../../../src/mode';
 
 const test = getMode().test;
 const localDev = getMode().localDev;

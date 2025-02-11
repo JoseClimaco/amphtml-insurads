@@ -1,10 +1,8 @@
-
-
 import {isElement} from '#core/types';
 
 export function dev() {
   return {
-    assertElement: element => {
+    assertElement: (element) => {
       console.assert(isElement(element), 'Element expected');
       return element;
     },

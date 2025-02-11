@@ -1,5 +1,3 @@
-
-
 /*
  * In desktop panel mode i-amphtml-story-button-container acts as a sentinel
  * and covers the previous and next pages.
@@ -15,7 +13,9 @@
   height: calc(var(--story-100dvh) - 150px) !important;
   margin: auto 0 !important;
   background: none !important;
-  transition: 150ms opacity linear, 150ms visibility linear !important;
+  transition:
+    150ms opacity linear,
+    150ms visibility linear !important;
   outline: none !important;
   z-index: 100002 !important;
 }
@@ -26,13 +26,16 @@ amp-story:not([desktop]) .i-amphtml-story-button-container {
 }
 
 .next-container,
-.i-amphtml-story-button-container.next-container > .i-amphtml-story-button-move {
+.i-amphtml-story-button-container.next-container
+  > .i-amphtml-story-button-move {
   left: auto !important;
   right: 0 !important;
 }
 
-[dir=rtl] .next-container,
-[dir=rtl] .i-amphtml-story-button-container.next-container > .i-amphtml-story-button-move {
+[dir='rtl'] .next-container,
+[dir='rtl']
+  .i-amphtml-story-button-container.next-container
+  > .i-amphtml-story-button-move {
   left: 0 !important;
   right: auto !important;
 }
@@ -43,7 +46,7 @@ amp-story:not([desktop]) .i-amphtml-story-button-container {
 
 /* A11y pagination element. Focusable by screen readers. Visibly Hidden on mobile unless navigating with keyboard. */
 amp-story:not([desktop]) .i-amphtml-story-button-move,
-[dir=rtl] amp-story:not([desktop]) .i-amphtml-story-button-move {
+[dir='rtl'] amp-story:not([desktop]) .i-amphtml-story-button-move {
   width: 100% !important;
   height: 100% !important;
   border: none !important;
@@ -56,26 +59,28 @@ amp-story:not([desktop]) .i-amphtml-story-button-move,
   filter: invert(100%) drop-shadow(0 0 3px #000b) !important;
 }
 
-body:not(.amp-mode-keyboard-active) amp-story:not([desktop]):not(.i-amphtml-story-desktop-one-panel) .i-amphtml-story-button-move {
+body:not(.amp-mode-keyboard-active)
+  amp-story:not([desktop]):not(.i-amphtml-story-desktop-one-panel)
+  .i-amphtml-story-button-move {
   /* Hides background unless navigating with keyboard. */
   background: none !important;
 }
 
 [desktop] .i-amphtml-story-button-move {
   display: flex !important;
-  position: fixed!important;
-  top: 0!important;
-  bottom: 0!important;
-  margin: auto 12px!important;
-  width: 54px!important;
-  height: 54px!important;
-  border: 0!important;
-  background-repeat: no-repeat!important;
-  justify-content: center!important;
-  align-items: center!important;
-  transition: 150ms opacity linear!important;
-  cursor: pointer!important;
-  pointer-events: all!important;
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  margin: auto 12px !important;
+  width: 54px !important;
+  height: 54px !important;
+  border: 0 !important;
+  background-repeat: no-repeat !important;
+  justify-content: center !important;
+  align-items: center !important;
+  transition: 150ms opacity linear !important;
+  cursor: pointer !important;
+  pointer-events: all !important;
 }
 
 amp-story.i-amphtml-story-desktop-one-panel .i-amphtml-story-button-container {
@@ -86,19 +91,30 @@ amp-story.i-amphtml-story-desktop-one-panel .i-amphtml-story-button-container {
   bottom: auto !important;
   pointer-events: all !important;
   /* Calculates position of button by factoring in page width. */
-  --i-amphtml-story-desktop-one-panel-button-margin: max(10px, calc(50vw - 72px - var(--i-amphtml-story-desktop-one-panel-width) / 2));
+  --i-amphtml-story-desktop-one-panel-button-margin: max(
+    10px,
+    calc(50vw - 72px - var(--i-amphtml-story-desktop-one-panel-width) / 2)
+  );
 }
 
-amp-story.i-amphtml-story-desktop-one-panel .i-amphtml-story-button-container.prev-container {
-  margin-inline-start: var(--i-amphtml-story-desktop-one-panel-button-margin) !important;
+amp-story.i-amphtml-story-desktop-one-panel
+  .i-amphtml-story-button-container.prev-container {
+  margin-inline-start: var(
+    --i-amphtml-story-desktop-one-panel-button-margin
+  ) !important;
 }
 
-amp-story.i-amphtml-story-desktop-one-panel .i-amphtml-story-button-container.next-container {
-  margin-inline-end: var(--i-amphtml-story-desktop-one-panel-button-margin) !important;
+amp-story.i-amphtml-story-desktop-one-panel
+  .i-amphtml-story-button-container.next-container {
+  margin-inline-end: var(
+    --i-amphtml-story-desktop-one-panel-button-margin
+  ) !important;
 }
 
 amp-story.i-amphtml-story-desktop-one-panel .i-amphtml-story-button-move,
-[dir=rtl] amp-story.i-amphtml-story-desktop-one-panel .i-amphtml-story-button-move {
+[dir='rtl']
+  amp-story.i-amphtml-story-desktop-one-panel
+  .i-amphtml-story-button-move {
   filter: none !important;
   background-color: white !important;
   border-radius: 50% !important;
@@ -106,7 +122,7 @@ amp-story.i-amphtml-story-desktop-one-panel .i-amphtml-story-button-move,
 
 amp-story.i-amphtml-story-desktop-one-panel .i-amphtml-story-button-hidden {
   visibility: visible !important;
-  opacity: .1 !important;
+  opacity: 0.1 !important;
   pointer-events: none !important;
 }
 
@@ -114,29 +130,29 @@ amp-story.i-amphtml-story-desktop-one-panel .i-amphtml-story-button-hidden {
   background-size: 100% !important;
   background-color: #fff2 !important;
   border-radius: 50% !important;
-  filter: invert(1)!important;
+  filter: invert(1) !important;
 }
 
 .prev-container > .i-amphtml-story-button-move,
-[dir=rtl] .i-amphtml-story-fwd-next > .i-amphtml-story-button-move,
+[dir='rtl'] .i-amphtml-story-fwd-next > .i-amphtml-story-button-move,
 .i-amphtml-story-fwd-next > .i-amphtml-story-button-move,
-[dir=rtl] .prev-container > .i-amphtml-story-button-move {
-  background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none"><path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="m21.52 16.22 7.75 7.75M21.52 31.75 29.27 24"/></svg>')!important;
+[dir='rtl'] .prev-container > .i-amphtml-story-button-move {
+  background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none"><path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="m21.52 16.22 7.75 7.75M21.52 31.75 29.27 24"/></svg>') !important;
 }
 
 .prev-container > .i-amphtml-story-button-move,
-[dir=rtl] .i-amphtml-story-fwd-next > .i-amphtml-story-button-move {
-  left: 0!important;
+[dir='rtl'] .i-amphtml-story-fwd-next > .i-amphtml-story-button-move {
+  left: 0 !important;
   right: auto !important;
   transform: rotate(180deg) !important;
 }
 
-[dir="rtl"] .prev-container > .i-amphtml-story-button-move {
+[dir='rtl'] .prev-container > .i-amphtml-story-button-move {
   transform: none !important;
 }
 
 .i-amphtml-story-fwd-next > .i-amphtml-story-button-move,
-[dir=rtl] .prev-container > .i-amphtml-story-button-move {
+[dir='rtl'] .prev-container > .i-amphtml-story-button-move {
   left: auto !important;
   right: 0 !important;
 }

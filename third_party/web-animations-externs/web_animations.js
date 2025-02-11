@@ -18,14 +18,12 @@
  * limitations under the License.
  */
 
-
 /**
  * See https://developer.mozilla.org/en-US/docs/Web/API/Animation
  * @interface
  */
 class WorkletAnimation {
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * Starts or resumes playing of an animation, or begins the animation again
@@ -58,12 +56,10 @@ class WorkletAnimation {
   reverse() {}
 }
 
-
 /**
  */
 class ScrollTimeline {
-  constructor() {
-  }
+  constructor() {}
 }
 
 /**

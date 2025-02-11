@@ -1149,4 +1149,4 @@ function getMetaTag(rootNode, name) {
   return null;
 }
 
-export { Doc, PageConfig, PageConfigResolver };
+export {Doc, PageConfig, PageConfigResolver};

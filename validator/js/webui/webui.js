@@ -8,7 +8,8 @@ function getLocationHashParams() {
     const keyValue = paramStrings[ii].split('=');
     if (keyValue[0].length > 0) {
       params[keyValue[0]] = keyValue[1]
-        ? decodeURIComponent(keyValue[1]) : undefined;
+        ? decodeURIComponent(keyValue[1])
+        : undefined;
     }
   }
   return params;

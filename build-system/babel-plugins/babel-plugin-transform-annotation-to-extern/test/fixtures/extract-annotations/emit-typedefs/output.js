@@ -12,10 +12,8 @@ class PositionObserver {
     this.win_ = win;
     /**/
   }
-
 }
 /**/
-
 
 /**
  * @typedef {{
@@ -26,11 +24,11 @@ class PositionObserver {
 let PositionEntryDef;
 
 /**
-     * @typedef {{
-     *   viewportRect: !LayoutRectDef,
-     *   targetRect: !LayoutRectDef,
-     * }}
-     */
+ * @typedef {{
+ *   viewportRect: !LayoutRectDef,
+ *   targetRect: !LayoutRectDef,
+ * }}
+ */
 let PositionEntryDef2;
 
 /**

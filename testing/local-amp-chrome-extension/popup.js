@@ -1,5 +1,3 @@
-
-
 const background = chrome.extension.getBackgroundPage(); // eslint-disable-line no-undef
 
 function toggleProxy(unusedE) {
@@ -7,7 +5,7 @@ function toggleProxy(unusedE) {
   background.updateBadge();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const switchButton = document.querySelector('input[type="checkbox"]');
   switchButton.addEventListener('change', toggleProxy);
   if (!background.disabled) {

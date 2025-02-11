@@ -3,18 +3,11 @@ goog.require('goog.crypt.base64');
 goog.require('goog.uri.utils');
 goog.require('proto.amp.validator.ValidationError');
 goog.require('proto.amp.validator.ValidationResult');
-const {
-  ValidationError,
-  ValidationResult,
-} = proto.amp.validator;
+const {ValidationError, ValidationResult} = proto.amp.validator;
 const {
   asserts,
-  crypt: {
-    base64,
-  },
-  uri: {
-    utils: uriUtils,
-  },
+  crypt: {base64},
+  uri: {utils: uriUtils},
 } = goog;
 
 let wasmModule;
@@ -43,8 +36,9 @@ class ProtobufEnum {
   constructor(jspbObject) {
     const entries = Object.entries(jspbObject);
     this.numberByName = new Map(entries);
-    this.nameByNumber =
-        new Map(entries.map(([name, number]) => [number, name]));
+    this.nameByNumber = new Map(
+      entries.map(([name, number]) => [number, name])
+    );
   }
 }
 
@@ -101,14 +95,18 @@ function validateString(input, opt_htmlFormat) {
     htmlFormat = opt_htmlFormat.toUpperCase();
   }
   asserts.assertExists(wasmModule, `WebAssembly is uninitialized`);
-  const resultBase64 =
-      wasmModule.validateString(input, htmlFormat, /*maxErrors=*/ -1);
+  const resultBase64 = wasmModule.validateString(
+    input,
+    htmlFormat,
+    /*maxErrors=*/ -1
+  );
   const resultJspb = ValidationResult.deserializeBinary(resultBase64);
   const resultObject = resultJspb.toObject();
   resultObject.errors = resultJspb.getErrorsList().map((errorJspb) => {
     const errorObject = stringifyValidationErrorFields(errorJspb.toObject());
-    errorObject[PB_BASE64] =
-        base64.encodeByteArray(errorJspb.serializeBinary());
+    errorObject[PB_BASE64] = base64.encodeByteArray(
+      errorJspb.serializeBinary()
+    );
     return errorObject;
   });
   resultObject.status = STATUS.nameByNumber.get(resultObject.status);
@@ -136,9 +134,9 @@ function renderErrorMessage(error) {
 function renderInlineResult(validationResult, filename, inputContents) {
   asserts.assertExists(wasmModule, `WebAssembly is uninitialized`);
   return wasmModule.renderInlineResult(
-      validationResult[PB_BASE64],
-      filename,
-      inputContents,
+    validationResult[PB_BASE64],
+    filename,
+    inputContents
   );
 }
 
@@ -160,8 +158,9 @@ function isAmpCacheUrl(url) {
 function errorLine(filenameOrUrl, error) {
   const line = error.line ?? 1;
   const col = error.col ?? 0;
-  let errorLine = `${uriUtils.removeFragment(filenameOrUrl)}:${line}:${col} ${
-      renderErrorMessage(error)}`;
+  let errorLine = `${uriUtils.removeFragment(filenameOrUrl)}:${line}:${col} ${renderErrorMessage(
+    error
+  )}`;
   if (error.specUrl) {
     errorLine += ` (see ${error.specUrl})`;
   }
@@ -174,22 +173,21 @@ function errorLine(filenameOrUrl, error) {
  * @param {string} url
  */
 function logValidationResult(validationResult, url) {
-  const {
-    status,
-    errors,
-  } = validationResult;
+  const {status, errors} = validationResult;
   if (status === STATUS.nameByNumber.get(ValidationResult.Status.PASS)) {
     console.info('AMP validation successful.');
     console.info(
-        `Review our 'publishing checklist' to ensure successful AMP document` +
-        `distribution. See https://go.amp.dev/publishing-checklist`);
+      `Review our 'publishing checklist' to ensure successful AMP document` +
+        `distribution. See https://go.amp.dev/publishing-checklist`
+    );
     if (errors.length === 0) {
       return;
     }
   } else if (status !== STATUS.nameByNumber.get(ValidationResult.Status.FAIL)) {
     console.error(
-        'AMP validation had unknown results. This indicates a validator ' +
-        'bug. Please report at https://github.com/ampproject/amphtml/issues .');
+      'AMP validation had unknown results. This indicates a validator ' +
+        'bug. Please report at https://github.com/ampproject/amphtml/issues .'
+    );
   }
   if (status === STATUS.nameByNumber.get(ValidationResult.Status.FAIL)) {
     console.error('AMP validation had errors:');
@@ -197,16 +195,21 @@ function logValidationResult(validationResult, url) {
     console.error('AMP validation had warnings:');
   }
   for (const error of errors) {
-    if (error.severity ===
-        SEVERITY.nameByNumber.get(ValidationError.Severity.ERROR)) {
+    if (
+      error.severity ===
+      SEVERITY.nameByNumber.get(ValidationError.Severity.ERROR)
+    ) {
       console.error(errorLine(url, error));
     } else {
       console.warn(errorLine(url, error));
     }
   }
   if (errors.length !== 0) {
-    console.info(`See also https://validator.amp.dev/?experimental_wasm=1#url=${
-        encodeURIComponent(uriUtils.removeFragment(url))}`);
+    console.info(
+      `See also https://validator.amp.dev/?experimental_wasm=1#url=${encodeURIComponent(
+        uriUtils.removeFragment(url)
+      )}`
+    );
   }
 }
 
@@ -217,15 +220,11 @@ function logValidationResult(validationResult, url) {
  */
 async function validateUrlAndLog(url) {
   asserts.assert(
-      isAmpCacheUrl(url) === false,
-      'Attempting to validate an AMP cache URL.' +
-          'Please use #development=1 on the origin URL instead.');
-  const [
-    response,
-  ] = await Promise.all([
-    fetch(url),
-    init(),
-  ]);
+    isAmpCacheUrl(url) === false,
+    'Attempting to validate an AMP cache URL.' +
+      'Please use #development=1 on the origin URL instead.'
+  );
+  const [response] = await Promise.all([fetch(url), init()]);
   asserts.assert(response.status === 200, `Failed to fetch ${url}`);
   const html = await response.text();
   let format = 'AMP';

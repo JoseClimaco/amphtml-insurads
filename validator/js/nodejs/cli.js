@@ -5,4 +5,3 @@
 const {main} = require('./');
 
 main();
-

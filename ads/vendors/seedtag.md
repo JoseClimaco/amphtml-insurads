@@ -36,8 +36,8 @@ Supported parameters:
 
 -   `data-adunit-id` mandatory
 
-
 ## User Consent Integration
+
 When [user consent](https://github.com/ampproject/amphtml/blob/main/extensions/amp-consent/amp-consent.md#blocking-behaviors) is required, Seedtag ad approaches user consent in the following ways:
 
 -   `CONSENT_POLICY_STATE.SUFFICIENT`: Serve a personalized ad to the user.

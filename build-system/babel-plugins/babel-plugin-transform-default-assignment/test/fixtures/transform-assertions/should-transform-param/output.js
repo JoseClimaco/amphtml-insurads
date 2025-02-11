@@ -8,5 +8,4 @@ class Foo {
     let _param2 = param;
     _param2;
   }
-
 }

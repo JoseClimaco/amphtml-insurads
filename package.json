@@ -20,6 +20,7 @@
     "@ampproject/toolbox-cache-url": "2.9.0",
     "@ampproject/viewer-messaging": "1.1.2",
     "@ampproject/worker-dom": "0.35.0",
+    "@microsoft/signalr": "7.0.14",
     "@use-gesture/react": "10.2.10",
     "@webcomponents/webcomponentsjs": "2.6.0",
     "date-fns": "2.27.0",

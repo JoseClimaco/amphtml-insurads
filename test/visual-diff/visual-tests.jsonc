@@ -131,7 +131,7 @@
       "url": "examples/visual-tests/article-access.amp/article-access.amp.html",
       "name": "AMP Article Access",
       "loading_incomplete_selectors": [".article-body"],
-      "loading_complete_selectors": [".login-section"]
+      "loading_complete_selectors": [".login-section"],
     },
     {
       // TODO(#34792, kristoferbaxter): See issue for details.
@@ -140,21 +140,21 @@
       "name": "Fonts",
       "loading_incomplete_selectors": [
         "html.comic-amp-font-loading",
-        "html.comic-amp-bold-font-loading"
+        "html.comic-amp-bold-font-loading",
       ],
       "loading_complete_selectors": [
         "html.comic-amp-font-loaded",
-        "html.comic-amp-bold-font-loaded"
-      ]
+        "html.comic-amp-bold-font-loaded",
+      ],
     },
     {
       "url": "examples/visual-tests/amp-layout/amp-layout.amp.html",
-      "name": "AMP Layout"
+      "name": "AMP Layout",
     },
     {
       "url": "examples/visual-tests/article-fade-in.amp.html",
       "name": "fade-in & fade-in-scroll",
-      "loading_complete_selectors": [".overlay-container", ".overflow-window"]
+      "loading_complete_selectors": [".overlay-container", ".overflow-window"],
     },
     {
       // TODO(#34792, kristoferbaxter): See issue for details.
@@ -163,13 +163,13 @@
       "name": "Fonts 404",
       "loading_complete_selectors": [
         ".comic-amp-font-missing",
-        ".comic-amp-bold-font-missing"
+        ".comic-amp-bold-font-missing",
       ],
-      "interactive_tests": "examples/visual-tests/font.amp.404/font.amp.js"
+      "interactive_tests": "examples/visual-tests/font.amp.404/font.amp.js",
     },
     {
       "url": "examples/visual-tests/css.amp/css.amp.html",
-      "name": "unbuilt css"
+      "name": "unbuilt css",
     },
     {
       "url": "examples/visual-tests/article.amp/article.amp.html",
@@ -177,8 +177,8 @@
       "loading_complete_selectors": [
         ".article-body",
         ".ad-one :not(.i-amphtml-loading-container) + iframe",
-        ".ad-two :not(.i-amphtml-loading-container) + iframe"
-      ]
+        ".ad-two :not(.i-amphtml-loading-container) + iframe",
+      ],
     },
     {
       "url": "examples/visual-tests/amp-list/amp-list.amp.html",
@@ -186,39 +186,39 @@
       "loading_complete_selectors": [
         "#list1 > div[role='list']",
         "#list2 > div[role='list']",
-        "#list3 > div[role='list']"
+        "#list3 > div[role='list']",
       ],
-      "interactive_tests": "examples/visual-tests/amp-list/amp-list.amp.js"
+      "interactive_tests": "examples/visual-tests/amp-list/amp-list.amp.js",
     },
     {
       "url": "examples/visual-tests/amp-lightbox-gallery.html",
-      "name": "amp-lightbox-gallery - article"
+      "name": "amp-lightbox-gallery - article",
     },
     {
       "url": "examples/visual-tests/video/rotate-to-fullscreen.html",
       "name": "Video rotate-to-fullscreen",
-      "loading_complete_selectors": ["video.i-amphtml-replaced-content"]
+      "loading_complete_selectors": ["video.i-amphtml-replaced-content"],
     },
     {
       "url": "examples/visual-tests/amp-sidebar/amp-sidebar.amp.html",
       "name": "amp-sidebar",
       "viewport": {"width": 400, "height": 800},
       "interactive_tests": "examples/visual-tests/amp-sidebar/amp-sidebar.js",
-      "loading_incomplete_selectors": ["amp-sidebar.i-amphtml-element"]
+      "loading_incomplete_selectors": ["amp-sidebar.i-amphtml-element"],
     },
     {
       "url": "examples/visual-tests/amp-sidebar/amp-sidebar-toolbar-ol.amp.html",
       "name": "amp-sidebar toolbar > ol",
       "viewport": {"width": 400, "height": 800},
       "interactive_tests": "examples/visual-tests/amp-sidebar/amp-sidebar-toolbar.js",
-      "loading_incomplete_selectors": ["amp-sidebar.i-amphtml-element"]
+      "loading_incomplete_selectors": ["amp-sidebar.i-amphtml-element"],
     },
     {
       "url": "examples/visual-tests/amp-sidebar/amp-sidebar-toolbar-ul.amp.html",
       "name": "amp-sidebar toolbar > ul",
       "viewport": {"width": 400, "height": 800},
       "interactive_tests": "examples/visual-tests/amp-sidebar/amp-sidebar-toolbar.js",
-      "loading_incomplete_selectors": ["amp-sidebar.i-amphtml-element"]
+      "loading_incomplete_selectors": ["amp-sidebar.i-amphtml-element"],
     },
     {
       // TODO(#27455, @ampproject/wg-monetization): see https://percy.io/ampproject/amphtml/builds/4672752
@@ -227,10 +227,10 @@
       "name": "AMP Sticky Ad",
       "viewport": {
         "width": 400,
-        "height": 600
+        "height": 600,
       },
       "loading_complete_delay_ms": 500,
-      "enable_percy_javascript": true
+      "enable_percy_javascript": true,
     },
     {
       // TODO(@ampproject/wg-monetization, @ampproject/wg-stories)
@@ -239,13 +239,13 @@
       "name": "AMP Story Ad System Layer",
       "viewport": {
         "width": 400,
-        "height": 600
+        "height": 600,
       },
       "interactive_tests": "examples/visual-tests/amp-story/amp-story-ad.js",
       "loading_complete_selectors": [
         ".i-amphtml-story-ad-badge",
-        "amp-story[ad-showing]"
-      ]
+        "amp-story[ad-showing]",
+      ],
     },
     {
       // TODO(#32685, @ampproject/wg-stories): see https://percy.io/ampproject/amphtml/builds/8876280/changed/503548953
@@ -255,66 +255,66 @@
       "viewport": {"width": 320, "height": 480},
       "loading_complete_selectors": [
         ".i-amphtml-story-loaded",
-        "amp-story-page#page-2[active]"
+        "amp-story-page#page-2[active]",
       ],
       // for page navigation
-      "loading_complete_delay_ms": 500
+      "loading_complete_delay_ms": 500,
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-template-fill.html",
       "name": "amp-story: Grid layer (fill)",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-template-vertical.html",
       "name": "amp-story: Grid layer (vertical)",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-template-horizontal.html",
       "name": "amp-story: Grid layer (horizontal)",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-template-thirds.html",
       "name": "amp-story: Grid layer (thirds)",
       "viewport": {"width": 320, "height": 480},
       "loading_incomplete_selectors": ["[grid-area]"],
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-presets.html",
       "name": "amp-story: Grid layer anchoring with preset (vertically)",
       "viewport": {"width": 250, "height": 500},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-presets.html",
       "name": "amp-story: Grid layer anchoring with preset (horizontally)",
       "viewport": {"width": 400, "height": 500},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/embed-mode-1.html",
       "name": "amp-story: embed mode 1",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/embed-mode-2.html",
       "name": "amp-story: embed mode 2",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/share-menu.html",
       "name": "amp-story: share menu",
       "viewport": {"width": 320, "height": 480},
       "interactive_tests": "examples/visual-tests/amp-story/share-menu.js",
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       // TODO(#36358, @ampproject/wg-stories): Re-enable test.
@@ -323,7 +323,7 @@
       "name": "amp-story: info dialog",
       "viewport": {"width": 320, "height": 480},
       "interactive_tests": "examples/visual-tests/amp-story/info-dialog.js",
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-consent.html",
@@ -331,17 +331,17 @@
       "viewport": {"width": 320, "height": 480},
       "loading_complete_selectors": [
         ".i-amphtml-story-loaded",
-        ".i-amphtml-story-consent"
+        ".i-amphtml-story-consent",
       ],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-consent.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-consent.js",
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-unsupported-browser-layer.html?transform=0",
       "name": "amp-story: unsupported browser",
       "viewport": {"width": 320, "height": 480},
       "loading_complete_selectors": [
-        ".i-amphtml-story-unsupported-browser-overlay"
-      ]
+        ".i-amphtml-story-unsupported-browser-overlay",
+      ],
     },
     {
       "url": "examples/visual-tests/amp-story/basic.html",
@@ -349,47 +349,47 @@
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [
         ".i-amphtml-story-loaded",
-        "amp-story-page#page-2[active]"
+        "amp-story-page#page-2[active]",
       ],
       // for page navigation
-      "loading_complete_delay_ms": 500
+      "loading_complete_delay_ms": 500,
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-template-fill.html",
       "name": "amp-story: Grid layer (fill) (desktop)",
       "viewport": {"width": 1440, "height": 900},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-template-vertical.html",
       "name": "amp-story: Grid layer (vertical) (desktop)",
       "viewport": {"width": 1440, "height": 900},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-template-horizontal.html",
       "name": "amp-story: Grid layer (horizontal) (desktop)",
       "viewport": {"width": 1440, "height": 900},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-grid-layer-template-thirds.html",
       "name": "amp-story: Grid layer (thirds) (desktop)",
       "viewport": {"width": 1440, "height": 900},
       "loading_incomplete_selectors": ["[grid-area]"],
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/embed-mode-1.html",
       "name": "amp-story: embed mode 1 (desktop)",
       "viewport": {"width": 1440, "height": 900},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/embed-mode-2.html",
       "name": "amp-story: embed mode 2 (desktop)",
       "viewport": {"width": 1440, "height": 900},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-consent.html",
@@ -397,41 +397,41 @@
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [
         ".i-amphtml-story-loaded",
-        ".i-amphtml-story-consent"
+        ".i-amphtml-story-consent",
       ],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-consent.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-consent.js",
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-unsupported-browser-layer.html?transform=0",
       "name": "amp-story: unsupported browser (desktop)",
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [
-        ".i-amphtml-story-unsupported-browser-overlay"
-      ]
+        ".i-amphtml-story-unsupported-browser-overlay",
+      ],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-desktop-one-panel.html",
       "name": "amp-story: desktop one panel desktop default margin",
       "viewport": {"width": 1440, "height": 900},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-desktop-one-panel.html",
       "name": "amp-story: desktop one panel desktop panel responsive margin",
       "viewport": {"width": 1440, "height": 1300},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-desktop-one-panel.html",
       "name": "amp-story: desktop one panel short screen no margin",
       "viewport": {"width": 1440, "height": 750},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-desktop-one-panel.html",
       "name": "amp-story: desktop one panel small square screen",
       "viewport": {"width": 400, "height": 400},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/basic.rtl.html",
@@ -439,17 +439,17 @@
       "viewport": {"width": 320, "height": 480},
       "loading_complete_selectors": [
         ".i-amphtml-story-loaded",
-        "amp-story-page#page-2[active]"
+        "amp-story-page#page-2[active]",
       ],
       // for page navigation
-      "loading_complete_delay_ms": 500
+      "loading_complete_delay_ms": 500,
     },
     {
       "url": "examples/visual-tests/amp-story/share-menu.rtl.html",
       "name": "amp-story: share menu (rtl)",
       "viewport": {"width": 320, "height": 480},
       "interactive_tests": "examples/visual-tests/amp-story/share-menu.js",
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       // TODO(#36358, @ampproject/wg-stories): Re-enable test.
@@ -458,7 +458,7 @@
       "name": "amp-story: info dialog (rtl)",
       "viewport": {"width": 320, "height": 480},
       "interactive_tests": "examples/visual-tests/amp-story/info-dialog.js",
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-consent.rtl.html",
@@ -466,9 +466,9 @@
       "viewport": {"width": 320, "height": 480},
       "loading_complete_selectors": [
         ".i-amphtml-story-loaded",
-        ".i-amphtml-story-consent"
+        ".i-amphtml-story-consent",
       ],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-consent.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-consent.js",
     },
     {
       "url": "examples/visual-tests/amp-story/basic.rtl.html",
@@ -476,10 +476,10 @@
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [
         ".i-amphtml-story-loaded",
-        "amp-story-page#page-2[active]"
+        "amp-story-page#page-2[active]",
       ],
       // for page navigation
-      "loading_complete_delay_ms": 500
+      "loading_complete_delay_ms": 500,
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-consent.rtl.html",
@@ -487,23 +487,23 @@
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [
         ".i-amphtml-story-loaded",
-        ".i-amphtml-story-consent"
+        ".i-amphtml-story-consent",
       ],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-consent.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-consent.js",
     },
     {
       // TODO(#27453, @ampproject/wg-monetization): disabled in #21935 because this test is not hermetic.
       "flaky": true,
       "url": "examples/visual-tests/amp-inabox/amp-inabox-gpt.html",
       "name": "AMP Inabox GPT Ad",
-      "loading_complete_selectors": [".slot-render-ended", ".slot-onload"]
+      "loading_complete_selectors": [".slot-render-ended", ".slot-onload"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-tooltip.html",
       "name": "amp-story: tooltip",
       "viewport": {"width": 320, "height": 480},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-tooltip.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-tooltip.js",
     },
     {
       // TODO(#21665, @ampproject/wg-stories): Re-enable test.
@@ -512,7 +512,7 @@
       "name": "amp-story: tooltip desktop",
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-tooltip-desktop.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-tooltip-desktop.js",
     },
     {
       // TODO(#22070, @ampproject/wg-stories): Re-enable test.
@@ -521,7 +521,7 @@
       "name": "amp-story: pagination-buttons desktop",
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-pagination-buttons.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-pagination-buttons.js",
     },
     {
       // TODO(#22499, @ampproject/wg-stories): Re-enable this test once the animations run.
@@ -531,9 +531,9 @@
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [
         ".i-amphtml-story-loaded",
-        ".i-amphtml-story-sidebar-control.i-amphtml-story-button"
+        ".i-amphtml-story-sidebar-control.i-amphtml-story-button",
       ],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-sidebar.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-sidebar.js",
     },
     {
       // TODO(#21749, @ampproject/wg-stories): Re-enable test.
@@ -542,45 +542,45 @@
       "name": "amp-story: landscape templates",
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-landscape-templates.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-landscape-templates.js",
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-live-story.html",
       "name": "amp-story: live story",
       "viewport": {"width": 320, "height": 480},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-live-story.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-live-story.js",
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-live-story.html",
       "name": "amp-story: live story desktop",
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-live-story.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-live-story.js",
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-bot-rendering.html",
       "name": "amp-story: bot rendering",
       "viewport": {"width": 360, "height": 4500},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-interactive-quiz-sizing-positioning.html",
       "name": "amp-story-interactive-quiz: sizing and positioning",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-interactive-img-poll.html",
       "name": "amp-story-interactive-img-poll: render 4 image options with default customization options in mobile layout",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-interactive-img-quiz.html",
       "name": "amp-story-interactive-img-quiz: render 4 image options with default customization options in mobile layout",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "flaky": true, // #34033. See https://percy.io/ampproject/amphtml/builds/10102542/changed/568786603
@@ -588,8 +588,8 @@
       "name": "amp-story-dev-tools: preview tab loading and running",
       "viewport": {"width": 1080, "height": 720},
       "loading_complete_selectors": [
-        ".i-amphtml-story-dev-tools-tab.i-amphtml-layout"
-      ]
+        ".i-amphtml-story-dev-tools-tab.i-amphtml-layout",
+      ],
     },
     {
       "flaky": true, // #34033. See https://percy.io/ampproject/amphtml/builds/10102542/changed/568786603
@@ -597,8 +597,8 @@
       "name": "amp-story-dev-tools: preview tab loading and running with a desktop and ipad layout",
       "viewport": {"width": 1080, "height": 720},
       "loading_complete_selectors": [
-        ".i-amphtml-story-dev-tools-tab.i-amphtml-layout"
-      ]
+        ".i-amphtml-story-dev-tools-tab.i-amphtml-layout",
+      ],
     },
     {
       "flaky": true,
@@ -606,72 +606,72 @@
       "url": "examples/visual-tests/amp-date-picker/amp-date-picker.amp.html",
       "name": "amp-date-picker",
       "loading_complete_selectors": [".i-amphtml-date-picker-container"],
-      "interactive_tests": "examples/visual-tests/amp-date-picker/amp-date-picker.js"
+      "interactive_tests": "examples/visual-tests/amp-date-picker/amp-date-picker.js",
     },
     {
       "url": "examples/visual-tests/amp-selector.amp.html",
       "name": "amp-selector",
-      "interactive_tests": "examples/visual-tests/amp-selector.js"
+      "interactive_tests": "examples/visual-tests/amp-selector.js",
     },
     {
       "url": "examples/visual-tests/amp-form/amp-form.amp.html",
       "name": "amp-form",
-      "interactive_tests": "examples/visual-tests/amp-form/amp-form.js"
+      "interactive_tests": "examples/visual-tests/amp-form/amp-form.js",
     },
     {
       "url": "examples/visual-tests/amp-form/amp-form-server-error.amp.html",
       "name": "amp-form (server error)",
       "interactive_tests": "examples/visual-tests/amp-form/amp-form-server-error.js",
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-accordion/amp-accordion.html",
       "name": "amp-accordion: page loads",
       "loading_complete_delay_ms": 1000,
-      "interactive_tests": "examples/visual-tests/amp-accordion/amp-accordion.js"
+      "interactive_tests": "examples/visual-tests/amp-accordion/amp-accordion.js",
     },
     {
       "url": "examples/visual-tests/amp-user-notification/amp-user-notification.amp.html",
       "name": "amp-user-notification",
       "viewport": {"width": 400, "height": 600},
       "loading_complete_selectors": ["amp-user-notification.amp-active"],
-      "interactive_tests": "examples/visual-tests/amp-user-notification/amp-user-notification.js"
+      "interactive_tests": "examples/visual-tests/amp-user-notification/amp-user-notification.js",
     },
     {
       "url": "examples/visual-tests/amp-autocomplete/amp-autocomplete.amp.html",
       "name": "amp-autocomplete",
-      "interactive_tests": "examples/visual-tests/amp-autocomplete/amp-autocomplete.js"
+      "interactive_tests": "examples/visual-tests/amp-autocomplete/amp-autocomplete.js",
     },
     {
       "url": "examples/visual-tests/amphtml-ads/amp-fie-adchoices.html",
       "name": "amphtml-ads: friendly iframe adchoices",
       "interactive_tests": "examples/visual-tests/amphtml-ads/adchoices.js",
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       // TODO(#28975, @ampproject/wg-monetization): see https://percy.io/ampproject/amphtml/builds-next/8494289/changed/482844300
       "url": "examples/visual-tests/amphtml-ads/amp-fie-static.html",
       "name": "amphtml-ads: friendly iframe static",
       "interactive_tests": "examples/visual-tests/amphtml-ads/static.js",
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amphtml-ads/amp-inabox-adchoices.html",
       "name": "amphtml-ads: inabox adchoices",
       "interactive_tests": "examples/visual-tests/amphtml-ads/adchoices.js",
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amphtml-ads/amp-inabox-static.html",
       "name": "amphtml-ads: inabox static",
       "interactive_tests": "examples/visual-tests/amphtml-ads/static.js",
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-mega-menu/amp-mega-menu.amp.html",
       "name": "amp-mega-menu: basic usage",
       "loading_complete_selectors": [".i-amphtml-mega-menu-heading"],
-      "interactive_tests": "examples/visual-tests/amp-mega-menu/amp-mega-menu.js"
+      "interactive_tests": "examples/visual-tests/amp-mega-menu/amp-mega-menu.js",
     },
     {
       // TODO(#27454, @ampproject/wg-components): see https://percy.io/ampproject/amphtml/builds/4672992/view/274790617/375?mode=diff&browser=firefox&snapshot=274790617
@@ -679,7 +679,7 @@
       "url": "examples/visual-tests/amp-mega-menu/amp-mega-menu-with-list.amp.html",
       "name": "amp-mega-menu: template render",
       "loading_complete_selectors": [".i-amphtml-mega-menu-heading"],
-      "interactive_tests": "examples/visual-tests/amp-mega-menu/amp-mega-menu.js"
+      "interactive_tests": "examples/visual-tests/amp-mega-menu/amp-mega-menu.js",
     },
     {
       // TODO(@ampproject/wg-components)
@@ -689,7 +689,7 @@
       "viewport": {"width": 800, "height": 600},
       "interactive_tests": "examples/visual-tests/amp-video-docking/amp-video-docking.js",
       "loading_complete_selectors": [".i-amphtml-video-interface"],
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       // TODO(@ampproject/wg-components)
@@ -699,7 +699,7 @@
       "viewport": {"width": 800, "height": 600},
       "interactive_tests": "examples/visual-tests/amp-video-docking/amp-video-docking.js",
       "loading_complete_selectors": [".i-amphtml-video-interface"],
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       // TODO(@ampproject/wg-components)
@@ -709,7 +709,7 @@
       "viewport": {"width": 800, "height": 600},
       "interactive_tests": "examples/visual-tests/amp-video-docking/amp-video-docking.js",
       "loading_complete_selectors": [".i-amphtml-video-interface"],
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-story-player/back-button.html",
@@ -717,7 +717,7 @@
       "interactive_tests": "examples/visual-tests/amp-story-player/placeholder.js",
       "loading_complete_selectors": [".i-amphtml-story-player-loaded"],
       "loading_incomplete_selectors": [".i-amphtml-story-player-loading"],
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-story-player/close-button.html",
@@ -725,14 +725,14 @@
       "interactive_tests": "examples/visual-tests/amp-story-player/placeholder.js",
       "loading_complete_selectors": [".i-amphtml-story-player-loaded"],
       "loading_incomplete_selectors": [".i-amphtml-story-player-loading"],
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-story-player/player-local-story.html",
       "name": "amp-story-player local story basic page",
       "interactive_tests": "examples/visual-tests/amp-story-player/story-loaded.js",
       "loading_incomplete_selectors": [".i-amphtml-story-player-loading"],
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-story-player/player-amp-version.html",
@@ -740,7 +740,7 @@
       "interactive_tests": "examples/visual-tests/amp-story-player/player-amp-version.js",
       "viewport": {"width": 400, "height": 900},
       "loading_complete_delay_ms": 2000,
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-story-player/story-attribution.html",
@@ -748,43 +748,43 @@
       "interactive_tests": "examples/visual-tests/amp-story-player/story-loaded.js",
       "loading_incomplete_selectors": [".i-amphtml-story-player-loading"],
       "viewport": {"width": 400, "height": 800},
-      "no_base_test": true
+      "no_base_test": true,
     },
     {
       "url": "examples/visual-tests/amp-carousel/amp-carousel.html",
       "name": "amp-carousel",
-      "loading_complete_delay_ms": 2000
+      "loading_complete_delay_ms": 2000,
     },
     {
       "url": "examples/visual-tests/amp-carousel/amp-carousel-slides.html",
       "name": "amp-carousel-slides",
-      "loading_complete_delay_ms": 2000
+      "loading_complete_delay_ms": 2000,
     },
     {
       "url": "examples/visual-tests/amp-story/basic-transformed.html?transform=0",
       "name": "amp-story: basic example transformed with toolbox-optimizer",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-360-image.html",
       "name": "amp-story-360: 360 image rendering",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-360-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-360-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-page-attachment.html",
       "name": "amp-story-page-attachment: new inline & outlink CTA buttons",
       "viewport": {"width": 320, "height": 480},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-page-attachment.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-page-attachment.js",
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-page-attachment.html",
       "name": "amp-story-page-attachment: page attachment desktop",
       "viewport": {"width": 1440, "height": 900},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-page-attachment.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-page-attachment.js",
     },
     {
       "flaky": true,
@@ -793,7 +793,7 @@
       "name": "amp-story-shopping UI",
       "viewport": {"width": 320, "height": 900},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-shopping.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-shopping.js",
     },
     {
       "flaky": true,
@@ -802,33 +802,33 @@
       "name": "amp-story-shopping UI RTL",
       "viewport": {"width": 320, "height": 900},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-shopping.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-shopping.js",
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-shopping-lang-de.html",
       "name": "amp-story-shopping UI number format based on language",
       "viewport": {"width": 320, "height": 480},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-shopping-landscape.html",
       "name": "amp-story-shopping UI in desktop supports landscape mode",
       "viewport": {"width": 1500, "height": 1000},
       "loading_complete_selectors": [".i-amphtml-story-loaded"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-shopping.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-shopping.js",
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-subscriptions.html",
       "name": "amp-story-subscriptions UI",
       "viewport": {"width": 400, "height": 800},
       "loading_complete_selectors": ["amp-subscriptions-dialog:not([hidden])"],
-      "interactive_tests": "examples/visual-tests/amp-story/amp-story-subscriptions.js"
+      "interactive_tests": "examples/visual-tests/amp-story/amp-story-subscriptions.js",
     },
     {
       "url": "examples/visual-tests/amp-story/amp-story-custom-desktop-aspect-ratio.html",
       "name": "amp-story: custom desktop aspect ratio",
       "viewport": {"width": 1440, "height": 900},
-      "loading_complete_selectors": [".i-amphtml-story-loaded"]
+      "loading_complete_selectors": [".i-amphtml-story-loaded"],
     },
     {
       "url": "examples/visual-tests/amp-story-player/player-local-story-custom-desktop-aspect-ratio.html",
@@ -836,7 +836,7 @@
       "viewport": {"width": 1440, "height": 900},
       "interactive_tests": "examples/visual-tests/amp-story-player/story-loaded.js",
       "loading_incomplete_selectors": [".i-amphtml-story-player-loading"],
-      "no_base_test": true
-    }
-  ]
+      "no_base_test": true,
+    },
+  ],
 }

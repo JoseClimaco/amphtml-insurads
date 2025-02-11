@@ -1,5 +1,5 @@
-(dev().assertElement(dev()));
+dev().assertElement(dev());
 
 function hello() {
-  return (dev().assertElement(dev()));
+  return dev().assertElement(dev());
 }
