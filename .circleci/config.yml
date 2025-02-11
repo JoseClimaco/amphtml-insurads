@@ -2,8 +2,9 @@ version: 2.1
 
 orbs:
   browser-tools: circleci/browser-tools@1.4.8
-  codecov: codecov/codecov@4.1.0
-  node: circleci/node@5.2.0
+  codecov: codecov/codecov@5.0.0
+  macos: circleci/macos@2.5.2
+  node: circleci/node@6.3.0
 
 push_and_pr_builds: &push_and_pr_builds
   filters:
@@ -64,12 +65,12 @@ executors:
     resource_class: xlarge
   jdk-docker-2xlarge:
     docker:
-      - image: cimg/openjdk:21.0.2-node
+      - image: cimg/openjdk:21.0.5-node
     resource_class: 2xlarge
   macos-medium:
     macos:
-      xcode: 14.3.1
-    resource_class: macos.x86.medium.gen2
+      xcode: 15.3.0
+    resource_class: macos.m1.medium.gen1
 
 commands:
   checkout_repo:
@@ -155,7 +156,8 @@ commands:
             - save_cache:
                 name: '💾 Save node_modules/ Cache'
                 key: node-modules-cache-{{ arch }}-v3-{{ checksum "package-lock.json" }}
-                paths: node_modules/
+                paths:
+                  - node_modules/
   teardown_vm:
     steps:
       - persist_to_workspace:
@@ -183,11 +185,6 @@ commands:
       - run:
           name: '💿 Install Microsoft Edge'
           command: ./.circleci/install_microsoft_edge.sh
-  enable_safari_automation:
-    steps:
-      - run:
-          name: '⚙️ Enable Safari Automation'
-          command: sudo /usr/bin/safaridriver --enable
   store_test_output:
     steps:
       - store_test_results:
@@ -339,7 +336,8 @@ jobs:
           name: '⭐⭐⭐ All Unit Tests ⭐⭐⭐'
           command: node build-system/pr-check/unit-tests.js
       - codecov/upload:
-          file: test/coverage/lcov-unit.info
+          disable_search: true
+          files: test/coverage/lcov-unit.info
           flags: unit_tests
       - store_test_output
       - store_filelist
@@ -354,7 +352,8 @@ jobs:
           name: '⭐⭐⭐ Unminified Tests ⭐⭐⭐'
           command: node build-system/pr-check/unminified-tests.js
       - codecov/upload:
-          file: test/coverage/lcov-integration.info
+          disable_search: true
+          files: test/coverage/lcov-integration.info
           flags: integration_tests
       - store_test_output
       - teardown_vm
@@ -409,7 +408,8 @@ jobs:
     <<: *test_types_job
     steps:
       - setup_vm
-      - enable_safari_automation
+      - macos/install-rosetta
+      - macos/add-safari-permissions
       - run:
           name: '⭐⭐⭐ << parameters.test_type >> Tests (Safari) ⭐⭐⭐'
           command: node build-system/pr-check/browser-tests.js --browser=safari --type=<< parameters.test_type >>
