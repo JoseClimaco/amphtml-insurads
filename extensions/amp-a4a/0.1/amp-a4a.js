@@ -371,6 +371,7 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @override */
   getLayoutPriority() {
+    this.logMethodEntry();
     // Priority used for scheduling preload and layout callback.  Because
     // AMP creatives will be injected as part of the promise chain created
     // within onLayoutMeasure, this is only relevant to non-AMP creatives
@@ -382,11 +383,13 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @override */
   isLayoutSupported(layout) {
+    this.logMethodEntry();
     return isLayoutSizeDefined(layout);
   }
 
   /** @override */
   isRelayoutNeeded() {
+    this.logMethodEntry();
     return this.isRelayoutNeededFlag;
   }
 
@@ -394,6 +397,7 @@ export class AmpA4A extends AMP.BaseElement {
       @return {!Promise|undefined}
   */
   buildCallback() {
+    this.logMethodEntry();
     this.creativeSize_ = {
       width: this.element.getAttribute('width'),
       height: this.element.getAttribute('height'),
@@ -444,6 +448,7 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @override */
   renderOutsideViewport() {
+    this.logMethodEntry();
     // Ensure non-verified AMP creatives are throttled.
     if (
       !this.isVerifiedAmpCreative_ &&
@@ -465,6 +470,7 @@ export class AmpA4A extends AMP.BaseElement {
    *    possible.
    */
   isValidElement() {
+    this.logMethodEntry();
     return true;
   }
 
@@ -473,6 +479,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {?({width, height}|../../../src/layout-rect.LayoutRectDef)}
    */
   getCreativeSize() {
+    this.logMethodEntry();
     return this.creativeSize_;
   }
 
@@ -481,6 +488,7 @@ export class AmpA4A extends AMP.BaseElement {
    *    renderOutsideViewport is met or if number, the amount of viewports.
    */
   delayAdRequestEnabled() {
+    this.logMethodEntry();
     return false;
   }
 
@@ -491,6 +499,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Array<string>}
    */
   getPreconnectUrls() {
+    this.logMethodEntry();
     return [];
   }
 
@@ -501,6 +510,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Array<string>}
    */
   getPrefetchUrls() {
+    this.logMethodEntry();
     return [];
   }
 
@@ -511,6 +521,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {boolean}
    */
   isAmpAdElement() {
+    this.logMethodEntry();
     return (
       this.element.tagName == 'AMP-AD' || this.element.tagName == 'AMP-EMBED'
     );
@@ -523,6 +534,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @override
    */
   preconnectCallback(unusedOnLayout) {
+    this.logMethodEntry();
     const preconnect = this.getPreconnectUrls();
     // NOTE(keithwrightbos): Does not take isValidElement into account so could
     // preconnect unnecessarily, however it is assumed that isValidElement
@@ -540,6 +552,7 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @override */
   pauseCallback() {
+    this.logMethodEntry();
     if (this.friendlyIframeEmbed_) {
       this.friendlyIframeEmbed_.pause();
     }
@@ -547,6 +560,7 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @override */
   resumeCallback() {
+    this.logMethodEntry();
     // FIE that was not destroyed on unlayoutCallback does not require a new
     // ad request.
     if (this.friendlyIframeEmbed_) {
@@ -566,6 +580,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @visibleForTesting
    */
   getResource() {
+    this.logMethodEntry();
     return this.element.getResources().getResourceForElement(this.element);
   }
 
@@ -575,6 +590,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @protected
    */
   hasAdPromise() {
+    this.logMethodEntry();
     return !!this.adPromise_;
   }
 
@@ -586,6 +602,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @visibleForTesting
    */
   inNonAmpPreferenceExp() {
+    this.logMethodEntry();
     return (
       !!this.postAdResponseExperimentFeatures['pref_neutral_enabled'] &&
       ['adsense', 'doubleclick'].includes(this.element.getAttribute('type'))
@@ -598,6 +615,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @private
    */
   shouldInitializePromiseChain_() {
+    this.logMethodEntry();
     const slotRect = this.getIntersectionElementLayoutBox();
     const fixedSizeZeroHeightOrWidth =
       this.getLayout() != Layout_Enum.FLUID &&
@@ -645,6 +663,7 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @override */
   onLayoutMeasure() {
+    this.logMethodEntry();
     this.initiateAdRequest();
   }
 
@@ -656,6 +675,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @protected
    */
   whenWithinViewport(viewport) {
+    this.logMethodEntry();
     devAssert(viewport !== false);
     const resource = this.getResource();
     if (WITHIN_VIEWPORT_INOB || getMode().localDev || getMode().test) {
@@ -680,6 +700,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @protected
    */
   initiateAdRequest() {
+    this.logMethodEntry();
     if (this.xOriginIframeHandler_) {
       this.xOriginIframeHandler_.onLayoutMeasure();
     }
@@ -939,6 +960,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {boolean}
    */
   isInNoSigningExp() {
+    this.logMethodEntry();
     return NO_SIGNING_RTV;
   }
 
@@ -950,6 +972,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {boolean}
    */
   skipClientSideValidation(unusedHeaders) {
+    this.logMethodEntry();
     return false;
   }
 
@@ -960,6 +983,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {Promise<?./head-validation.ValidatedHeadDef>}
    */
   streamResponse_(httpResponse, checkStillCurrent) {
+    this.logMethodEntry();
     if (httpResponse.status === 204) {
       this.forceCollapse();
       return Promise.reject(NO_CONTENT_RESPONSE);
@@ -1033,6 +1057,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Promise<null>}
    */
   handleFallback_(fallbackHttpResponse, checkStillCurrent) {
+    this.logMethodEntry();
     // Experiment to give non-AMP creatives same benefits as AMP so
     // update priority.
     if (this.inNonAmpPreferenceExp()) {
@@ -1052,6 +1077,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {?./head-validation.ValidatedHeadDef} head data or null if we should fall back to xdomain.
    */
   validateHeadElement_(headElement) {
+    this.logMethodEntry();
     return processHead(this.win, this.element, headElement);
   }
 
@@ -1063,6 +1089,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {Promise<?CreativeMetaDataDef>}
    */
   startValidationFlow_(fetchResponse, checkStillCurrent) {
+    this.logMethodEntry();
     // Note: Resolving a .then inside a .then because we need to capture
     // two fields of fetchResponse, one of which is, itself, a promise,
     // and one of which isn't.  If we just return
@@ -1177,6 +1204,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Promise<?ArrayBuffer>}
    */
   maybeValidateAmpCreative(bytes, headers) {
+    this.logMethodEntry();
     const checkStillCurrent = this.verifyStillCurrent();
     return this.keysetPromise_
       .then(() => {
@@ -1227,6 +1255,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @private
    */
   populatePostAdResponseExperimentFeatures_(input) {
+    this.logMethodEntry();
     input.split(',').forEach((line) => {
       if (!line) {
         return;
@@ -1250,6 +1279,7 @@ export class AmpA4A extends AMP.BaseElement {
    *   the refresh function complete. This is particularly handy for testing.
    */
   refresh(refreshEndCallback) {
+    this.logMethodEntry();
     devAssert(!this.isRefreshing);
     this.isRefreshing = true;
     this.tearDownSlot();
@@ -1300,6 +1330,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @private
    */
   promiseErrorHandler_(error, opt_ignoreStack) {
+    this.logMethodEntry();
     if (isCancellation(error)) {
       // Rethrow if cancellation.
       throw error;
@@ -1336,6 +1367,7 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @override */
   layoutCallback() {
+    this.logMethodEntry();
     if (this.isRefreshing) {
       this.destroyFrame(true);
     }
@@ -1356,6 +1388,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @protected
    */
   attemptToRenderCreative() {
+    this.logMethodEntry();
     // Promise may be null if element was determined to be invalid for A4A.
     if (!this.adPromise_) {
       if (this.shouldInitializePromiseChain_()) {
@@ -1425,11 +1458,13 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {boolean}
    */
   isXhrAllowed() {
+    this.logMethodEntry();
     return true;
   }
 
   /** @override */
   attemptChangeSize(newHeight, newWidth) {
+    this.logMethodEntry();
     // Store original size of slot in order to allow re-expansion on
     // unlayoutCallback so that it is reverted to original size in case
     // of resumeCallback.
@@ -1439,6 +1474,7 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @override  */
   unlayoutCallback() {
+    this.logMethodEntry();
     this.unobserveIntersections_?.();
     this.unobserveIntersections_ = null;
     this.tearDownSlot();
@@ -1450,6 +1486,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @protected
    */
   tearDownSlot() {
+    this.logMethodEntry();
     // Increment promiseId to cause any pending promise to cancel.
     this.promiseId_++;
     this.uiHandler.applyUnlayoutUI();
@@ -1486,6 +1523,7 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @override */
   detachedCallback() {
+    this.logMethodEntry();
     super.detachedCallback();
     this.destroyFrame(true);
   }
@@ -1494,6 +1532,7 @@ export class AmpA4A extends AMP.BaseElement {
    * Remove the iframe and clean it up.
    */
   maybeDestroyIframe_() {
+    this.logMethodEntry();
     if (this.iframe && this.iframe.parentElement) {
       this.iframe.parentElement.removeChild(this.iframe);
       this.iframe = null;
@@ -1510,6 +1549,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @protected
    */
   destroyFrame(force = false) {
+    this.logMethodEntry();
     if (!force && this.isRefreshing) {
       return;
     }
@@ -1533,6 +1573,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @protected
    */
   viewportCallback(inViewport) {
+    this.logMethodEntry();
     if (this.xOriginIframeHandler_) {
       this.xOriginIframeHandler_.viewportCallback(inViewport);
     }
@@ -1551,6 +1592,7 @@ export class AmpA4A extends AMP.BaseElement {
     opt_rtcResponsesPromise,
     opt_serveNpaSignal
   ) {
+    this.logMethodEntry();
     throw new Error('getAdUrl not implemented!');
   }
 
@@ -1560,6 +1602,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Promise<boolean>}
    */
   getServeNpaSignal() {
+    this.logMethodEntry();
     return Promise.resolve(false);
   }
 
@@ -1569,6 +1612,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Promise<boolean>}
    */
   getBlockRtc_() {
+    this.logMethodEntry();
     if (!this.element.getAttribute('block-rtc')) {
       return Promise.resolve(false);
     }
@@ -1594,6 +1638,7 @@ export class AmpA4A extends AMP.BaseElement {
    * is thrown after url construction but prior to layoutCallback.
    */
   resetAdUrl() {
+    this.logMethodEntry();
     this.adUrl_ = null;
   }
 
@@ -1604,6 +1649,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @throws {Error}
    */
   verifyStillCurrent() {
+    this.logMethodEntry();
     const promiseId = this.promiseId_;
     return () => {
       if (promiseId != this.promiseId_) {
@@ -1621,6 +1667,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {?SizeInfoDef}
    */
   extractSize(responseHeaders) {
+    this.logMethodEntry();
     const headerValue = responseHeaders.get(CREATIVE_SIZE_HEADER);
     if (!headerValue) {
       return null;
@@ -1642,6 +1689,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @visibleForTesting
    */
   forceCollapse() {
+    this.logMethodEntry();
     if (this.isRefreshing) {
       // If, for whatever reason, the new creative would collapse this slot,
       // stick with the old creative until the next refresh cycle.
@@ -1667,6 +1715,7 @@ export class AmpA4A extends AMP.BaseElement {
    *    child window fires the `onload` event.
    */
   onCreativeRender(creativeMetaData, opt_onLoadPromise) {
+    this.logMethodEntry();
     this.maybeTriggerAnalyticsEvent_(
       creativeMetaData ? 'renderFriendlyEnd' : 'renderCrossDomainEnd'
     );
@@ -1678,6 +1727,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @visibleForTesting
    */
   onCrossDomainIframeCreated(iframe) {
+    this.logMethodEntry();
     dev().info(
       TAG,
       this.element.getAttribute('type'),
@@ -1687,6 +1737,7 @@ export class AmpA4A extends AMP.BaseElement {
 
   /** @return {boolean} whether html creatives should be sandboxed. */
   sandboxHTMLCreativeFrame() {
+    this.logMethodEntry();
     return true;
   }
 
@@ -1697,6 +1748,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @protected
    */
   sendXhrRequest(adUrl) {
+    this.logMethodEntry();
     this.maybeTriggerAnalyticsEvent_('adRequestStart');
     const xhrInit = {
       mode: 'cors',
@@ -1745,6 +1797,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!{adUrl: (string|undefined), frameGetDisabled: (boolean|undefined)}}
    */
   onNetworkFailure(unusedError, unusedAdUrl) {
+    this.logMethodEntry();
     return {};
   }
 
@@ -1754,6 +1807,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Array<string>} A list of signing services.
    */
   getSigningServiceNames() {
+    this.logMethodEntry();
     return getMode().localDev ? ['google', 'google-dev'] : ['google'];
   }
 
@@ -1764,6 +1818,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {Promise<boolean>} Whether the creative was successfully rendered.
    */
   renderNonAmpCreative(throttleApplied) {
+    this.logMethodEntry();
     if (this.element.getAttribute('disable3pfallback') == 'true') {
       user().warn(
         TAG,
@@ -1815,6 +1870,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Promise} Whether the creative was successfully rendered.
    */
   renderFriendlyTrustless_(headData, checkStillCurrent) {
+    this.logMethodEntry();
     checkStillCurrent();
     devAssert(this.element.ownerDocument);
     this.maybeTriggerAnalyticsEvent_('renderFriendlyStart');
@@ -1898,6 +1954,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @private
    */
   renderAmpCreative_(creativeMetaData) {
+    this.logMethodEntry();
     devAssert(creativeMetaData.minifiedCreative, 'missing minified creative');
     devAssert(!!this.element.ownerDocument, 'missing owner document?!');
     this.maybeTriggerAnalyticsEvent_('renderFriendlyStart');
@@ -1961,6 +2018,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Promise<!../../../src/friendly-iframe-embed.FriendlyIframeEmbed>}
    */
   installFriendlyIframeEmbed_(html, extensions, fonts, skipHtmlMerge) {
+    this.logMethodEntry();
     return installFriendlyIframeEmbed(
       devAssert(this.iframe),
       this.element,
@@ -1977,12 +2035,13 @@ export class AmpA4A extends AMP.BaseElement {
     );
   }
 
-  /**
+  /**makeFieVisible_
    *
    * @param {!Window} embedWin
    * @param {../../../src/service/ampdoc-impl.AmpDoc=} ampdoc
    */
   preinstallCallback_(embedWin, ampdoc) {
+    this.logMethodEntry();
     const parentAmpdoc = this.getAmpDoc();
     installUrlReplacementsForEmbed(
       ampdoc,
@@ -1997,6 +2056,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @param {function()} checkStillCurrent
    */
   makeFieVisible_(friendlyIframeEmbed, creativeMetaData, checkStillCurrent) {
+    this.logMethodEntry();
     checkStillCurrent();
     this.friendlyIframeEmbed_ = friendlyIframeEmbed;
     // Ensure visibility hidden has been removed (set by boilerplate).
@@ -2026,6 +2086,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Element}
    */
   getFieBody_(friendlyIframeEmbed) {
+    this.logMethodEntry();
     const frameDoc =
       friendlyIframeEmbed.iframe.contentDocument ||
       friendlyIframeEmbed.win.document;
@@ -2039,6 +2100,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @private
    */
   iframeRenderHelper_(attributes) {
+    this.logMethodEntry();
     const mergedAttributes = Object.assign(attributes, {
       'height': this.creativeSize_.height,
       'width': this.creativeSize_.width,
@@ -2117,6 +2179,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @private
    */
   renderViaIframeGet_(adUrl) {
+    this.logMethodEntry();
     this.maybeTriggerAnalyticsEvent_('renderCrossDomainStart');
     const contextMetadata = getContextMetadata(
       this.win,
@@ -2141,6 +2204,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {boolean}
    */
   letCreativeTriggerRenderStart() {
+    this.logMethodEntry();
     return false;
   }
 
@@ -2154,6 +2218,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @private
    */
   renderViaNameAttrOfXOriginIframe_(creativeBody) {
+    this.logMethodEntry();
     /** @type {?string} */
     const method = this.experimentalNonAmpCreativeRenderMethod_;
     devAssert(
@@ -2225,6 +2290,7 @@ export class AmpA4A extends AMP.BaseElement {
    * TODO(keithwrightbos@): report error cases
    */
   getAmpAdMetadata(creative) {
+    this.logMethodEntry();
     let metadataStart = -1;
     let metadataString;
     for (let i = 0; i < METADATA_STRINGS.length; i++) {
@@ -2347,6 +2413,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {string} full url to safeframe implementation.
    */
   getSafeframePath() {
+    this.logMethodEntry();
     return (
       'https://tpc.googlesyndication.com/safeframe/' +
       `${this.safeframeVersion}/html/container.html`
@@ -2360,6 +2427,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @private
    */
   maybeTriggerAnalyticsEvent_(lifecycleStage) {
+    this.logMethodEntry();
     if (!this.a4aAnalyticsConfig_) {
       // No config exists that will listen to this event.
       return;
@@ -2383,6 +2451,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!JsonObject}
    */
   getA4aAnalyticsVars(unusedAnalyticsEvent) {
+    this.logMethodEntry();
     return {};
   }
 
@@ -2394,6 +2463,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {?JsonObject}
    */
   getA4aAnalyticsConfig() {
+    this.logMethodEntry();
     return null;
   }
 
@@ -2408,6 +2478,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {Promise<!Array<!rtcResponseDef>>|undefined}
    */
   tryExecuteRealTimeConfig_(consentState, consentString, consentMetadata) {
+    this.logMethodEntry();
     const hasStorageConsent =
       consentState != CONSENT_POLICY_STATE.UNKNOWN &&
       consentState != CONSENT_POLICY_STATE.INSUFFICIENT &&
@@ -2443,6 +2514,7 @@ export class AmpA4A extends AMP.BaseElement {
    *   !../../../src/service/variable-source.AsyncResolverDef>}
    */
   getCustomRealTimeConfigMacros_(unusedHasStorageConsent) {
+    this.logMethodEntry();
     return {};
   }
 
@@ -2452,6 +2524,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {boolean}
    */
   shouldPreferentialRenderWithoutCrypto() {
+    this.logMethodEntry();
     return false;
   }
 
@@ -2460,6 +2533,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {?XORIGIN_MODE}
    */
   getNonAmpCreativeRenderingMethod(headerValue) {
+    this.logMethodEntry();
     if (headerValue) {
       if (!isEnumValue(XORIGIN_MODE, headerValue)) {
         dev().error(
@@ -2482,13 +2556,16 @@ export class AmpA4A extends AMP.BaseElement {
    *   a safeframe.
    * @return {!JsonObject|undefined}
    */
-  getAdditionalContextMetadata(opt_isSafeframe) {}
+  getAdditionalContextMetadata(opt_isSafeframe) {
+    this.logMethodEntry();
+  }
 
   /**
    * Returns whether the received creative is verified AMP.
    * @return {boolean} True if the creative is verified AMP, false otherwise.
    */
   isVerifiedAmpCreative() {
+    this.logMethodEntry();
     return this.isVerifiedAmpCreative_;
   }
 
@@ -2497,6 +2574,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {string} iframe title attribute
    */
   getIframeTitle() {
+    this.logMethodEntry();
     return this.element.getAttribute('title') || '3rd party ad content';
   }
 
@@ -2513,6 +2591,7 @@ export class AmpA4A extends AMP.BaseElement {
    * @return {!Array<string>}
    */
   getSsrExpIds_() {
+    this.logMethodEntry();
     const exps = [];
     const meta = this.getAmpDoc().getMetaByName('amp-usqp');
     if (meta) {
@@ -2532,6 +2611,80 @@ export class AmpA4A extends AMP.BaseElement {
       }
     }
     return exps;
+  }
+
+  /**
+   * Logs method entry with parameter names, timestamp, override status, and caller
+   */
+  logMethodEntry() {
+    // Get current timestamp
+    const timestamp = new Date().toISOString();
+
+    // Get call stack info
+    const err = new Error();
+    const stack = err.stack || '';
+    const stackLines = stack.split('\n');
+
+    // Current method is usually at position 2 in the stack trace
+    const currentLine = stackLines[2] || '';
+    const currentMethodMatch = currentLine.match(/at\s+([\w.]+)\s*\(/);
+    const currentMethodName = currentMethodMatch
+      ? currentMethodMatch[1].split('.').pop()
+      : 'unknown';
+
+    // Caller method is usually at position 3 in the stack trace
+    const callerLine = stackLines[3] || '';
+    const callerMethodMatch = callerLine.match(/at\s+([\w.]+)\s*\(/);
+    const callerMethodName = callerMethodMatch
+      ? callerMethodMatch[1].split('.').pop()
+      : 'unknown';
+
+    // Check if method overrides parent class by looking up prototype chain
+    let isOverridden = false;
+    let baseProto = Object.getPrototypeOf(this.constructor.prototype);
+    while (baseProto && !isOverridden) {
+      if (
+        baseProto[currentMethodName] &&
+        this[currentMethodName] !== baseProto[currentMethodName]
+      ) {
+        isOverridden = true;
+        break;
+      }
+      baseProto = Object.getPrototypeOf(baseProto);
+    }
+
+    // Get the function source code
+    const fnStr = this[currentMethodName].toString();
+
+    // Extract the parameter names from the function declaration
+    const paramStrMatch = fnStr.match(/\(([^)]*)\)/);
+    const paramStr = paramStrMatch ? paramStrMatch[1] : '';
+
+    // Split by comma and clean up each parameter name
+    const paramNames = paramStr
+      .split(',')
+      .map((p) => p.trim())
+      .filter((p) => p.length > 0)
+      .map((p) => {
+        // Handle default values: 'name=value' -> 'name'
+        // Handle type annotations: '!Type name' -> 'name'
+        return p
+          .split('=')[0]
+          .trim()
+          .replace(/^.*\s+/, '');
+      });
+
+    // Format the output
+    const overrideStatus = isOverridden ? '[OVERRIDE]' : '';
+    const paramsOutput =
+      paramNames.length > 0 ? `${paramNames.join(', ')}` : '';
+    const callerInfo =
+      callerMethodName !== 'unknown' ? `called by ${callerMethodName}` : '';
+
+    console /*OK*/
+      .log(
+        `[${timestamp}] ${currentMethodName}(${paramsOutput}) ${overrideStatus} ${callerInfo}`
+      );
   }
 }
 

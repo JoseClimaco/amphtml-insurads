@@ -1,5 +1,7 @@
 import {Deferred} from '#core/data-structures/promise';
 
+import {Services} from '#service';
+
 import {LockedIdGenerator} from './lockedid-generator';
 
 import {AmpA4A} from '../../amp-a4a/0.1/amp-a4a';
@@ -14,6 +16,20 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   constructor(element) {
     super(element);
 
+    // Store visibility percentage and observer
+    /** @private {number} */
+    this.visibilityPercentage_ = 0;
+    /** @private {?IntersectionObserver} */
+    this.visibilityObserver_ = null;
+
+    /** @private {?{width: number, height: number}} */
+    this.originalSize_ = null;
+
+    /** @private {boolean} */
+    this.customRefreshEnabled_ = true;
+
+    this.refreshCount_ = 0;
+
     /* InsurAds Business  */
     this.lockedid = new LockedIdGenerator().getLockedIdData();
     /* InsurAds Business  */
@@ -23,6 +39,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
 
     this.initDoubleClickHelper();
     this.addWebSocketCommunication();
+    this.setupVisibilityTracking();
   }
 
   /**
@@ -42,21 +59,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
 
     AmpAdNetworkInsuradsImpl.prototype.doubleClickGetAdUrl =
       AmpAdNetworkDoubleclickImpl.prototype.getAdUrl;
-
-    // AmpAdNetworkInsuradsImpl.prototype.doubleClickGetAdUrl = function () {
-    //   const doubleClickUrlPromise =
-    //     AmpAdNetworkDoubleclickImpl.prototype.getAdUrl.call(this);
-
-    //   doubleClickUrlPromise.then((doubleClickUrl) => {
-    //     const url = new URL(doubleClickUrl);
-
-    //     const params = url.searchParams;
-    //     params.set('iu', '/134642692/amp-samples/amp-MREC');
-    //     params.set('sz', '300x250');
-
-    //     return url.toString();
-    //   });
-    // };
 
     AmpAdNetworkInsuradsImpl.prototype.populateAdUrlState =
       AmpAdNetworkDoubleclickImpl.prototype.populateAdUrlState;
@@ -81,10 +83,34 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
 
     AmpAdNetworkInsuradsImpl.prototype.getLocationQueryParameterValue =
       AmpAdNetworkDoubleclickImpl.prototype.getLocationQueryParameterValue;
+
+    this.canonicalUrl = Services.documentInfoForDoc(this.element).canonicalUrl;
+    console /*OK*/
+      .log('Canonical URL:', this.canonicalUrl);
+
+    // setTimeout(() => {
+    //   // this.initiateCustomRefresh();
+    //   this.refresh(this.refreshEndCallback);
+    // }, 2000);
+  }
+
+  /** @override */
+  buildCallback() {
+    console.log('Build Callback');
+    super.buildCallback();
+
+    // Store original size for refresh operations
+    const width = Number(this.element.getAttribute('width'));
+    const height = Number(this.element.getAttribute('height'));
+    this.originalSize_ = {width, height};
   }
 
   /** @override */
   getAdUrl(opt_consentTuple, opt_rtcResponsesPromise, opt_serveNpaSignal) {
+    this.getAdUrlDeferred = new Deferred();
+    this.getAdUrlInsurAdsDeferred = new Deferred();
+
+    const self = this;
     this.doubleClickGetAdUrl(
       opt_consentTuple,
       opt_rtcResponsesPromise,
@@ -94,16 +120,98 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     this.getAdUrlDeferred.promise.then((doubleClickUrl) => {
       const url = new URL(doubleClickUrl);
 
-      const params = url.searchParams;
-      params.set('iu', '/30497360/a4a/a4a_native');
-      params.set('sz', '300x250');
-      console /*OK*/
-        .log(url.toString());
+      if (self.refreshCount_ > 0) {
+        console.log('Refresh count:', self.refreshCount_);
 
-      this.getAdUrlInsurAdsDeferred.resolve(url.toString());
+        const params = url.searchParams;
+        params.set('iu', '/30497360/a4a/a4a_native');
+        params.set('sz', '300x250');
+        console /*OK*/
+          .log(url.toString());
+      }
+
+      self.getAdUrlInsurAdsDeferred.resolve(url.toString());
     });
 
     return this.getAdUrlInsurAdsDeferred.promise;
+  }
+
+  /** @override */
+  refresh(refreshEndCallback) {
+    this.refreshCount_++;
+    console /*Ok*/
+      .log('Refresh');
+    return super.refresh(refreshEndCallback);
+  }
+
+  // /** @override */
+  // onCreativeRender(creativeMetaData, opt_onLoadPromise) {
+  //   super.onCreativeRender(creativeMetaData);
+
+  //   console /*OK*/
+  //     .log('Creative rendered metadata:', creativeMetaData);
+  //   console /*OK*/
+  //     .log('Refresh count:', this.customRefreshCount_);
+
+  //   // Add attribute to indicate this was a refreshed creative
+  //   if (this.customRefreshCount_ > 0) {
+  //     this.element.setAttribute(
+  //       'data-refresh-count',
+  //       String(this.customRefreshCount_)
+  //     );
+  //   }
+
+  //   // Reset refresh flags to ensure clean state
+  //   this.isCustomRefreshing_ = false;
+  //   this.isRefreshing = false;
+
+  //   // Handle completion callback
+  //   opt_onLoadPromise &&
+  //     opt_onLoadPromise
+  //       .then((data) => {
+  //         console /*OK*/
+  //           .log('Creative rendered onloadpromise results:', data);
+
+  //         // Track successful render for analytics
+  //         if (
+  //           this.customRefreshCount_ > 0 &&
+  //           this.ws &&
+  //           this.ws.readyState === WebSocket.OPEN
+  //         ) {
+  //           this.ws.send(
+  //             JSON.stringify({
+  //               type: 'creative_rendered',
+  //               data: {
+  //                 adId: this.element.id || 'unknown',
+  //                 refreshCount: this.customRefreshCount_,
+  //                 timestamp: Date.now(),
+  //               },
+  //             })
+  //           );
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console /*OK*/
+  //           .error('Error in onLoadPromise:', err);
+  //       });
+  // }
+
+  /** @override */
+  extractSize(responseHeaders) {
+    console /*Ok*/
+      .log('CreativeId', responseHeaders.get('google-creative-id') || '-1');
+    console /*Ok*/
+      .log('lineItemId', responseHeaders.get('google-lineitem-id') || '-1');
+    return super.extractSize(responseHeaders);
+  }
+
+  /**
+   * refreshEndCallback
+   *
+   */
+  refreshEndCallback() {
+    console /*OK*/
+      .log('Refresh End Callback');
   }
 
   /**
@@ -126,13 +234,59 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     });
 
     // Listen for messages
-    ws.addEventListener('message', function (event) {
-      console.log('Message from server ', event.data);
+    ws.addEventListener('message', (event) => {
+      console /*Ok*/
+        .log('Message from server ', event.data);
+
+      // this.refresh(this.refreshEndCallback);
     });
 
     // Connection closed
     ws.addEventListener('close', function (event) {
       console.log('Connection closed');
+    });
+  }
+
+  /**
+   * Sets up visibility tracking using IntersectionObserver
+   */
+  setupVisibilityTracking() {
+    // [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    const thresholds = Array.from({length: 11}, (_, i) => i / 10);
+
+    this.visibilityObserver_ = new this.win.IntersectionObserver(
+      (entries) => this.handleVisibilityChange_(entries),
+      {
+        threshold: thresholds,
+      }
+    );
+
+    this.visibilityObserver_.observe(this.element);
+  }
+
+  /**
+   * Handles intersection changes reported by the IntersectionObserver
+   * @param {!Array<!IntersectionObserverEntry>} entries
+   * @private
+   */
+  handleVisibilityChange_(entries) {
+    entries.forEach((entry) => {
+      const previousVisibility = this.visibilityPercentage_;
+      this.visibilityPercentage_ = entry.intersectionRatio;
+
+      const visibilityChanged =
+        Math.abs(this.visibilityPercentage_ - previousVisibility) >= 0.1;
+      if (visibilityChanged) {
+        console /*OK*/
+          .log(
+            'Ad visibility:',
+            Math.round(this.visibilityPercentage_ * 100) + '%'
+          );
+        // console /*OK*/
+        //   .log('boundingClientRect:', entry.boundingClientRect);
+        // console /*OK*/
+        //   .log('intersectionRect:', entry.intersectionRect);
+      }
     });
   }
 }
