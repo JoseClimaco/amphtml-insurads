@@ -1069,6 +1069,7 @@ export class AmpAdNetworkDoubleclickImpl extends AmpA4A {
 
   /** @override */
   extractSize(responseHeaders) {
+    console.log('extractSize', responseHeaders);
     this.ampAnalyticsConfig_ = extractAmpAnalyticsConfig(this, responseHeaders);
     this.qqid_ = responseHeaders.get(QQID_HEADER);
     this.shouldSandbox_ = responseHeaders.get(SANDBOX_HEADER) == 'true';

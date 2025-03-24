@@ -2617,6 +2617,7 @@ export class AmpA4A extends AMP.BaseElement {
    * Logs method entry with parameter names, timestamp, override status, and caller
    */
   logMethodEntry() {
+    return;
     // Get current timestamp
     const timestamp = new Date().toISOString();
 
