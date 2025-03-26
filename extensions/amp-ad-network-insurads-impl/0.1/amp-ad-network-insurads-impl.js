@@ -17,6 +17,13 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   constructor(element) {
     super(element);
 
+    this.experimentIds = [];
+
+    this.element.setAttribute('data-enable-refresh', 'false');
+
+    console /*OK*/
+      .log('AmpAdNetworkInsuradsImpl');
+
     // Store visibility percentage and observer
     /** @private {number} */
     this.visibilityPercentage_ = 0;
@@ -35,7 +42,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     this.refreshCount_ = 0;
 
     this.initDoubleClickHelper();
-    this.setupVisibilityTracking();
+    // this.setupVisibilityTracking();
     this.initExtensionCommunication();
 
     this.slot = this.element.getAttribute('data-slot');
@@ -198,14 +205,11 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
           2000
         ));
       this.listener = window.frames['TG-listener'];
-      console.log('Initiating Extension Communication: listener not available');
     }
     if (this.listener) {
-      console.log('Initiating Extension Communication: listener available');
       this.listener.addEventListener('message', this.handler.bind(this));
       this.listener.postMessage('extensionReady', '*');
       while (this.queue.length !== 0) {
-        console.log('Posting message from queue', this.queue.length);
         this.listener./*Ok*/ postMessage(this.queue.shift(), '*');
       }
       if (this.listenerAttacher) {
@@ -221,8 +225,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     if (msg.data.adUnitId !== this.slot) {
       return;
     }
-    console /*OK*/
-      .log('Message received from extension:', msg);
+
     switch (msg.data.action) {
       case 'changeBanner':
         this.refresh(this.refreshEndCallback);
@@ -239,8 +242,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
       type,
       data,
     };
-    console /*OK*/
-      .log('Posting message to extension:', msg);
 
     this.queue.push(msg);
     this.initExtensionCommunication();
@@ -258,35 +259,21 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     /** @private {!TroubleshootDataDef} */
     this.troubleshootData_ = /** @type {!TroubleshootDataDef} */ ({});
 
-    // AmpAdNetworkInsuradsImpl.prototype.getAdUrl =
-    //   AmpAdNetworkDoubleclickImpl.prototype.getAdUrl;
+    const exceptions = ['constructor'];
+
+    // Ensure base DoubleClick implementation
+    const iatImpl = AmpAdNetworkInsuradsImpl.prototype;
+    const dblImpl = AmpAdNetworkDoubleclickImpl.prototype;
+    for (const methodName in dblImpl) {
+      if (exceptions.indexOf(methodName) >= 0) {
+        iatImpl['doubleClick' + methodName] = dblImpl[methodName];
+      } else {
+        iatImpl[methodName] = dblImpl[methodName];
+      }
+    }
 
     AmpAdNetworkInsuradsImpl.prototype.doubleClickGetAdUrl =
       AmpAdNetworkDoubleclickImpl.prototype.getAdUrl;
-
-    AmpAdNetworkInsuradsImpl.prototype.populateAdUrlState =
-      AmpAdNetworkDoubleclickImpl.prototype.populateAdUrlState;
-
-    AmpAdNetworkInsuradsImpl.prototype.generateAdKey_ =
-      AmpAdNetworkDoubleclickImpl.prototype.generateAdKey_;
-
-    AmpAdNetworkInsuradsImpl.prototype.getParameterSize_ =
-      AmpAdNetworkDoubleclickImpl.prototype.getParameterSize_;
-
-    AmpAdNetworkInsuradsImpl.prototype.expandJsonTargeting_ =
-      AmpAdNetworkDoubleclickImpl.prototype.expandJsonTargeting_;
-
-    AmpAdNetworkInsuradsImpl.prototype.mergeRtcResponses_ =
-      AmpAdNetworkDoubleclickImpl.prototype.mergeRtcResponses_;
-
-    AmpAdNetworkInsuradsImpl.prototype.getPageParameters =
-      AmpAdNetworkDoubleclickImpl.prototype.getPageParameters;
-
-    AmpAdNetworkInsuradsImpl.prototype.getBlockParameters_ =
-      AmpAdNetworkDoubleclickImpl.prototype.getBlockParameters_;
-
-    AmpAdNetworkInsuradsImpl.prototype.getLocationQueryParameterValue =
-      AmpAdNetworkDoubleclickImpl.prototype.getLocationQueryParameterValue;
 
     this.canonicalUrl = Services.documentInfoForDoc(this.element).canonicalUrl;
     console /*OK*/
