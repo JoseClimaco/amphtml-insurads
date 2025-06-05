@@ -1065,11 +1065,6 @@ const adConfig = jsonConfiguration({
     renderStartImplemented: true,
   },
 
-  'puffnetwork': {
-    prefetch: 'https://static.puffnetwork.com/amp_ad.js',
-    renderStartImplemented: true,
-  },
-
   'pulse': {
     prefetch: 'https://static.pulse.mail.ru/pulse-widget-amp.js',
     renderStartImplemented: true,
@@ -1555,6 +1550,8 @@ const adConfig = jsonConfiguration({
     preconnect: 'https://creatives.yieldpro.eu',
     renderStartImplemented: true,
   },
+
+  'yobee': {},
 
   'zedo': {
     prefetch: 'https://ss3.zedo.com/gecko/tag/Gecko.amp.min.js',

@@ -3,6 +3,8 @@
 // always available for them. However, when we test an impl in isolation,
 // AmpAd is not loaded already, so we need to load it separately.
 import '../../../amp-ad/0.1/amp-ad';
+import {AMP_GFP_SET_COOKIES_HEADER_NAME} from '#ads/google/a4a/cookie-utils';
+
 import {
   CONSENT_POLICY_STATE,
   CONSENT_STRING_TYPE,
@@ -16,6 +18,8 @@ import {forceExperimentBranch, toggleExperiment} from '#experiments';
 import * as experiments from '#experiments';
 
 import {Services} from '#service';
+
+import {getCookie, setCookie} from 'src/cookies';
 
 import {AmpA4A} from '../../../amp-a4a/0.1/amp-a4a';
 import {AmpAd} from '../../../amp-ad/0.1/amp-ad';
@@ -478,6 +482,90 @@ describes.realWin(
 
         expect(storageContent).to.deep.equal({'aas-ca-adsense': true});
       });
+
+      it('should clear cookies as specified in creative response, with opt out', () => {
+        setCookie(env.win, '__gads', '__gads_val', Date.now() + 100_000);
+        setCookie(env.win, '__gpi', '__gpi_val', Date.now() + 100_000);
+        expect(getCookie(env.win, '__gads')).to.equal('__gads_val');
+        expect(getCookie(env.win, '__gpi')).to.equal('__gpi_val');
+
+        impl.size_ = {width: 123, height: 456};
+        impl.iframe = {
+          contentWindow: window,
+          nodeType: 1,
+          style: {setProperty: () => {}},
+        };
+        impl.onCreativeRender(false);
+        impl.checkIfClearCookiePostMessageHasValidSource_ = () => true;
+        env.win.postMessage(
+          JSON.stringify({
+            googMsgType: 'gpi-uoo',
+            userOptOut: true,
+            clearAdsData: true,
+          }),
+          '*'
+        );
+
+        expect(getCookie(env.win, '__gpi_opt_out')).to.equal('1');
+        expect(getCookie(env.win, '__gads')).to.be.null;
+        expect(getCookie(env.win, '__gpi')).to.be.null;
+      });
+
+      it('should clear cookies as specified in creative response, without opt out', () => {
+        setCookie(env.win, '__gads', '__gads_val', Date.now() + 100_000);
+        setCookie(env.win, '__gpi', '__gpi_val', Date.now() + 100_000);
+        expect(getCookie(env.win, '__gads')).to.equal('__gads_val');
+        expect(getCookie(env.win, '__gpi')).to.equal('__gpi_val');
+
+        impl.size_ = {width: 123, height: 456};
+        impl.iframe = {
+          contentWindow: window,
+          nodeType: 1,
+          style: {setProperty: () => {}},
+        };
+        impl.onCreativeRender(false);
+        impl.checkIfClearCookiePostMessageHasValidSource_ = () => true;
+        env.win.postMessage(
+          JSON.stringify({
+            googMsgType: 'gpi-uoo',
+            userOptOut: false,
+            clearAdsData: true,
+          }),
+          '*'
+        );
+
+        expect(getCookie(env.win, '__gpi_opt_out')).to.equal('0');
+        expect(getCookie(env.win, '__gads')).to.be.null;
+        expect(getCookie(env.win, '__gpi')).to.be.null;
+      });
+
+      it('should not clear cookies as specified in creative response, without opt out or clear ads', () => {
+        setCookie(env.win, '__gads', '__gads_val', Date.now() + 100_000);
+        setCookie(env.win, '__gpi', '__gpi_val', Date.now() + 100_000);
+        expect(getCookie(env.win, '__gads')).to.equal('__gads_val');
+        expect(getCookie(env.win, '__gpi')).to.equal('__gpi_val');
+
+        impl.size_ = {width: 123, height: 456};
+        impl.iframe = {
+          contentWindow: window,
+          nodeType: 1,
+          style: {setProperty: () => {}},
+        };
+        impl.onCreativeRender(false);
+        impl.checkIfClearCookiePostMessageHasValidSource_ = () => true;
+        env.win.postMessage(
+          JSON.stringify({
+            googMsgType: 'gpi-uoo',
+            userOptOut: false,
+            clearAdsData: false,
+          }),
+          '*'
+        );
+
+        expect(getCookie(env.win, '__gpi_opt_out')).to.equal('0');
+        expect(getCookie(env.win, '__gads')).to.equal('__gads_val');
+        expect(getCookie(env.win, '__gpi')).to.equal('__gpi_val');
+      });
     });
 
     describe('centering', () => {
@@ -562,6 +650,22 @@ describes.realWin(
           'ADSENSE_AMP_AUTO_ADS_HOLDOUT_EXPERIMENT_NAME',
           false
         );
+      });
+
+      it('should contain cookie params', () => {
+        setCookie(env.win, '__gads', '__gads_val', Date.now() + 100_000);
+        setCookie(env.win, '__gpi', '__gpi_val', Date.now() + 100_000);
+        const ampStickyAd = createElementWithAttributes(doc, 'amp-sticky-ad', {
+          'layout': 'nodisplay',
+        });
+        ampStickyAd.appendChild(element);
+        doc.body.appendChild(ampStickyAd);
+        return impl
+          .getAdUrl({consentState: CONSENT_POLICY_STATE.SUFFICIENT})
+          .then((adUrl) => {
+            expect(adUrl).to.contain('cookie=__gads_val');
+            expect(adUrl).to.contain('gpic=__gpi_val');
+          });
       });
 
       it('should contain act', () => {
@@ -1603,6 +1707,61 @@ describes.realWin(
           branches.forEach((branch) => expect(branch).to.be.a('string'));
         });
       });
+    });
+  }
+);
+
+// Separate from main describe function because of difficulty testing cookie setting with real window.
+describes.fakeWin(
+  'amp-ad-network-adsense-impl#onAdResponse',
+  {amp: true},
+  (env) => {
+    let element;
+    let impl;
+    beforeEach(() => {
+      element = env.win.document.createElement('amp-ad');
+      element.setAttribute('type', 'adsense');
+      env.win.document.body.appendChild(element);
+      impl = new AmpAdNetworkAdsenseImpl(element);
+    });
+
+    afterEach(() => {
+      env.win.document.body.removeChild(element);
+    });
+
+    it('sets cookies as specified on the ad response', () => {
+      impl.onAdResponse({
+        headers: {
+          has: (header) => {
+            return header === AMP_GFP_SET_COOKIES_HEADER_NAME;
+          },
+          get: (header) => {
+            if (header !== AMP_GFP_SET_COOKIES_HEADER_NAME) {
+              return;
+            }
+
+            return JSON.stringify({
+              'cookie': [
+                {
+                  'version': 1,
+                  'value': 'val1',
+                  'domain': 'foo.com',
+                  'expiration': Date.now() + 100_000,
+                },
+                {
+                  'version': 2,
+                  'value': 'val2',
+                  'domain': 'foo.com',
+                  'expiration': Date.now() + 100_000,
+                },
+              ],
+            });
+          },
+        },
+      });
+
+      expect(getCookie(env.win, '__gads')).to.equal('val1');
+      expect(getCookie(env.win, '__gpi')).to.equal('val2');
     });
   }
 );
