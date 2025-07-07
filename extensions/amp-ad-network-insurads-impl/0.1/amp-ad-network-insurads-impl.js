@@ -44,6 +44,8 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
 
     // States of the Application
     this.appEnabled = false;
+    /** @private @const {!Deferred} */
+    this.appReadyDeferred_ = new Deferred();
 
     /* DoubleClick & AMP */
     this.dCHelper = new DoubleClickHelper(this);
@@ -119,7 +121,11 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     //   this.unitInfo.setProvider(entry.provider);
     // }
 
-    this.sendUnitInit_();
+    // After the ad URL is fetched and the app is ready, send our init message.
+    this.appReadyDeferred_.promise.then(() => {
+      // This will now correctly execute on the initial load AND every refresh.
+      this.sendUnitInit_();
+    });
 
     if (this.extension_) {
       // this.extension_.bannerChanged(this.unitInfo); // TODO: Correct this
@@ -320,6 +326,10 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     //   this.unitInfo.setPendingUnitInit(false);
     //   this.sendUnitInit_();
     // }
+    // Like so:
+    if (!this.appReadyDeferred_.isDone()) {
+      this.appReadyDeferred_.resolve(message);
+    }
 
     console /*OK*/
       .log('App Init:', message);
@@ -424,6 +434,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     if (this.appEnabled) {
       const entry = this.waterfall ? this.waterfall.getCurrentEntry() : null;
 
+      // Maybe create a method to get the object parameters if this is going to be reused for extension?
       const unitInit = {
         // Unit
         code: this.code_,
