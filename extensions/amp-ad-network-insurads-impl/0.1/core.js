@@ -144,11 +144,22 @@ export class Core {
 
   /**
    * Sends an ad unit initialization message
-   * @param {UnitInfo} unitInfo - Ad unit information
+   * @param {{
+   *   code: string,
+   *   adUnitId: (string|undefined),
+   *   keyValues: (Array|undefined),
+   *   path: (string|undefined),
+   *   lineItemId: (string|undefined),
+   *   creativeId: (string|undefined),
+   *   servedSize: (string|undefined)
+   *   isHouseDemand: (boolean|undefined),
+   *   position: (number|undefined),
+   *
+   * }} unitInfo - Ad unit information object. // TODO: Complete parameters
    * @param {boolean=} reconnect - Reconnect flag
    * @param {boolean=} passback - Passback flag
    */
-  sendUnitInit(unitInfo, reconnect = false, passback = false) {
+  sendUnitInit({unitInfo}, reconnect = false, passback = false) {
     const info = {
       ...unitInfo,
       reconnect,
