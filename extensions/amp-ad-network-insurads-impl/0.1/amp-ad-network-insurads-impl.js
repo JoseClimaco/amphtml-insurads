@@ -121,15 +121,16 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     //   this.unitInfo.setProvider(entry.provider);
     // }
 
-    // After the ad URL is fetched and the app is ready, send our init message.
+    // After the ad is served and the app is ready, send our init message.
     this.appReadyDeferred_.promise.then(() => {
       // This will now correctly execute on the initial load AND every refresh.
       this.sendUnitInit_();
     });
 
-    if (this.extension_) {
-      // this.extension_.bannerChanged(this.unitInfo); // TODO: Correct this
-    }
+    // TODO: Use the appropriate model
+    // if (this.extension_) {
+    //   this.extension_.bannerChanged(this.unitInfo);
+    // }
 
     return this.dCHelper.callMethod('extractSize', responseHeaders);
   }
