@@ -329,7 +329,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     // }
     // Like so:
     if (!this.appReadyDeferred_.isDone()) {
-      this.appReadyDeferred_.resolve(message);
+      this.appReadyDeferred_.resolve();
     }
 
     console /*OK*/
@@ -367,7 +367,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
       instance: this.element.getAttribute('data-amp-slot-index'),
       configuration: null,
       customTargeting: null,
-      rotation: 'Enabled',
+      rotation: message.rotation ? message.rotation : false,
       isFirstPrint: this.refreshCount_ === 0,
       isTracking: false,
       visible: this.isViewable_,
@@ -408,7 +408,8 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
 
     switch (msg.data.action) {
       case 'changeBanner':
-        this.refresh(this.refreshEndCallback);
+        // this.refresh(this.refreshEndCallback); not needed
+        this.sendUnitInit_(false, true);
         break;
     }
   }
@@ -421,17 +422,17 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   onVisibilityChange_(visibilityData) {
     if (this.isViewable_ !== visibilityData.isViewable && this.appEnabled) {
       this.core_.sendUnitSnapshot(this.code_, visibilityData.isViewable);
-
-      this.isViewable_ = visibilityData.isViewable;
     }
+    this.isViewable_ = visibilityData.isViewable;
   }
 
   /**
    * Sends the unit initialization message
    * @param {boolean=} reconnect - Whether this is a reconnect
+   * @param {boolean=} passback - Whether this is a passback
    * @private
    */
-  sendUnitInit_(reconnect) {
+  sendUnitInit_(reconnect = false, passback = false) {
     if (this.appEnabled) {
       const entry = this.waterfall ? this.waterfall.getCurrentEntry() : null;
 
@@ -453,10 +454,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
         // TODO: Complete parameters
       };
 
-      this.core_.sendUnitInit(unitInit, reconnect);
-    } else {
-      // TODO: Maybe make this a promise so we dont need the state?
-      // this.unitInfo.setPendingUnitInit(true);
+      this.core_.sendUnitInit(unitInit, reconnect, passback);
     }
   }
 
