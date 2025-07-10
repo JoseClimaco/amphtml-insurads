@@ -781,7 +781,6 @@ export class AmpAdNetworkDoubleclickImpl extends AmpA4A {
 
   /** @override */
   getAdUrl(opt_consentTuple, opt_rtcResponsesPromise, opt_serveNpaSignal) {
-    console.log('getAdUrl from amp-ad-network-doubleclick-impl.js');
     if (this.useSra) {
       this.sraDeferred = this.sraDeferred || new Deferred();
     }
@@ -1290,7 +1289,6 @@ export class AmpAdNetworkDoubleclickImpl extends AmpA4A {
 
   /** @override */
   onCreativeRender(creativeMetaData, opt_onLoadPromise) {
-    console.log('creative render amp-ad-network-doubleclick-impl.js');
     super.onCreativeRender(creativeMetaData);
     this.isAmpCreative_ = !!creativeMetaData;
     if (
