@@ -679,6 +679,18 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     return true;
   }
 
+  // #region InsurAds Logic
+  /** @override */
+  forceCollapse() {
+    if (this.refreshCount_ === 0) {
+      super.forceCollapse();
+      this.destroy_();
+    } else {
+      this.triggerImmediateRefresh_();
+    }
+  }
+  // #endregion
+
   /**
    * @param {?ConsentTupleDef} consentTuple
    * @param {!Array<!AmpAdNetworkInsuradsImpl>=} instances
@@ -904,7 +916,53 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
             rtcParams
           ),
           this.experimentIds
-        ).then((adUrl) => this.getAdUrlDeferred.resolve(adUrl));
+        ).then((adUrl) => {
+          // #region InsurAds Logic
+          const url = new URL(adUrl);
+          if (self.refreshCount_ > 0) {
+            const entry = this.waterfall_.getCurrentEntry();
+
+            const params = url.searchParams;
+
+            if (entry.path) {
+              params.set('iu', entry.path);
+            }
+
+            const keyValuesParam = params.get('scp') || '';
+            let keyValues = keyValuesParam;
+
+            const allKeyValues = [
+              ...(entry.keyValues || []),
+              ...(entry.commonKeyValues || []),
+            ];
+
+            if (allKeyValues.length > 0) {
+              const merged = this.serializeKeyValueArray_(allKeyValues);
+              keyValues += (keyValues ? '&' : '') + merged;
+            }
+
+            if (this.iabTaxonomy_ && entry.isHouseDemand) {
+              const userSignals = this.convertToUserSignals_(this.iabTaxonomy_);
+
+              const encodedSignals = encodeURIComponent(
+                btoa(JSON.stringify(userSignals))
+              );
+
+              params.set('ppsj', encodedSignals);
+            }
+
+            params.set('scp', keyValues);
+
+            const sizesString = params.get('sz');
+            const sizesArray = sizesString
+              .split('|')
+              .map((size) => size.split('x').map(Number));
+            this.sizes_ = sizesArray;
+          }
+          // #endregion
+
+          this.getAdUrlDeferred.resolve(url.toString());
+        });
       }
     );
     this.troubleshootData_.adUrl = this.getAdUrlDeferred.promise;

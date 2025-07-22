@@ -1,5 +1,4 @@
 import {CONSENT_POLICY_STATE} from '#core/constants/consent-state';
-import {Deferred} from '#core/data-structures/promise';
 import {tryParseJson} from '#core/types/object/json';
 
 import {user} from '#utils/log';
@@ -12,7 +11,6 @@ import {
 } from 'src/consent';
 
 import {ExtensionCommunication} from './extension';
-import {CryptoUtils} from './utilities';
 import {VisibilityTracker} from './visibility-tracking';
 import {Waterfall} from './waterfall';
 
@@ -25,152 +23,6 @@ export class Initial {
    */
   constructor(win) {
     this.win = win;
-  }
-
-  /* Main method to start the process */
-
-  // Not Needed because it calls DoubleClick method only
-  // Status: Not Needed
-  // buildCallback() {
-  //   this.dCHelper.callMethod('buildCallback');
-  // }
-
-  // Not Needed because it calls DoubleClick method only
-  // Status: Not Needed
-  // tearDownSlot() {
-  //   this.dCHelper.callMethod('tearDownSlot');
-  // }
-
-  // Don't need to call DoubleClick onCreativeRender
-  // Do we need to set isRefreshing to false here? Or can we do in a different place?
-  // Status: Needs Review
-  /**
-   * onCreativeRender
-   */
-  // onCreativeRender() {
-  //   this.isRefreshing = false;
-  //   // this.dCHelper.callMethod(
-  //   //   'onCreativeRender',
-  //   //   creativeMetaData,
-  //   //   opt_onLoadPromise
-  //   // );
-  // }
-
-  // Status: Needs Review
-  // /**
-  //  * refresh
-  //  * @param {*} refreshEndCallback
-  //  * @return
-  //  */
-  // refresh(refreshEndCallback) {
-  //   if (this.isRefreshing) {
-  //     return;
-  //   }
-  //   this.refreshCount_++;
-
-  //   return super.refresh(refreshEndCallback);
-  // }
-
-  // Status: Needs Review
-  // /**
-  //  * ExtractSize
-  //  * @param {*} responseHeaders
-  //  * @return
-  //  */
-  // extractSize(responseHeaders) {
-  //   this.adResponseData_ = {
-  //     lineItemId: responseHeaders.get('google-lineitem-id') || '-1',
-  //     creativeId: responseHeaders.get('google-creative-id') || '-1',
-  //     servedSize: responseHeaders.get('google-size') || '',
-  //   };
-
-  //   this.appReadyDeferred_.promise.then(() => {
-  //     this.sendUnitInit_();
-  //   });
-
-  //   this.extensionReadyDeferred_.promise.then(() => {
-  //     if (this.extension_) {
-  //       const entry = this.waterfall_
-  //         ? this.waterfall_.getCurrentEntry()
-  //         : null;
-
-  //       this.extension_.bannerChanged({
-  //         unitId: this.getUnitId_(),
-  //         shortId: this.unitId_,
-  //         impressionId: CryptoUtils.generateImpressionId(),
-  //         provider: entry ? entry.provider : '',
-  //         width: this.adResponseData_.servedSize.width,
-  //         height: this.adResponseData_.servedSize.height,
-  //       });
-  //     }
-  //   });
-
-  //   return this.dCHelper.callMethod('extractSize', responseHeaders);
-  // }
-
-  // Status: Needs Review
-  /**
-   * get ad url
-   * @param {*} opt_consentTuple
-   * @param {*} opt_rtcResponsesPromise
-   * @param {*} opt_serveNpaSignal
-   * @return
-   */
-  getAdUrl(opt_consentTuple, opt_rtcResponsesPromise, opt_serveNpaSignal) {
-    this.getAdUrlDeferred = new Deferred();
-    this.getAdUrlInsurAdsDeferred = new Deferred();
-    const self = this;
-    this.dCHelper.callMethod(
-      'getAdUrl',
-      opt_consentTuple,
-      opt_rtcResponsesPromise,
-      opt_serveNpaSignal
-    );
-    this.getAdUrlDeferred.promise.then((doubleClickUrl) => {
-      const url = new URL(doubleClickUrl);
-      if (self.refreshCount_ > 0) {
-        const entry = this.waterfall_.getCurrentEntry();
-
-        const params = url.searchParams;
-
-        if (entry.path) {
-          params.set('iu', entry.path);
-        }
-
-        const keyValuesParam = params.get('scp') || '';
-        let keyValues = keyValuesParam;
-
-        const allKeyValues = [
-          ...(entry.keyValues || []),
-          ...(entry.commonKeyValues || []),
-        ];
-
-        if (allKeyValues.length > 0) {
-          const merged = this.serializeKeyValueArray_(allKeyValues);
-          keyValues += (keyValues ? '&' : '') + merged;
-        }
-
-        if (this.iabTaxonomy_ && entry.isHouseDemand) {
-          const userSignals = this.convertToUserSignals_(this.iabTaxonomy_);
-
-          const encodedSignals = encodeURIComponent(
-            btoa(JSON.stringify(userSignals))
-          );
-
-          params.set('ppsj', encodedSignals);
-        }
-
-        params.set('scp', keyValues);
-
-        const sizesString = params.get('sz');
-        const sizesArray = sizesString
-          .split('|')
-          .map((size) => size.split('x').map(Number));
-        this.sizes_ = sizesArray;
-      }
-      self.getAdUrlInsurAdsDeferred.resolve(url.toString());
-    });
-    return this.getAdUrlInsurAdsDeferred.promise;
   }
 
   // Status: Needs Review
