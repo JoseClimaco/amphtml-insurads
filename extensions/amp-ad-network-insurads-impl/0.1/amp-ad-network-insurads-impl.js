@@ -75,18 +75,10 @@ import {dev, devAssert, user} from '#utils/log';
 import {isAttributionReportingAllowed} from '#utils/privacy-sandbox-utils';
 
 import {
-  getConsentMetadata,
-  getConsentPolicyInfo,
-  getConsentPolicySharedData,
-  getConsentPolicyState,
-} from 'src/consent'; // InsurAds specific
-
-import {
   FlexibleAdSlotDataTypeDef,
   getFlexibleAdSlotData,
 } from './flexible-ad-slot-utils';
-import {Core} from './iat/core'; // InsurAds specific
-import {CryptoUtils} from './iat/utilities'; // InsurAds specific
+import {InsurAds} from './iat/insurads';
 import {SafeframeHostApi} from './safeframe-host';
 import {
   TFCD,
@@ -106,7 +98,6 @@ import {
   DEFAULT_SAFEFRAME_VERSION,
   XORIGIN_MODE,
   assignAdUrlToError,
-  hasStorageConsent,
   tryAddingCookieParams,
 } from '../../amp-a4a/0.1/amp-a4a';
 import {
@@ -352,68 +343,13 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     this.serveNpaSignal_ = false;
 
     // #region InsurAds Specific
-    // TODO: This needs review
-    this.element.setAttribute('data-enable-refresh', 'false');
-    const publicId = this.element.getAttribute('data-public-id');
     const {canonicalUrl} = Services.documentInfoForDoc(this.element);
-
-    /** @private {number} */
-    this.unitId_ = 0;
-    /** @private {?Object} */
-    this.adResponseData_ = null;
-    /** @private {?Array<!Array<number>>} */
-    this.sizes_ = null;
-
-    /** @private {number} */
-    this.parentMawId_ = 0;
-
-    /** @private {string} */
-    this.unitCode_ = CryptoUtils.generateCode();
-    /** @private {string} */
-    this.path_ = this.element.getAttribute('data-slot');
-    /** @private {!Object<string, *>} */
-    this.requiredKeyValues_ = {};
-    /** @private {?Object} */
-    this.originalRtcConfig_ = tryParseJson(
-      this.element.getAttribute('rtc-config')
+    this.insurads = new InsurAds(
+      this.win,
+      this.element,
+      canonicalUrl,
+      this.refresh
     );
-
-    /** @private {boolean} */
-    this.isViewable_ = false;
-
-    /** @private {?Object} */
-    this.iabTaxonomy_ = {};
-
-    /** @private {boolean} */
-    this.appEnabled_ = false;
-    /** @private @const {!Deferred} */
-    this.appReadyDeferred_ = new Deferred();
-
-    /** @private {?ExtensionCommunication} */
-    this.extension_ = null;
-    /** @private @const {!Deferred} */
-    this.extensionReadyDeferred_ = new Deferred();
-
-    /** @private {?Waterfall} */
-    this.waterfall_ = null;
-
-    // TODO: This needs review
-    this.getConsent_().then((consent) => {
-      const consentTuple = consent ? this.parseConsent_(consent) : null;
-      const storageConsent = hasStorageConsent(consentTuple);
-
-      /** @private {?Core} */
-      this.core_ = Core.start(this.win, canonicalUrl, publicId, storageConsent);
-      this.core_.registerUnit(
-        this.unitCode_,
-        this.handleReconnect_.bind(this),
-        {
-          appInitHandler: (message) => this.handleAppInit_(message),
-          unitInitHandler: (message) => this.handleUnitInit_(message),
-          waterfallHandler: (message) => this.handleWaterfall_(message),
-        }
-      );
-    });
     // #endregion
   }
 
@@ -682,12 +618,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   // #region InsurAds Logic
   /** @override */
   forceCollapse() {
-    if (this.refreshCount_ === 0) {
-      super.forceCollapse();
-      this.destroy_();
-    } else {
-      this.triggerImmediateRefresh_();
-    }
+    this.insurads.forceCollapse();
   }
   // #endregion
 
@@ -844,7 +775,8 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
       : width && height
         ? // width/height could be 'auto' in which case we fallback to measured.
           {width, height}
-        : this.getIntersectionElementLayoutBox();
+        : // eslint-disable-next-line local/no-forbidden-terms
+          this.getIntersectionElementLayoutBox();
     this.jsonTargeting = tryParseJson(this.element.getAttribute('json')) || {};
     this.adKey = this.generateAdKey_(
       `${this.initialSize_.width}x${this.initialSize_.height}`
@@ -918,50 +850,10 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
           this.experimentIds
         ).then((adUrl) => {
           // #region InsurAds Logic
-          const url = new URL(adUrl);
-          if (self.refreshCount_ > 0) {
-            const entry = this.waterfall_.getCurrentEntry();
-
-            const params = url.searchParams;
-
-            if (entry.path) {
-              params.set('iu', entry.path);
-            }
-
-            const keyValuesParam = params.get('scp') || '';
-            let keyValues = keyValuesParam;
-
-            const allKeyValues = [
-              ...(entry.keyValues || []),
-              ...(entry.commonKeyValues || []),
-            ];
-
-            if (allKeyValues.length > 0) {
-              const merged = this.serializeKeyValueArray_(allKeyValues);
-              keyValues += (keyValues ? '&' : '') + merged;
-            }
-
-            if (this.iabTaxonomy_ && entry.isHouseDemand) {
-              const userSignals = this.convertToUserSignals_(this.iabTaxonomy_);
-
-              const encodedSignals = encodeURIComponent(
-                btoa(JSON.stringify(userSignals))
-              );
-
-              params.set('ppsj', encodedSignals);
-            }
-
-            params.set('scp', keyValues);
-
-            const sizesString = params.get('sz');
-            const sizesArray = sizesString
-              .split('|')
-              .map((size) => size.split('x').map(Number));
-            this.sizes_ = sizesArray;
-          }
+          const augmentedAdUrl = this.insurads.augmentAdUrl(adUrl);
           // #endregion
 
-          this.getAdUrlDeferred.resolve(url.toString());
+          this.getAdUrlDeferred.resolve(augmentedAdUrl.toString());
         });
       }
     );
@@ -1204,32 +1096,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   extractSize(responseHeaders) {
     // #region InsurAds Logic
     // TODO: Some duplicated logic, needs to be refactored.
-    this.adResponseData_ = {
-      lineItemId: responseHeaders.get('google-lineitem-id') || '-1',
-      creativeId: responseHeaders.get('google-creative-id') || '-1',
-      servedSize: responseHeaders.get('google-size') || '',
-    };
-
-    this.appReadyDeferred_.promise.then(() => {
-      this.sendUnitInit_();
-    });
-
-    this.extensionReadyDeferred_.promise.then(() => {
-      if (this.extension_) {
-        const entry = this.waterfall_
-          ? this.waterfall_.getCurrentEntry()
-          : null;
-
-        this.extension_.bannerChanged({
-          unitId: this.getUnitId_(),
-          shortId: this.unitId_,
-          impressionId: CryptoUtils.generateImpressionId(),
-          provider: entry ? entry.provider : '',
-          width: this.adResponseData_.servedSize.width,
-          height: this.adResponseData_.servedSize.height,
-        });
-      }
-    });
+    this.insurads.extractSize(responseHeaders);
     // #endregion
 
     this.ampAnalyticsConfig_ = extractAmpAnalyticsConfig(this, responseHeaders);
@@ -1286,6 +1153,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     return width && height
       ? {width, height}
       : // width/height could be 'auto' in which case we fallback to measured.
+        // eslint-disable-next-line local/no-forbidden-terms
         this.getIntersectionElementLayoutBox();
   }
 
@@ -2188,100 +2056,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   onAdResponse(fetchResponse) {
     maybeSetCookieFromAdResponse(this.win, fetchResponse);
   }
-
-  // #region Moved to Implementation
-  /**
-   * Get Consent
-   * @return {!Promise<Array<Promise>>} - Resolves with consent state, string, metadata, and shared data, or undefined if no policy ID
-   * @private
-   */
-  getConsent_() {
-    const consentPolicyId = super.getConsentPolicy();
-
-    if (consentPolicyId) {
-      const consentStatePromise = getConsentPolicyState(
-        this.element,
-        consentPolicyId
-      ).catch((err) => {
-        user().error(TAG, 'Error determining consent state', err);
-        return CONSENT_POLICY_STATE.UNKNOWN;
-      });
-
-      const consentStringPromise = getConsentPolicyInfo(
-        this.element,
-        consentPolicyId
-      ).catch((err) => {
-        user().error(TAG, 'Error determining consent string', err);
-        return null;
-      });
-
-      const consentMetadataPromise = getConsentMetadata(
-        this.element,
-        consentPolicyId
-      ).catch((err) => {
-        user().error(TAG, 'Error determining consent metadata', err);
-        return null;
-      });
-
-      const consentSharedDataPromise = getConsentPolicySharedData(
-        this.element,
-        consentPolicyId
-      ).catch((err) => {
-        user().error(TAG, 'Error determining consent shared data', err);
-        return null;
-      });
-
-      return Promise.all([
-        consentStatePromise,
-        consentStringPromise,
-        consentMetadataPromise,
-        consentSharedDataPromise,
-      ]);
-    }
-
-    return Promise.resolve(null);
-  }
-
-  /**
-   * Parses the consent tuple into a structured object
-   * @param {Array} consentResponse - The consent response array
-   * @return {?ConsentTupleDef} The parsed consent object
-   * @private
-   */
-  parseConsent_(consentResponse) {
-    const consentState = consentResponse[0];
-    const consentString = consentResponse[1];
-    const consentMetadata = consentResponse[2];
-    const consentSharedData = consentResponse[3];
-
-    const gdprApplies = consentMetadata
-      ? consentMetadata['gdprApplies']
-      : consentMetadata;
-    const additionalConsent = consentMetadata
-      ? consentMetadata['additionalConsent']
-      : consentMetadata;
-    const consentStringType = consentMetadata
-      ? consentMetadata['consentStringType']
-      : consentMetadata;
-    const purposeOne = consentMetadata
-      ? consentMetadata['purposeOne']
-      : consentMetadata;
-    const gppSectionId = consentMetadata
-      ? consentMetadata['gppSectionId']
-      : consentMetadata;
-
-    return {
-      consentState,
-      consentString,
-      consentStringType,
-      gdprApplies,
-      additionalConsent,
-      consentSharedData,
-      purposeOne,
-      gppSectionId,
-    };
-  }
-  // #endregion
 }
 
 AMP.extension(TAG, '0.1', (AMP) => {

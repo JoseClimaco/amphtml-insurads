@@ -1,7 +1,6 @@
 import {CONSENT_POLICY_STATE} from '#core/constants/consent-state';
+import {Deferred} from '#core/data-structures/promise';
 import {tryParseJson} from '#core/types/object/json';
-
-import {user} from '#utils/log';
 
 import {
   getConsentMetadata,
@@ -10,19 +9,88 @@ import {
   getConsentPolicyState,
 } from 'src/consent';
 
+import {Core} from './core'; // InsurAds specific
 import {ExtensionCommunication} from './extension';
+import {CryptoUtils} from './utilities'; // InsurAds specific
 import {VisibilityTracker} from './visibility-tracking';
 import {Waterfall} from './waterfall';
 
+import {ConsentTupleDef, hasStorageConsent} from '../../../amp-a4a/0.1/amp-a4a';
 /**
  * To be named later.
  */
-export class Initial {
+export class InsurAds {
   /**
    * @param {!Window} win - Window object
+   * @param {!Element} element - The AMP element this ad is attached to
+   * @param {string} canonicalUrl - The canonical URL of the document
+   * @param {function(function())} refresh - Function to call for ad refresh
    */
-  constructor(win) {
+  constructor(win, element, canonicalUrl, refresh) {
     this.win = win;
+    this.element = element;
+    this.canonicalUrl = canonicalUrl;
+    this.refresh_ = refresh;
+
+    this.element.setAttribute('data-enable-refresh', 'false');
+    const publicId = this.element.getAttribute('data-public-id');
+
+    /** @private {number} */
+    this.unitId_ = 0;
+    /** @private {?Object} */
+    this.adResponseData_ = null;
+    /** @private {?Array<!Array<number>>} */
+    this.sizes_ = null;
+
+    /** @private {number} */
+    this.parentMawId_ = 0;
+
+    /** @private {string} */
+    this.unitCode_ = CryptoUtils.generateCode();
+    /** @private {string} */
+    this.path_ = this.element.getAttribute('data-slot');
+    /** @private {!Object<string, *>} */
+    this.requiredKeyValues_ = {};
+    /** @private {?Object} */
+    this.originalRtcConfig_ = tryParseJson(
+      this.element.getAttribute('rtc-config')
+    );
+
+    /** @private {boolean} */
+    this.isViewable_ = false;
+
+    /** @private {?Object} */
+    this.iabTaxonomy_ = {};
+
+    /** @private {boolean} */
+    this.appEnabled_ = false;
+    /** @private @const {!Deferred} */
+    this.appReadyDeferred_ = new Deferred();
+
+    /** @private {?ExtensionCommunication} */
+    this.extension_ = null;
+    /** @private @const {!Deferred} */
+    this.extensionReadyDeferred_ = new Deferred();
+
+    /** @private {?Waterfall} */
+    this.waterfall_ = null;
+
+    this.getConsent_().then((consent) => {
+      const consentTuple = consent ? this.parseConsent_(consent) : null;
+      const storageConsent = hasStorageConsent(consentTuple);
+
+      /** @private {?Core} */
+      this.core_ = Core.start(this.win, canonicalUrl, publicId, storageConsent);
+      this.core_.registerUnit(
+        this.unitCode_,
+        this.handleReconnect_.bind(this),
+        {
+          appInitHandler: (message) => this.handleAppInit_(message),
+          unitInitHandler: (message) => this.handleUnitInit_(message),
+          waterfallHandler: (message) => this.handleWaterfall_(message),
+        }
+      );
+    });
   }
 
   // Status: Needs Review
@@ -78,7 +146,7 @@ export class Initial {
 
     this.updateRtcConfig_(nextEntry);
 
-    this.refresh(this.refreshEndCallback_);
+    this.refresh_(this.refreshEndCallback_);
   }
 
   /**
@@ -383,32 +451,28 @@ export class Initial {
       const consentStatePromise = getConsentPolicyState(
         this.element,
         consentPolicyId
-      ).catch((err) => {
-        user().error(TAG, 'Error determining consent state', err);
+      ).catch(() => {
         return CONSENT_POLICY_STATE.UNKNOWN;
       });
 
       const consentStringPromise = getConsentPolicyInfo(
         this.element,
         consentPolicyId
-      ).catch((err) => {
-        user().error(TAG, 'Error determining consent string', err);
+      ).catch(() => {
         return null;
       });
 
       const consentMetadataPromise = getConsentMetadata(
         this.element,
         consentPolicyId
-      ).catch((err) => {
-        user().error(TAG, 'Error determining consent metadata', err);
+      ).catch(() => {
         return null;
       });
 
       const consentSharedDataPromise = getConsentPolicySharedData(
         this.element,
         consentPolicyId
-      ).catch((err) => {
-        user().error(TAG, 'Error determining consent shared data', err);
+      ).catch(() => {
         return null;
       });
 
@@ -461,5 +525,100 @@ export class Initial {
       purposeOne,
       gppSectionId,
     };
+  }
+
+  /**
+   * Appends InsurAds URL parameters for ad requests.
+   * @param {string} adUrl
+   * @return {URL} The augmented URL with InsurAds parameters
+   */
+  augmentAdUrl(adUrl) {
+    const url = new URL(adUrl);
+    if (self.refreshCount_ > 0) {
+      const entry = this.waterfall_.getCurrentEntry();
+
+      const params = url.searchParams;
+
+      if (entry.path) {
+        params.set('iu', entry.path);
+      }
+
+      const keyValuesParam = params.get('scp') || '';
+      let keyValues = keyValuesParam;
+
+      const allKeyValues = [
+        ...(entry.keyValues || []),
+        ...(entry.commonKeyValues || []),
+      ];
+
+      if (allKeyValues.length > 0) {
+        const merged = this.serializeKeyValueArray_(allKeyValues);
+        keyValues += (keyValues ? '&' : '') + merged;
+      }
+
+      if (this.iabTaxonomy_ && entry.isHouseDemand) {
+        const userSignals = this.convertToUserSignals_(this.iabTaxonomy_);
+
+        const encodedSignals = encodeURIComponent(
+          btoa(JSON.stringify(userSignals))
+        );
+
+        params.set('ppsj', encodedSignals);
+      }
+
+      params.set('scp', keyValues);
+
+      const sizesString = params.get('sz');
+      const sizesArray = sizesString
+        .split('|')
+        .map((size) => size.split('x').map(Number));
+      this.sizes_ = sizesArray;
+    }
+    return url;
+  }
+
+  /**
+   * Extracts the ad size from the response headers.
+   * @param {Headers} responseHeaders
+   */
+  extractSize(responseHeaders) {
+    this.adResponseData_ = {
+      lineItemId: responseHeaders.get('google-lineitem-id') || '-1',
+      creativeId: responseHeaders.get('google-creative-id') || '-1',
+      servedSize: responseHeaders.get('google-size') || '',
+    };
+
+    this.appReadyDeferred_.promise.then(() => {
+      this.sendUnitInit_();
+    });
+
+    this.extensionReadyDeferred_.promise.then(() => {
+      if (this.extension_) {
+        const entry = this.waterfall_
+          ? this.waterfall_.getCurrentEntry()
+          : null;
+
+        this.extension_.bannerChanged({
+          unitId: this.getUnitId_(),
+          shortId: this.unitId_,
+          impressionId: CryptoUtils.generateImpressionId(),
+          provider: entry ? entry.provider : '',
+          width: this.adResponseData_.servedSize.width,
+          height: this.adResponseData_.servedSize.height,
+        });
+      }
+    });
+  }
+
+  /**
+   * Forces the collapse of the ad unit.
+   */
+  forceCollapse() {
+    if (this.refreshCount_ === 0) {
+      super.forceCollapse();
+      this.destroy_();
+    } else {
+      this.triggerImmediateRefresh_();
+    }
   }
 }
