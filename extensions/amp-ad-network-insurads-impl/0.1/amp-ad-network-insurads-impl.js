@@ -17,12 +17,12 @@ import {
   AmpAnalyticsConfigDef,
   QQID_HEADER,
   SANDBOX_HEADER,
-  ValidAdContainerTypes,
+  // ValidAdContainerTypes,
   addCsiSignalsToAmpAnalyticsConfig,
   extractAmpAnalyticsConfig,
   getCsiAmpAnalyticsConfig,
   getCsiAmpAnalyticsVariables,
-  getEnclosingContainerTypes,
+  // getEnclosingContainerTypes,
   getServeNpaPromise,
   googleAdUrl,
   googleBlockParameters,
@@ -100,10 +100,10 @@ import {
   assignAdUrlToError,
   tryAddingCookieParams,
 } from '../../amp-a4a/0.1/amp-a4a';
-import {
-  RefreshManager, // eslint-disable-line @typescript-eslint/no-unused-vars
-  getRefreshManager,
-} from '../../amp-a4a/0.1/refresh-manager';
+// import {
+//   RefreshManager, // eslint-disable-line @typescript-eslint/no-unused-vars
+//   getRefreshManager,
+// } from '../../amp-a4a/0.1/refresh-manager';
 import {AMP_SIGNATURE_HEADER} from '../../amp-a4a/0.1/signature-verifier';
 import {
   getAmpAdRenderOutsideViewport,
@@ -254,8 +254,10 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     /** @protected {?Deferred<?Response>} */
     this.sraDeferred = null;
 
-    /** @private {?RefreshManager} */
-    this.refreshManager_ = null;
+    // #region InsurAds - Don't need refresh manager
+    // /** @private {?RefreshManager} */
+    // this.refreshManager_ = null;
+    // #endregion
 
     /** @private {number} */
     this.refreshCount_ = 0;
@@ -344,12 +346,16 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
 
     // #region InsurAds Specific
     const {canonicalUrl} = Services.documentInfoForDoc(this.element);
-    this.insurads = new InsurAds(
-      this.win,
-      this.element,
-      canonicalUrl,
-      this.refresh
-    );
+    this.insurads = new InsurAds(this.win, this.element, canonicalUrl, {
+      refresh: () => this.refresh(),
+      getConsentPolicy: () => super.getConsentPolicy(),
+      forceCollapse: () => super.forceCollapse(),
+      isRefreshing: () => this.isRefreshing,
+      hasIframe: () => !!this.iframe,
+      getRefreshCount: () => this.refreshCount_,
+      getInitialSize: () => this.initialSize_,
+      getCreativeSize: () => this.returnedSize_,
+    });
     // #endregion
   }
 
@@ -457,7 +463,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
             !forcedExperimentId &&
             !this.win.document./*OK*/ querySelector(
               'meta[name=amp-ad-enable-refresh], ' +
-                'amp-ad[type=doubleclick][data-enable-refresh], ' +
+                'amp-ad[type=insurads][data-enable-refresh], ' + // type needs to be insurads otherwise will fail
                 'meta[name=amp-ad-doubleclick-sra]'
             ),
           branches: Object.keys(DOUBLECLICK_SRA_EXP_BRANCHES).map(
@@ -538,29 +544,31 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     return extractUrlExperimentId(this.win, this.element);
   }
 
-  /** @private */
-  maybeDeprecationWarn_() {
-    const warnDeprecation = (feature) =>
-      user().warn(
-        TAG,
-        `${feature} is no longer supported for DoubleClick.` +
-          'Please refer to ' +
-          'https://github.com/ampproject/amphtml/issues/11834 ' +
-          'for more information'
-      );
-    const usdrd = 'useSameDomainRenderingUntilDeprecated';
-    const hasUSDRD =
-      usdrd in this.element.dataset ||
-      (tryParseJson(this.element.getAttribute('json')) || {})[usdrd];
-    if (hasUSDRD) {
-      warnDeprecation(usdrd);
-    }
-    const useRemoteHtml =
-      this.getAmpDoc().getMetaByName('amp-3p-iframe-src') !== null;
-    if (useRemoteHtml) {
-      warnDeprecation('remote.html');
-    }
-  }
+  // TODO: HERE
+  // Maybe we can remove this, i don't think we need to worry about deprecation warnings
+  // /** @private */
+  // maybeDeprecationWarn_() {
+  //   const warnDeprecation = (feature) =>
+  //     user().warn(
+  //       TAG,
+  //       `${feature} is no longer supported for DoubleClick.` +
+  //         'Please refer to ' +
+  //         'https://github.com/ampproject/amphtml/issues/11834 ' +
+  //         'for more information'
+  //     );
+  //   const usdrd = 'useSameDomainRenderingUntilDeprecated';
+  //   const hasUSDRD =
+  //     usdrd in this.element.dataset ||
+  //     (tryParseJson(this.element.getAttribute('json')) || {})[usdrd];
+  //   if (hasUSDRD) {
+  //     warnDeprecation(usdrd);
+  //   }
+  //   const useRemoteHtml =
+  //     this.getAmpDoc().getMetaByName('amp-3p-iframe-src') !== null;
+  //   if (useRemoteHtml) {
+  //     warnDeprecation('remote.html');
+  //   }
+  // }
 
   /** @override */
   delayAdRequestEnabled() {
@@ -573,13 +581,14 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   /** @override */
   buildCallback() {
     super.buildCallback();
-    this.maybeDeprecationWarn_();
+    // this.maybeDeprecationWarn_(); // TODO: Remove this? check method
     this.setPageLevelExperiments(this.extractUrlExperimentId_());
     const pubEnabledSra = !!this.win.document.querySelector(
       'meta[name=amp-ad-doubleclick-sra]'
     );
     const delayFetchEnabled = !!this.win.document.querySelector(
-      `amp-ad[type=doubleclick][${escapeCssSelectorIdent(
+      // type needs to be insurads otherwise will fail
+      `amp-ad[type=insurads][${escapeCssSelectorIdent(
         LAZY_FETCH_ATTRIBUTE
       )}=true]`
     );
@@ -853,7 +862,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
           const augmentedAdUrl = this.insurads.augmentAdUrl(adUrl);
           // #endregion
 
-          this.getAdUrlDeferred.resolve(augmentedAdUrl.toString());
+          this.getAdUrlDeferred.resolve(augmentedAdUrl);
         });
       }
     );
@@ -1269,9 +1278,11 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
 
   /** @override  */
   unlayoutCallback() {
-    if (this.refreshManager_) {
-      this.refreshManager_.unobserve();
-    }
+    // #region InsurAds - Don't need refresh manager
+    // if (this.refreshManager_) {
+    //   this.refreshManager_.unobserve();
+    // }
+    // #endregion
     if (!this.useSra && this.isAmpCreative_) {
       // Allow non-AMP creatives to remain unless SRA.
       return false;
@@ -1309,10 +1320,13 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   refresh(refreshEndCallback) {
     // #region InsurAds Logic
     if (this.isRefreshing) {
+      console./*Ok*/ log(
+        '[iat-debug]: refresh called, but isRefreshing is already true'
+      );
       return;
     }
     // #endregion
-
+    console./*Ok*/ log('[iat-debug]: refresh called - ', this.refreshCount_);
     this.refreshCount_++;
     return super.refresh(refreshEndCallback);
   }
@@ -1320,9 +1334,33 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   /** @override */
   onCreativeRender(creativeMetaData, opt_onLoadPromise) {
     // #region InsurAds Logic
-    // TODO: Why is this needed?
     this.isRefreshing = false;
+    console./*Ok*/ log(
+      '[iat-debug]: onCreativeRender called, isRefreshing set to false',
+      creativeMetaData,
+      opt_onLoadPromise
+    );
     // #endregion
+    console./*Ok*/ log(
+      '[iat-debug]: setTimeout called, refreshing ad after 10 seconds'
+    );
+    if (this.refreshCount_ === 0) {
+      setTimeout(() => {
+        // #region InsurAds Logic
+        this.refresh(() => {
+          console./*Ok*/ log(
+            '[iat-debug]: refresh called - ',
+            this.refreshCount_
+          );
+        });
+        this.refresh(() => {
+          console./*Ok*/ log(
+            '[iat-debug]: refresh called - ',
+            this.refreshCount_
+          );
+        });
+      }, 10000);
+    }
 
     super.onCreativeRender(creativeMetaData);
     this.isAmpCreative_ = !!creativeMetaData;
@@ -1356,12 +1394,15 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
         !!this.postAdResponseExperimentFeatures['avr_disable_immediate']
       );
     }
-    if (this.isRefreshing) {
-      devAssert(this.refreshManager_);
-      this.refreshManager_.initiateRefreshCycle();
-      this.isRefreshing = false;
-      this.isRelayoutNeededFlag = false;
-    }
+    // #region InsurAds - Don't need refresh manager
+    // TODO: Shall we keep/not keep the code apart from refresh manager?
+    // if (this.isRefreshing) {
+    //   devAssert(this.refreshManager_);
+    //   this.refreshManager_.initiateRefreshCycle();
+    //   this.isRefreshing = false;
+    //   this.isRelayoutNeededFlag = false;
+    // }
+    // #endregion
 
     // Force size of frame to match creative or, if creative size is unknown,
     // the slot. This ensures that the creative is centered in the former case,
@@ -1411,29 +1452,31 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
       });
     }
 
-    this.refreshManager_ =
-      this.refreshManager_ ||
-      getRefreshManager(this, () => {
-        if (this.useSra) {
-          user().warn(TAG, 'Refresh not compatible with SRA.');
-          return false;
-        }
-        if (
-          getEnclosingContainerTypes(this.element).filter(
-            (container) =>
-              container != ValidAdContainerTypes['AMP-CAROUSEL'] &&
-              container != ValidAdContainerTypes['AMP-STICKY-AD']
-          ).length
-        ) {
-          user().warn(
-            TAG,
-            'Refresh not compatible with ad-containers, except for ' +
-              'AMP-CAROUSEL and AMP-STICKY-AD'
-          );
-          return false;
-        }
-        return true;
-      });
+    // #region InsurAds - Don't need refresh manager
+    // this.refreshManager_ =
+    //   this.refreshManager_ ||
+    //   getRefreshManager(this, () => {
+    //     if (this.useSra) {
+    //       user().warn(TAG, 'Refresh not compatible with SRA.');
+    //       return false;
+    //     }
+    //     if (
+    //       getEnclosingContainerTypes(this.element).filter(
+    //         (container) =>
+    //           container != ValidAdContainerTypes['AMP-CAROUSEL'] &&
+    //           container != ValidAdContainerTypes['AMP-STICKY-AD']
+    //       ).length
+    //     ) {
+    //       user().warn(
+    //         TAG,
+    //         'Refresh not compatible with ad-containers, except for ' +
+    //           'AMP-CAROUSEL and AMP-STICKY-AD'
+    //       );
+    //       return false;
+    //     }
+    //     return true;
+    //   });
+    // #endregion
 
     // Add listener for GPID cookie optout.
     this.win.addEventListener('message', (event) => {

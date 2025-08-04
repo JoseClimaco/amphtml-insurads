@@ -24,15 +24,14 @@ export class InsurAds {
    * @param {!Window} win - Window object
    * @param {!Element} element - The AMP element this ad is attached to
    * @param {string} canonicalUrl - The canonical URL of the document
-   * @param {function(function())} refresh - Function to call for ad refresh
+   * @param {object(function())} api - Function to call for ad refresh
    */
-  constructor(win, element, canonicalUrl, refresh) {
+  constructor(win, element, canonicalUrl, api) {
     this.win = win;
     this.element = element;
-    this.canonicalUrl = canonicalUrl;
-    this.refresh_ = refresh;
+    this.api_ = api;
 
-    this.element.setAttribute('data-enable-refresh', 'false');
+    this.element.setAttribute('data-enable-refresh', 'false'); // Disable refresh by default
     const publicId = this.element.getAttribute('data-public-id');
 
     /** @private {number} */
@@ -76,20 +75,26 @@ export class InsurAds {
     this.waterfall_ = null;
 
     this.getConsent_().then((consent) => {
-      const consentTuple = consent ? this.parseConsent_(consent) : null;
-      const storageConsent = hasStorageConsent(consentTuple);
+      this.initializeWithConsent_(consent, canonicalUrl, publicId);
+    });
+  }
 
-      /** @private {?Core} */
-      this.core_ = Core.start(this.win, canonicalUrl, publicId, storageConsent);
-      this.core_.registerUnit(
-        this.unitCode_,
-        this.handleReconnect_.bind(this),
-        {
-          appInitHandler: (message) => this.handleAppInit_(message),
-          unitInitHandler: (message) => this.handleUnitInit_(message),
-          waterfallHandler: (message) => this.handleWaterfall_(message),
-        }
-      );
+  /**
+   * Initializes the InsurAds instance with consent data.
+   * @param {string=} consent - The consent data string
+   * @param {string} canonicalUrl - The canonical URL of the document
+   * @param {string} publicId - The public ID for the ad
+   * @private
+   */
+  initializeWithConsent_(consent, canonicalUrl, publicId) {
+    const consentTuple = consent ? this.parseConsent_(consent) : null;
+    const storageConsent = hasStorageConsent(consentTuple);
+
+    this.core_ = Core.start(this.win, canonicalUrl, publicId, storageConsent);
+    this.core_.registerUnit(this.unitCode_, this.handleReconnect_.bind(this), {
+      appInitHandler: (message) => this.handleAppInit_(message),
+      unitInitHandler: (message) => this.handleUnitInit_(message),
+      waterfallHandler: (message) => this.handleWaterfall_(message),
     });
   }
 
@@ -98,8 +103,8 @@ export class InsurAds {
    *  forceCollapse
    */
   forceCollapse() {
-    if (this.refreshCount_ === 0) {
-      super.forceCollapse();
+    if (this.api_.getRefreshCount() === 0) {
+      this.api_.forceCollapse();
       this.destroy_();
     } else {
       this.triggerImmediateRefresh_();
@@ -130,11 +135,11 @@ export class InsurAds {
       return false;
     }
 
-    if (this.isRefreshing) {
+    if (this.api_.isRefreshing()) {
       return false;
     }
 
-    if (!this.iframe) {
+    if (!this.api_.hasIframe()) {
       return false;
     }
 
@@ -146,7 +151,7 @@ export class InsurAds {
 
     this.updateRtcConfig_(nextEntry);
 
-    this.refresh_(this.refreshEndCallback_);
+    this.api_.refresh(this.refreshEndCallback_);
   }
 
   /**
@@ -208,7 +213,8 @@ export class InsurAds {
       );
     }
 
-    const {height, width} = this.creativeSize_ || this.initialSize_;
+    const {height, width} =
+      this.api_.getCreativeSize() || this.api_.getInitialSize();
 
     if (!this.extensionReadyDeferred_.isDone()) {
       if (this.extension_) {
@@ -445,7 +451,7 @@ export class InsurAds {
    * @private
    */
   getConsent_() {
-    const consentPolicyId = super.getConsentPolicy();
+    const consentPolicyId = this.api_.getConsentPolicy();
 
     if (consentPolicyId) {
       const consentStatePromise = getConsentPolicyState(
@@ -530,51 +536,140 @@ export class InsurAds {
   /**
    * Appends InsurAds URL parameters for ad requests.
    * @param {string} adUrl
-   * @return {URL} The augmented URL with InsurAds parameters
+   * @return {string} The augmented URL with InsurAds parameters
    */
   augmentAdUrl(adUrl) {
-    const url = new URL(adUrl);
-    if (self.refreshCount_ > 0) {
-      const entry = this.waterfall_.getCurrentEntry();
-
-      const params = url.searchParams;
-
-      if (entry.path) {
-        params.set('iu', entry.path);
-      }
-
-      const keyValuesParam = params.get('scp') || '';
-      let keyValues = keyValuesParam;
-
-      const allKeyValues = [
-        ...(entry.keyValues || []),
-        ...(entry.commonKeyValues || []),
-      ];
-
-      if (allKeyValues.length > 0) {
-        const merged = this.serializeKeyValueArray_(allKeyValues);
-        keyValues += (keyValues ? '&' : '') + merged;
-      }
-
-      if (this.iabTaxonomy_ && entry.isHouseDemand) {
-        const userSignals = this.convertToUserSignals_(this.iabTaxonomy_);
-
-        const encodedSignals = encodeURIComponent(
-          btoa(JSON.stringify(userSignals))
+    if (
+      !this.appEnabled_ ||
+      !this.waterfall_ ||
+      this.api_.getRefreshCount() === 0
+    ) {
+      // If app is not enabled or no waterfall, return the original ad URL
+      console /*OK*/
+        .log(
+          'InsurAds: App not enabled or no waterfall, returning original ad URL'
         );
-
-        params.set('ppsj', encodedSignals);
-      }
-
-      params.set('scp', keyValues);
-
-      const sizesString = params.get('sz');
-      const sizesArray = sizesString
-        .split('|')
-        .map((size) => size.split('x').map(Number));
-      this.sizes_ = sizesArray;
+      const url = new URL(adUrl); // TODO: return adUrl original
+      const params = url.searchParams;
+      params.set('iat', 'not-enabled');
+      return url.toString();
     }
-    return url;
+
+    const url = new URL(adUrl);
+    const params = url.searchParams;
+    const entry = this.waterfall_.getCurrentEntry();
+
+    if (entry.path) {
+      params.set('iu', entry.path);
+    }
+
+    this.mergeKeyValuesWithParams_(params, entry);
+    this.addUserSignalsToParams_(params, entry);
+    this.parseSizesFromParams_(params);
+
+    return url.toString();
+  }
+
+  /**
+   * Merges entry key values with existing URL parameters
+   * @param {!URLSearchParams} params - The URL parameters
+   * @param {!Object} entry - The waterfall entry
+   * @private
+   */
+  mergeKeyValuesWithParams_(params, entry) {
+    if (!params || !entry) {
+      return;
+    }
+    const existingKeyValues = params.get('scp');
+    const allKeyValues = [];
+
+    if (entry.keyValues) {
+      allKeyValues.push(...entry.keyValues);
+    }
+    if (entry.commonKeyValues) {
+      allKeyValues.push(...entry.commonKeyValues);
+    }
+
+    if (allKeyValues.length === 0) {
+      return;
+    }
+
+    const serializedKeyValues = this.serializeKeyValueArray_(allKeyValues);
+    const mergedKeyValues = existingKeyValues
+      ? `${existingKeyValues}&${serializedKeyValues}`
+      : serializedKeyValues;
+
+    params.set('scp', mergedKeyValues);
+  }
+
+  /**
+   * Adds IAB taxonomy user signals to URL parameters if conditions are met
+   * @param {!URLSearchParams} params - The URL parameters to modify
+   * @param {!Object} entry - The waterfall entry
+   * @private
+   */
+  addUserSignalsToParams_(params, entry) {
+    if (!params || !entry) {
+      return;
+    }
+
+    if (!this.iabTaxonomy_ || !entry.isHouseDemand) {
+      return;
+    }
+
+    try {
+      const userSignals = this.convertToUserSignals_(this.iabTaxonomy_);
+      const encodedSignals = this.encodeUserSignals_(userSignals);
+      params.set('ppsj', encodedSignals);
+    } catch (error) {
+      console /*Ok*/
+        .error('Failed to encode user signals:', error);
+    }
+  }
+
+  /**
+   * Encodes user signals for URL transmission
+   * @param {!Object} userSignals - The user signals object
+   * @return {string} Base64 encoded and URI encoded signals
+   * @private
+   */
+  encodeUserSignals_(userSignals) {
+    const jsonString = JSON.stringify(userSignals);
+    const base64Encoded = btoa(jsonString);
+    return encodeURIComponent(base64Encoded);
+  }
+
+  /**
+   * Parses and stores ad sizes from URL parameters
+   * @param {!URLSearchParams} params - The URL parameters
+   * @private
+   */
+  parseSizesFromParams_(params) {
+    const sizesString = params.get('sz');
+
+    if (!sizesString) {
+      this.sizes_ = [];
+      return;
+    }
+
+    try {
+      this.sizes_ = this.parseSizeString_(sizesString);
+    } catch (error) {
+      this.sizes_ = [];
+    }
+  }
+
+  /**
+   * Parses a size string into an array of [width, height] pairs
+   * @param {string} sizesString - The sizes string (e.g., "300x250|728x90")
+   * @return {!Array<!Array<number>>} Array of [width, height] pairs
+   * @private
+   */
+  parseSizeString_(sizesString) {
+    return sizesString
+      .split('|')
+      .map((size) => size.split('x').map(Number))
+      .filter((size) => size !== null);
   }
 
   /**
@@ -608,17 +703,5 @@ export class InsurAds {
         });
       }
     });
-  }
-
-  /**
-   * Forces the collapse of the ad unit.
-   */
-  forceCollapse() {
-    if (this.refreshCount_ === 0) {
-      super.forceCollapse();
-      this.destroy_();
-    } else {
-      this.triggerImmediateRefresh_();
-    }
   }
 }
