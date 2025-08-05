@@ -1029,6 +1029,7 @@ const forbiddenTermsSrcInclusive = {
       'extensions/amp-ad/0.1/amp-ad-3p-impl.js',
       'extensions/amp-ad-network-adsense-impl/0.1/amp-ad-network-adsense-impl.js',
       'extensions/amp-ad-network-doubleclick-impl/0.1/amp-ad-network-doubleclick-impl.js',
+      'extensions/amp-ad-network-insurads-impl/0.1/amp-ad-network-insurads-impl.js',
     ],
   },
   "require\\('fancy-log'\\)": {
