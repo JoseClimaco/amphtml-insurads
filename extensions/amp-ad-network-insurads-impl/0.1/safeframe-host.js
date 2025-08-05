@@ -108,12 +108,12 @@ export function safeframeListener(event) {
  */
 export class SafeframeHostApi {
   /**
-   * @param {!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl} baseInstance
+   * @param {!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl} baseInstance
    * @param {boolean} isFluid
    * @param {{width:number, height:number}} creativeSize
    */
   constructor(baseInstance, isFluid, creativeSize) {
-    /** @private {!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl} */
+    /** @private {!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl} */
     this.baseInstance_ = baseInstance;
 
     /** @private {!Function} */

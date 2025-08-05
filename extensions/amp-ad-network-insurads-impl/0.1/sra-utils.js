@@ -11,7 +11,7 @@ import {dev, devAssert} from '#utils/log';
 import {RENDERING_TYPE_HEADER, XORIGIN_MODE} from '../../amp-a4a/0.1/amp-a4a';
 
 /** @type {string} */
-const TAG = 'amp-ad-network-doubleclick-impl';
+const TAG = 'amp-ad-network-insurads-impl';
 
 /**
  * @const {string}
@@ -25,7 +25,7 @@ export const TFCD = 'tagForChildDirectedTreatment';
  */
 export const TFUA = 'tagForUnderAgeTreatment';
 
-/** @private {!Array<function(!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>):?{[key: string]: string}>} */
+/** @private {!Array<function(!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>):?{[key: string]: string}>} */
 const SRA_JOINERS = [
   combineInventoryUnits,
   getCookieOptOut,
@@ -42,7 +42,7 @@ const SRA_JOINERS = [
 ];
 
 /**
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {!{[key: string]: *}}
  */
 export function constructSRABlockParameters(impls) {
@@ -54,8 +54,8 @@ export function constructSRABlockParameters(impls) {
 /**
  * Given array of instances, execute extractFn on each and return first non-
  * falsey value or null if none are truthy.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
- * @param {function(!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl):?T} extractFn
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
+ * @param {function(!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl):?T} extractFn
  * @return {?T} value of first instance with non-null/undefined value or null
  *    if none can be found
  * @template T
@@ -77,7 +77,7 @@ function getFirstInstanceValue_(impls, extractFn) {
  * paths using index into iu_parts list.
  * Example: /123/foo/bar and /blah/foo/bar/123 =>
  *    iu_parts=123,foo,bar,blah & enc_prev_ius=/0/1/2,/3/1/2/0
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -114,7 +114,7 @@ export function combineInventoryUnits(impls) {
 /**
  * Indicates SRA request is cookie opt out if any of the blocks includes
  * cookie opt out in targeting.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -128,7 +128,7 @@ export function getCookieOptOut(impls) {
 
 /**
  * Combine ad unit key of each block via comma separated values.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -138,7 +138,7 @@ export function getAdks(impls) {
 
 /**
  * Combine block sizes via comma separated values.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -151,7 +151,7 @@ export function getSizes(impls) {
 /**
  * Indicate SRA request is tagForChildDirectedTreatment if any blocks includes
  * in targeting.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -166,7 +166,7 @@ export function getTfcd(impls) {
 /**
  * Indicate SRA request should include adtest=on if any block includes the
  * manual experiment id.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -180,7 +180,7 @@ export function isAdTest(impls) {
  * Join block targeting values by separating by pipes (each key/value pair for
  * a given block is separated by =) and exclusions are given special excl_cat
  * key (list of categories are comma separated).
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -243,7 +243,7 @@ export function getTargetingAndExclusions(impls) {
  * supported for SRA requests therefore block values are combined by building
  * the unique set of experiment ids which are comma separated (order does not
  * matter).
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -265,7 +265,7 @@ export function getExperimentIds(impls) {
  * Combine force safeframe values for each block via comma separated numeric
  * values based on boolean value (e.g. false = 0, true = 1).  If none of the
  * blocks has force safeframe, parameter is not included in SRA request.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -282,7 +282,7 @@ export function getForceSafeframe(impls) {
 /**
  * Combine page offset info for each block by constructing separate parameter
  * for left (adxs) and top (adyx) via comma separated.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -301,7 +301,7 @@ export function getPageOffsets(impls) {
  * Combine which containers exist for each block (e.g. sticky) via pipe
  * separator (as block can have multiple values that are comma separated).  If
  * none of the blocks have a container, then parameter is not sent.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
@@ -318,7 +318,7 @@ export function getContainers(impls) {
 
 /**
  * Combine fluid settings for each block via comma separator.
- * @param {!Array<!./amp-ad-network-doubleclick-impl.AmpAdNetworkDoubleclickImpl>} impls
+ * @param {!Array<!./amp-ad-network-insurads-impl.AmpAdNetworkInsuradsImpl>} impls
  * @return {?{[key: string]: string}}
  * @visibleForTesting
  */
