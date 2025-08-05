@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <title>InsurAds example - AMP News Example</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+  <meta name="amp-script-src" content="sha384-86Dw_wai9Zbw_h8Sau6EGbo3zWzQMMYlW6bDczalbkxARcEQ0w5p_pGx1feQ5BaL">
   <link rel="canonical" href="http://nonblocking.io/" >
   <style amp-custom>
     amp-ad {
@@ -123,6 +124,7 @@
     </style>
   </noscript>
   <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+  <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
   <script async src="https://cdn.ampproject.org/v0.js"></script>
 </head>
 
@@ -139,10 +141,6 @@
       </button>
     </div>
 
-    <amp-ad type="insurads" data-public-id="4WMPI6PV" width="300" height="250" data-multi-size="300x250,300x50,300x50"
-      data-slot="/134642692/AMPTestsV3" json='{"targeting":{"target":["news"],"pos":["amp"]}}'>
-    </amp-ad>
-
     <div class="news-section">
       <div class="news-article">
         <h4>World</h4>
@@ -153,8 +151,15 @@
         <p>New smartphone release sets the bar for innovation and user experience.</p>
       </div>
       <div class="news-article">
-        <h4>Sports</h4>
-        <p>Local team wins championship in a thrilling final match.</p>
+        <amp-ad
+        type="insurads"
+        data-public-id="4WMPI6PV"
+        width="300"
+        height="250"
+        data-multi-size="300x200"
+        data-slot="/134642692/AMPTestsV3"
+        json='{"targeting":{"target":["news"],"pos":["amp"]}}'>
+        </amp-ad>
       </div>
     </div>
   </div>
