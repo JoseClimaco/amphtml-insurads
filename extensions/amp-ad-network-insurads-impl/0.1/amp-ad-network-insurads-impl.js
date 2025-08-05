@@ -254,11 +254,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     /** @protected {?Deferred<?Response>} */
     this.sraDeferred = null;
 
-    // #region InsurAds - Don't need refresh manager
-    // /** @private {?RefreshManager} */
-    // this.refreshManager_ = null;
-    // #endregion
-
     /** @private {number} */
     this.refreshCount_ = 0;
 
@@ -544,32 +539,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
     return extractUrlExperimentId(this.win, this.element);
   }
 
-  // TODO: HERE
-  // Maybe we can remove this, i don't think we need to worry about deprecation warnings
-  // /** @private */
-  // maybeDeprecationWarn_() {
-  //   const warnDeprecation = (feature) =>
-  //     user().warn(
-  //       TAG,
-  //       `${feature} is no longer supported for DoubleClick.` +
-  //         'Please refer to ' +
-  //         'https://github.com/ampproject/amphtml/issues/11834 ' +
-  //         'for more information'
-  //     );
-  //   const usdrd = 'useSameDomainRenderingUntilDeprecated';
-  //   const hasUSDRD =
-  //     usdrd in this.element.dataset ||
-  //     (tryParseJson(this.element.getAttribute('json')) || {})[usdrd];
-  //   if (hasUSDRD) {
-  //     warnDeprecation(usdrd);
-  //   }
-  //   const useRemoteHtml =
-  //     this.getAmpDoc().getMetaByName('amp-3p-iframe-src') !== null;
-  //   if (useRemoteHtml) {
-  //     warnDeprecation('remote.html');
-  //   }
-  // }
-
   /** @override */
   delayAdRequestEnabled() {
     if (this.element.getAttribute(LAZY_FETCH_ATTRIBUTE) !== 'true') {
@@ -581,7 +550,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   /** @override */
   buildCallback() {
     super.buildCallback();
-    // this.maybeDeprecationWarn_(); // TODO: Remove this? check method
     this.setPageLevelExperiments(this.extractUrlExperimentId_());
     const pubEnabledSra = !!this.win.document.querySelector(
       'meta[name=amp-ad-doubleclick-sra]'
@@ -1104,7 +1072,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   /** @override */
   extractSize(responseHeaders) {
     // #region InsurAds Logic
-    // TODO: Some duplicated logic, needs to be refactored.
     this.insurads.extractSize(responseHeaders);
     // #endregion
 
@@ -1278,11 +1245,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
 
   /** @override  */
   unlayoutCallback() {
-    // #region InsurAds - Don't need refresh manager
-    // if (this.refreshManager_) {
-    //   this.refreshManager_.unobserve();
-    // }
-    // #endregion
     if (!this.useSra && this.isAmpCreative_) {
       // Allow non-AMP creatives to remain unless SRA.
       return false;
@@ -1320,13 +1282,9 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   refresh(refreshEndCallback) {
     // #region InsurAds Logic
     if (this.isRefreshing) {
-      console./*Ok*/ log(
-        '[iat-debug]: refresh called, but isRefreshing is already true'
-      );
       return;
     }
     // #endregion
-    console./*Ok*/ log('[iat-debug]: refresh called - ', this.refreshCount_);
     this.refreshCount_++;
     return super.refresh(refreshEndCallback);
   }
@@ -1335,32 +1293,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   onCreativeRender(creativeMetaData, opt_onLoadPromise) {
     // #region InsurAds Logic
     this.isRefreshing = false;
-    console./*Ok*/ log(
-      '[iat-debug]: onCreativeRender called, isRefreshing set to false',
-      creativeMetaData,
-      opt_onLoadPromise
-    );
     // #endregion
-    console./*Ok*/ log(
-      '[iat-debug]: setTimeout called, refreshing ad after 10 seconds'
-    );
-    if (this.refreshCount_ === 0) {
-      setTimeout(() => {
-        // #region InsurAds Logic
-        this.refresh(() => {
-          console./*Ok*/ log(
-            '[iat-debug]: refresh called - ',
-            this.refreshCount_
-          );
-        });
-        this.refresh(() => {
-          console./*Ok*/ log(
-            '[iat-debug]: refresh called - ',
-            this.refreshCount_
-          );
-        });
-      }, 10000);
-    }
 
     super.onCreativeRender(creativeMetaData);
     this.isAmpCreative_ = !!creativeMetaData;
@@ -1394,15 +1327,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
         !!this.postAdResponseExperimentFeatures['avr_disable_immediate']
       );
     }
-    // #region InsurAds - Don't need refresh manager
-    // TODO: Shall we keep/not keep the code apart from refresh manager?
-    // if (this.isRefreshing) {
-    //   devAssert(this.refreshManager_);
-    //   this.refreshManager_.initiateRefreshCycle();
-    //   this.isRefreshing = false;
-    //   this.isRelayoutNeededFlag = false;
-    // }
-    // #endregion
 
     // Force size of frame to match creative or, if creative size is unknown,
     // the slot. This ensures that the creative is centered in the former case,
@@ -1451,32 +1375,6 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
         this.expandFluidCreative_();
       });
     }
-
-    // #region InsurAds - Don't need refresh manager
-    // this.refreshManager_ =
-    //   this.refreshManager_ ||
-    //   getRefreshManager(this, () => {
-    //     if (this.useSra) {
-    //       user().warn(TAG, 'Refresh not compatible with SRA.');
-    //       return false;
-    //     }
-    //     if (
-    //       getEnclosingContainerTypes(this.element).filter(
-    //         (container) =>
-    //           container != ValidAdContainerTypes['AMP-CAROUSEL'] &&
-    //           container != ValidAdContainerTypes['AMP-STICKY-AD']
-    //       ).length
-    //     ) {
-    //       user().warn(
-    //         TAG,
-    //         'Refresh not compatible with ad-containers, except for ' +
-    //           'AMP-CAROUSEL and AMP-STICKY-AD'
-    //       );
-    //       return false;
-    //     }
-    //     return true;
-    //   });
-    // #endregion
 
     // Add listener for GPID cookie optout.
     this.win.addEventListener('message', (event) => {
@@ -1768,7 +1666,7 @@ export class AmpAdNetworkInsuradsImpl extends AmpA4A {
   /**
    * Executes SRA request via the following steps:
    * - create only one executor per page
-   * - get all doubleclick amp-ad instances on the page
+   * - get all insurads amp-ad instances on the page
    * - group by networkID allowing for separate SRA requests
    * - for each grouping, construct SRA request
    * - handle chunks for streaming response for each block
