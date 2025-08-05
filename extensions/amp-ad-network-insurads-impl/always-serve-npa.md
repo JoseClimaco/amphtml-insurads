@@ -6,9 +6,10 @@
 <amp-ad
   width="320"
   height="50"
+  data-public-id="4WMPI6PV"
   always-serve-npa="geoGroup1,geoGroup2"
-  type="doubleclick"
-  data-slot="/4119129/mobile_ad_banner"
+  type="insurads"
+  data-slot="/134642692/AMPTestsV3"
 >
 </amp-ad>
 

@@ -11,7 +11,8 @@ Single page ads are similar to regular Google Ad Manager ads, but must be tagged
   <script type="application/json">
     {
       "ad-attributes": {
-        "type": "doubleclick",
+        "type": "insurads",
+        "data-public-id": "4WMPI6PV",
         "data-slot": "/30497360/a4a/amp_story_dfp_example"
       }
     }
@@ -44,4 +45,4 @@ You can find a fully working example hosted on [amp.dev](https://amp.dev/documen
 
 Google Ad Manager trafficking instructions can be found in the [DFP Help Center](https://support.google.com/dfp_premium/answer/9038178).
 
-#### <a href="amp-ad-network-doubleclick-impl-internal.md">Back to Google Ad Manager</a>
+#### <a href="amp-ad-network-insurads-impl-internal.md">Back to Google Ad Manager</a>

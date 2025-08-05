@@ -98,8 +98,9 @@ For example, take the following amp-ad:
 <amp-ad
   width="320"
   height="50"
-  type="doubleclick"
-  data-slot="/4119129/mobile_ad_banner"
+  data-public-id="4WMPI6PV"
+  type="insurads"
+  data-slot="/134642692/AMPTestsV3"
   rtc-config='{"urls": ["https://rtcEndpoint.biz/"}'
   json='{
           "targeting":{"loc": "usa", "animal": "cat"},
@@ -139,8 +140,9 @@ For instance, take this example where we call out to vendors, VendorA and Vendor
 <amp-ad
   width="320"
   height="50"
-  type="doubleclick"
-  data-slot="/4119129/mobile_ad_banner"
+  data-public-id="4WMPI6PV"
+  type="insurads"
+  data-slot="/134642692/AMPTestsV3"
   rtc-config='{"vendors": {"vendorA": {}, "vendorB": {}}'
   json='{"targeting":{"abc":"123"}'
 >
@@ -205,8 +207,9 @@ For example, take the following amp-ad:
 <amp-ad
   width="320"
   height="50"
-  type="doubleclick"
-  data-slot="/4119129/mobile_ad_banner"
+  data-public-id="4WMPI6PV"
+  type="insurads"
+  data-slot="/134642692/AMPTestsV3"
   rtc-config='{
                 "vendors": {"vendorA": {}},
                 "urls": ["https://rtcEndpoint.biz/"]
@@ -258,8 +261,9 @@ For example, take the following amp-ad:
 <amp-ad
   width="320"
   height="50"
-  type="doubleclick"
-  data-slot="/4119129/mobile_ad_banner"
+  data-public-id="4WMPI6PV"
+  type="insurads"
+  data-slot="/134642692/AMPTestsV3"
   rtc-config='{
                 "vendors": {"vendorA": {}},
                 "urls": ["https://rtcEndpoint.biz/"]
@@ -302,4 +306,4 @@ https://securepubads.g.doubleclick.net/...scp=loc%3Dusa%26gender%3Df%26r%3Dh%26e
 
 The results of the RTC Callouts will be added to the Google Ad Manager Ad Request, allowing you to use the key/value pairs in DFP as you would for any other non-AMP ad request. Please refer to generic key/value targeting documentation for Google Ad Manager.
 
-#### <a href="amp-ad-network-doubleclick-impl-internal.md">Back to Google Ad Manager</a>
+#### <a href="amp-ad-network-insurads-impl-internal.md">Back to Google Ad Manager</a>

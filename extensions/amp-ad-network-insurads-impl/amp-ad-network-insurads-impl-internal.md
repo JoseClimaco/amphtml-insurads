@@ -1,6 +1,6 @@
 # Google Ad Manager
 
-### <a name="amp-ad-network-doubleclick-impl"></a> `amp-ad-network-doubleclick-impl`
+### <a name="amp-ad-network-insurads-impl"></a> `amp-ad-network-insurads-impl`
 
 <table>
   <tr>
@@ -45,7 +45,7 @@
     <td>Launched</td>
   </tr>
   <tr>
-    <td><a href="doubleclick-rtc.md">Real Time Config</a></td>
+    <td><a href="insurads-rtc.md">Real Time Config</a></td>
     <td>Allows Publishers to augment ad requests with targeting information that is retrieved at runtime.</td>
     <td>Launched</td>
   </tr>
@@ -95,7 +95,7 @@
 Example - Google Ad Manager Ad
 
 ```html
-<amp-ad width="728" height="90" type="doubleclick" data-slot="/6355419/Travel">
+<amp-ad width="728" height="90" type="insurads" data-public-id="4WMPI6PV" data-slot="/134642692/AMPTestsV3">
 </amp-ad>
 ```
 
@@ -113,10 +113,11 @@ Example:
 <amp-ad
   width="320"
   height="50"
+  data-public-id="4WMPI6PV"
   data-override-width="111"
   data-override-height="222"
-  type="doubleclick"
-  data-slot="/4119129/mobile_ad_banner"
+  type="insurads"
+  data-slot="/134642692/AMPTestsV3"
 >
 </amp-ad>
 ```
@@ -151,8 +152,9 @@ Example with json attribute:
 <amp-ad
   width="320"
   height="50"
-  type="doubleclick"
-  data-slot="/4119129/mobile_ad_banner"
+  data-public-id="4WMPI6PV"
+  type="insurads"
+  data-slot="/134642692/AMPTestsV3"
   json='{"targeting":{"sport":["rugby","cricket"]},"categoryExclusions":["health"],"tagForChildDirectedTreatment":1}'
 >
 </amp-ad>

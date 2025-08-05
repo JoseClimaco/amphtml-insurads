@@ -26,9 +26,10 @@ Example - Valid multi-size request
 <amp-ad
   width="728"
   height="90"
-  type="doubleclick"
+  data-public-id="4WMPI6PV"
+  type="insurads"
   layout="fixed"
-  data-slot="/6355419/Travel"
+  data-slot="/134642692/AMPTestsV3"
   data-multi-size="700x90,700x60,500x60"
 >
 </amp-ad>
@@ -40,9 +41,10 @@ Example - Invalid multi-size request (multi-size size is too small relative to o
 <amp-ad
   width="320"
   height="50"
-  type="doubleclick"
+  data-public-id="4WMPI6PV"
+  type="insurads"
   layout="fixed"
-  data-slot="/6355419/Travel"
+  data-slot="/134642692/AMPTestsV3"
   data-override-width="728"
   data-override-height="90"
   data-multi-size="300x25"
@@ -56,9 +58,10 @@ Example - Invalid multi-size request (last multi-size size is too small)
 <amp-ad
   width="728"
   height="90"
-  type="doubleclick"
+  data-public-id="4WMPI6PV"
+  type="insurads"
   layout="fixed"
-  data-slot="/6355419/Travel"
+  data-slot="/134642692/AMPTestsV3"
   data-multi-size="700x90,700x60,300x25"
 >
 </amp-ad>
@@ -70,13 +73,14 @@ Example - Valid multi-size request (ignores minimum size constraint)
 <amp-ad
   width="728"
   height="90"
-  type="doubleclick"
+  data-public-id="4WMPI6PV"
+  type="insurads"
   layout="fixed"
-  data-slot="/6355419/Travel"
+  data-slot="/134642692/AMPTestsV3"
   data-multi-size="700x90,700x60,300x25"
   data-multi-size-validation="false"
 >
 </amp-ad>
 ```
 
-#### <a href="amp-ad-network-doubleclick-impl-internal.md">Back to Google Ad Manager</a>
+#### <a href="amp-ad-network-insurads-impl-internal.md">Back to Google Ad Manager</a>

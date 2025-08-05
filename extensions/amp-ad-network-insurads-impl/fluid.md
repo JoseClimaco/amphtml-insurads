@@ -8,8 +8,9 @@ An example slot might look like:
 
 ```html
 <amp-ad
-  type="doubleclick"
-  data-slot="/6355419/Travel"
+  data-public-id="4WMPI6PV"
+  type="insurads"
+  data-slot="/134642692/AMPTestsV3"
   layout="fluid"
   height="fluid"
 >
@@ -18,4 +19,4 @@ An example slot might look like:
 
 Note also that the width attribute is optional, and can be specified. When specified, the fluid creative will always occupy that width (unless used in conjunction with multi-size). Further, fluid creatives are fully compatible with multi-size creatives. When both features are turned on, either a fluid creative, or one matching one of the specified multi-size sizes may be given.
 
-#### <a href="amp-ad-network-doubleclick-impl-internal.md">Back to Google Ad Manager</a>
+#### <a href="amp-ad-network-insurads-impl-internal.md">Back to Google Ad Manager</a>
